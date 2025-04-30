@@ -6,7 +6,7 @@ class ForgotPassword {
 
   ForgotPassword({required this.userAuthRepository});
 
-  Future<Either<String, void>> call(String email) async {
-    return await userAuthRepository.forgotPassword(email);
+  Future<Either<String, void>> call(String email, String resetCode, String newPassword) async {
+    return await userAuthRepository.resetPassword(email, resetCode, newPassword);
   }
 }
