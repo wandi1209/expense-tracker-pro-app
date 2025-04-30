@@ -1,13 +1,9 @@
 class RegisterResModel {
   final String status;
   final String message;
-  final String token;
+  final String? token;
 
-  RegisterResModel({
-    required this.status,
-    required this.message,
-    required this.token,
-  });
+  RegisterResModel({required this.status, required this.message, this.token});
 
   factory RegisterResModel.fromJson(Map<String, dynamic> dataResponse) {
     return RegisterResModel(
