@@ -23,29 +23,32 @@ class RemoteDatasourceImplementation extends RemoteDatasource {
       '/users/register',
       data: dataRegister.toJson(),
     );
-    return UserAuthResModel(
-      status: response.data['status'],
-      message: response.data['message'],
-      token: response.data['token'],
-    );
+    return UserAuthResModel.fromJson({
+      'status': response.data['status'],
+      'message': response.data['message'],
+      'token': response.data['token'],
+    });
   }
 
   @override
-  Future<Map<String, dynamic>> login(LoginReqModel dataLogin) {
-    // TODO: implement login
-    throw UnimplementedError();
+  Future<UserAuthResModel> login(LoginReqModel dataLogin) async {
+    var response = await dio.post('/users/login', data: dataLogin.toJson());
+
+    return UserAuthResModel.fromJson({
+      'status': response.data['status'],
+      'message': response.data['message'],
+      'token': response.data['token'],
+    });
   }
 
   @override
-  Future<Map<String, dynamic>> forgotPassword(
-    ForgotPasswordReqModel dataForgot,
-  ) {
+  Future<UserAuthResModel> forgotPassword(ForgotPasswordReqModel dataForgot) {
     // TODO: implement forgotPassword
     throw UnimplementedError();
   }
 
   @override
-  Future<Map<String, dynamic>> resetPassword(ResetPasswordReqModel dataReset) {
+  Future<UserAuthResModel> resetPassword(ResetPasswordReqModel dataReset) {
     // TODO: implement resetPassword
     throw UnimplementedError();
   }
