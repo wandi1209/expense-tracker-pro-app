@@ -1,4 +1,4 @@
-import 'package:dartz/dartz.dart';
+import 'package:expense_tracker_pro/features/auth/data/models/user_auth_res.dart';
 import 'package:expense_tracker_pro/features/auth/domain/repositories/user_auth_repository.dart';
 
 class ForgotPassword {
@@ -6,7 +6,7 @@ class ForgotPassword {
 
   ForgotPassword({required this.userAuthRepository});
 
-  Future<Either<String, void>> call(String email, String resetCode, String newPassword) async {
+  Future<UserAuthResModel> call(String email, String resetCode, String newPassword) async {
     return await userAuthRepository.resetPassword(email, resetCode, newPassword);
   }
 }

@@ -5,17 +5,17 @@ import 'package:expense_tracker_pro/features/auth/data/models/register_req.dart'
 import 'package:expense_tracker_pro/features/auth/data/models/reset_password_req.dart';
 import 'package:expense_tracker_pro/features/auth/data/models/user_auth_res.dart';
 
-abstract class RemoteDatasource {
+abstract class UserAuthRemoteDatasource {
   Future<UserAuthResModel> register(RegisterReqModel dataRegister);
   Future<UserAuthResModel> login(LoginReqModel dataLogin);
   Future<UserAuthResModel> forgotPassword(ForgotPasswordReqModel dataForgot);
   Future<UserAuthResModel> resetPassword(ResetPasswordReqModel dataReset);
 }
 
-class RemoteDatasourceImplementation extends RemoteDatasource {
+class UserAuthRemoteDatasourceImplementation extends UserAuthRemoteDatasource {
   final Dio dio;
 
-  RemoteDatasourceImplementation(this.dio);
+  UserAuthRemoteDatasourceImplementation(this.dio);
 
   @override
   Future<UserAuthResModel> register(RegisterReqModel dataRegister) async {
