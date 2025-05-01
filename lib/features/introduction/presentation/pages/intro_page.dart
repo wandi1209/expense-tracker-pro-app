@@ -12,7 +12,7 @@ class IntroPage extends StatelessWidget {
     return Scaffold(
       body: Stack(
         children: [
-          SvgPicture.asset(AppVectors.introBg),
+          Positioned(top: 0, child: SvgPicture.asset(AppVectors.introBg)),
           Column(
             mainAxisAlignment: MainAxisAlignment.end,
             children: [
