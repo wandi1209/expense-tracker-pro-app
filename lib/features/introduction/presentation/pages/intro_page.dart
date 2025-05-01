@@ -1,3 +1,4 @@
+import 'package:expense_tracker_pro/common/buttons/basic_button.dart';
 import 'package:expense_tracker_pro/core/configs/assets/app_images.dart';
 import 'package:expense_tracker_pro/core/configs/assets/app_vectors.dart';
 import 'package:expense_tracker_pro/core/configs/theme/app_colors.dart';
@@ -30,27 +31,7 @@ class IntroPage extends StatelessWidget {
                 width: double.infinity,
                 height: 104,
                 padding: EdgeInsets.symmetric(horizontal: 30, vertical: 20),
-                child: ElevatedButton(
-                  onPressed: () {},
-
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: AppColors.secondary,
-                    padding: EdgeInsets.symmetric(vertical: 18),
-                    elevation: 5,
-                    shadowColor: AppColors.secondary,
-                    textStyle: const TextStyle(
-                      fontSize: 20,
-                      fontWeight: FontWeight.bold,
-                    ),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(50),
-                    ),
-                  ),
-                  child: Text(
-                    "Get Started",
-                    style: TextStyle(color: Colors.white),
-                  ),
-                ),
+                child: BasicButton(title: "Get Started", onPressed: () {}),
               ),
               Padding(
                 padding: const EdgeInsets.only(bottom: 30),
