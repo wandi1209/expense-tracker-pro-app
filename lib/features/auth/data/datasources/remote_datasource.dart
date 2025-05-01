@@ -19,49 +19,84 @@ class RemoteDatasourceImplementation extends RemoteDatasource {
 
   @override
   Future<UserAuthResModel> register(RegisterReqModel dataRegister) async {
-    var response = await dio.post(
-      '/users/register',
-      data: dataRegister.toJson(),
-    );
-    return UserAuthResModel.fromJson({
-      'status': response.data['status'],
-      'message': response.data['message'],
-      'token': response.data['token'],
-    });
+    try {
+      final response = await dio.post(
+        '/users/register',
+        data: dataRegister.toJson(),
+      );
+      return UserAuthResModel.fromJson({
+        'status': response.data['status'],
+        'message': response.data['message'],
+        'token': response.data['accessToken'],
+      });
+    } on DioException catch (e) {
+      return UserAuthResModel.fromJson({
+         'status': e.response?.data['status'],
+        'message': e.response?.data['message'] ?? 'Register failed',
+        'token': null,
+      });
+    }
   }
 
   @override
   Future<UserAuthResModel> login(LoginReqModel dataLogin) async {
-    var response = await dio.post('/users/login', data: dataLogin.toJson());
-
-    return UserAuthResModel.fromJson({
-      'status': response.data['status'],
-      'message': response.data['message'],
-      'token': response.data['token'],
-    });
+    try {
+      final response = await dio.post('/users/login', data: dataLogin.toJson());
+      return UserAuthResModel.fromJson({
+        'status': response.data['status'],
+        'message': response.data['message'],
+        'token': response.data['accessToken'],
+      });
+    } on DioException catch (e) {
+      return UserAuthResModel.fromJson({
+         'status': e.response?.data['status'],
+        'message': e.response?.data['message'] ?? 'Login failed',
+        'token': null,
+      });
+    }
   }
 
   @override
   Future<UserAuthResModel> forgotPassword(
     ForgotPasswordReqModel dataForgot,
   ) async {
-    var response = await dio.post('/users/forgot-password', data: dataForgot.toJson());
+    try {
+      final response = await dio.post(
+        '/users/forgot-password',
+        data: dataForgot.toJson(),
+      );
 
-    return UserAuthResModel.fromJson({
-      'status': response.data['status'],
-      'message': response.data['message'],
-    });
+      return UserAuthResModel.fromJson({
+        'status': response.data['status'],
+        'message': response.data['message'],
+      });
+    } on DioException catch (e) {
+      return UserAuthResModel.fromJson({
+        'status': e.response?.data['status'],
+        'message': e.response?.data['message'],
+      });
+    }
   }
 
   @override
   Future<UserAuthResModel> resetPassword(
     ResetPasswordReqModel dataReset,
   ) async {
-    var response = await dio.post('/users/reset-password', data: dataReset.toJson());
+    try {
+      final response = await dio.post(
+        '/users/reset-password',
+        data: dataReset.toJson(),
+      );
 
-    return UserAuthResModel.fromJson({
-      'status': response.data['status'],
-      'message': response.data['message'],
-    });
+      return UserAuthResModel.fromJson({
+        'status': response.data['status'],
+        'message': response.data['message'],
+      });
+    } on DioException catch (e) {
+      return UserAuthResModel.fromJson({
+        'status': e.response?.data['status'],
+        'message': e.response?.data['message'],
+      });
+    }
   }
 }
