@@ -1,8 +1,8 @@
-class RegisterReqModel {
+class LoginReqModel {
   final String email;
   final String password;
 
-  RegisterReqModel({
+  LoginReqModel({
     required this.email,
     required this.password,
   });

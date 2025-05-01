@@ -1,9 +1,9 @@
-class RegisterReqModel {
+class ResetPasswordReqModel {
   final String email;
   final String resetCode;
   final String newPassword;
 
-  RegisterReqModel({
+  ResetPasswordReqModel({
     required this.email,
     required this.resetCode,
     required this.newPassword,

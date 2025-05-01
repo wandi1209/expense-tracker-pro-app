@@ -1,7 +1,7 @@
-class RegisterReqModel {
+class ForgotPasswordReqModel {
   final String email;
 
-  RegisterReqModel({
+  ForgotPasswordReqModel({
     required this.email,
   });
 

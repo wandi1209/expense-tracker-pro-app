@@ -1,6 +1,52 @@
+import 'package:dio/dio.dart';
+import 'package:expense_tracker_pro/features/auth/data/models/forgot_password_req.dart';
+import 'package:expense_tracker_pro/features/auth/data/models/login_req.dart';
+import 'package:expense_tracker_pro/features/auth/data/models/register_req.dart';
+import 'package:expense_tracker_pro/features/auth/data/models/reset_password_req.dart';
+import 'package:expense_tracker_pro/features/auth/data/models/user_auth_res.dart';
+
 abstract class RemoteDatasource {
-  Future<Map<String, dynamic>> register(String name, String email, String password, String confirmPassword);
-  Future<Map<String, dynamic>> login(String email, String password);
-  Future<Map<String, dynamic>> forgotPassword(String email);
-  Future<Map<String, dynamic>> resetPassword(String email, String resetCode, String newPassword);
+  Future<UserAuthResModel> register(RegisterReqModel dataRegister);
+  Future<UserAuthResModel> login(LoginReqModel dataLogin);
+  Future<UserAuthResModel> forgotPassword(ForgotPasswordReqModel dataForgot);
+  Future<UserAuthResModel> resetPassword(ResetPasswordReqModel dataReset);
+}
+
+class RemoteDatasourceImplementation extends RemoteDatasource {
+  final Dio dio;
+
+  RemoteDatasourceImplementation(this.dio);
+
+  @override
+  Future<UserAuthResModel> register(RegisterReqModel dataRegister) async {
+    var response = await dio.post(
+      '/users/register',
+      data: dataRegister.toJson(),
+    );
+    return UserAuthResModel(
+      status: response.data['status'],
+      message: response.data['message'],
+      token: response.data['token'],
+    );
+  }
+
+  @override
+  Future<Map<String, dynamic>> login(LoginReqModel dataLogin) {
+    // TODO: implement login
+    throw UnimplementedError();
+  }
+
+  @override
+  Future<Map<String, dynamic>> forgotPassword(
+    ForgotPasswordReqModel dataForgot,
+  ) {
+    // TODO: implement forgotPassword
+    throw UnimplementedError();
+  }
+
+  @override
+  Future<Map<String, dynamic>> resetPassword(ResetPasswordReqModel dataReset) {
+    // TODO: implement resetPassword
+    throw UnimplementedError();
+  }
 }
