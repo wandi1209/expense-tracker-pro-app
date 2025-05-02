@@ -1,10 +1,10 @@
-import 'package:expense_tracker_pro/features/auth/data/datasources/remote_datasource.dart';
-import 'package:expense_tracker_pro/features/auth/data/models/forgot_password_req.dart';
-import 'package:expense_tracker_pro/features/auth/data/models/login_req.dart';
-import 'package:expense_tracker_pro/features/auth/data/models/register_req.dart';
-import 'package:expense_tracker_pro/features/auth/data/models/reset_password_req.dart';
-import 'package:expense_tracker_pro/features/auth/data/models/user_auth_res.dart';
-import 'package:expense_tracker_pro/features/auth/domain/repositories/user_auth_repository.dart';
+import '../datasources/remote_datasource.dart';
+import '../models/forgot_password_req.dart';
+import '../models/login_req.dart';
+import '../models/register_req.dart';
+import '../models/reset_password_req.dart';
+import '../models/user_auth_res.dart';
+import '../../domain/repositories/user_auth_repository.dart';
 
 class UserAuthRepositoryImplementation extends UserAuthRepository {
   final UserAuthRemoteDatasource remoteDatasource;

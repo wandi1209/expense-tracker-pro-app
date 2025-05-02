@@ -1,9 +1,9 @@
 import 'package:dio/dio.dart';
-import 'package:expense_tracker_pro/features/auth/data/models/forgot_password_req.dart';
-import 'package:expense_tracker_pro/features/auth/data/models/login_req.dart';
-import 'package:expense_tracker_pro/features/auth/data/models/register_req.dart';
-import 'package:expense_tracker_pro/features/auth/data/models/reset_password_req.dart';
-import 'package:expense_tracker_pro/features/auth/data/models/user_auth_res.dart';
+import '../models/forgot_password_req.dart';
+import '../models/login_req.dart';
+import '../models/register_req.dart';
+import '../models/reset_password_req.dart';
+import '../models/user_auth_res.dart';
 
 abstract class UserAuthRemoteDatasource {
   Future<UserAuthResModel> register(RegisterReqModel dataRegister);
