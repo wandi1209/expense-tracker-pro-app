@@ -14,18 +14,23 @@ class BasicButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ElevatedButton(
-      onPressed: onPressed,
+    return SizedBox(
+      width: double.infinity,
+      child: ElevatedButton(
+        onPressed: onPressed,
 
-      style: ElevatedButton.styleFrom(
-        backgroundColor: AppColors.secondary,
-        padding: EdgeInsets.symmetric(vertical: 18),
-        elevation: 5,
-        shadowColor: AppColors.secondary,
-        textStyle: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(50)),
+        style: ElevatedButton.styleFrom(
+          backgroundColor: AppColors.secondary,
+          padding: EdgeInsets.symmetric(vertical: 18),
+          elevation: 5,
+          shadowColor: AppColors.secondary,
+          textStyle: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(50),
+          ),
+        ),
+        child: Text(title, style: TextStyle(color: Colors.white)),
       ),
-      child: Text(title, style: TextStyle(color: Colors.white)),
     );
   }
 }
