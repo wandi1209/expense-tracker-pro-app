@@ -17,7 +17,7 @@ class LoginPage extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(
+                const Text(
                   "Login to your account.",
                   style: TextStyle(
                     fontWeight: FontWeight.bold,
@@ -25,21 +25,21 @@ class LoginPage extends StatelessWidget {
                     color: Colors.black,
                   ),
                 ),
-                SizedBox(height: 5),
-                Text(
+                const SizedBox(height: 5),
+                const Text(
                   "Please sign in to your account",
                   style: TextStyle(color: Colors.blueGrey),
                 ),
-                SizedBox(height: 15),
-                BasicInput(title: 'Email Address', hintText: 'john@gmail.com'),
-                SizedBox(height: 20),
-                BasicInput(
+                const SizedBox(height: 15),
+                const BasicInput(title: 'Email Address', hintText: 'john@gmail.com'),
+                const SizedBox(height: 20),
+                const BasicInput(
                   title: 'Password',
                   hintText: '••••••••',
                   obscure: true,
                 ),
-                SizedBox(height: 10),
-                Row(
+                const SizedBox(height: 10),
+                const Row(
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: [
                     Text(
@@ -48,11 +48,11 @@ class LoginPage extends StatelessWidget {
                     ),
                   ],
                 ),
-                SizedBox(height: 10),
-                SizedBox(height: 10),
+                const SizedBox(height: 10),
+                const SizedBox(height: 10),
                 BasicButton(title: 'Sign In', onPressed: () {}),
-                SizedBox(height: 30),
-                Row(
+                const SizedBox(height: 30),
+                const Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Text("Don't have account? "),

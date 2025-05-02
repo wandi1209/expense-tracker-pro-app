@@ -19,7 +19,7 @@ class IntroPage extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.end,
             children: [
               Image.asset(AppImages.introImage),
-              Text(
+              const Text(
                 "Spend Smarter\nSave more",
                 textAlign: TextAlign.center,
                 style: TextStyle(
@@ -31,7 +31,7 @@ class IntroPage extends StatelessWidget {
               Container(
                 width: double.infinity,
                 height: 104,
-                padding: EdgeInsets.symmetric(horizontal: 30, vertical: 20),
+                padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 20),
                 child: BasicButton(
                   title: "Get Started",
                   onPressed: () {
@@ -44,12 +44,12 @@ class IntroPage extends StatelessWidget {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Text("Already Have Account? "),
+                    const Text("Already Have Account? "),
                     GestureDetector(
                       onTap: () {
                         context.go('/login');
                       },
-                      child: Text(
+                      child: const Text(
                         "Log In",
                         style: TextStyle(color: AppColors.primary),
                       ),

@@ -36,8 +36,8 @@ class _BasicInputState extends State<BasicInput> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(widget.title, style: TextStyle(fontWeight: FontWeight.w500)),
-        SizedBox(height: 10),
+        Text(widget.title, style: const TextStyle(fontWeight: FontWeight.w500)),
+        const SizedBox(height: 10),
         TextField(
           obscureText: _obscureText,
           decoration: InputDecoration(
@@ -53,9 +53,9 @@ class _BasicInputState extends State<BasicInput> {
                       ),
                     )
                     : null,
-            contentPadding: EdgeInsets.symmetric(horizontal: 20, vertical: 20),
+            contentPadding: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
             hintText: widget.hintText,
-            hintStyle: TextStyle(fontSize: 15),
+            hintStyle: const TextStyle(fontSize: 15),
             border: OutlineInputBorder(
               borderRadius: BorderRadius.circular(10),
               borderSide: BorderSide(

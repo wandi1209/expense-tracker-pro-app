@@ -21,7 +21,7 @@ class BasicButton extends StatelessWidget {
 
         style: ElevatedButton.styleFrom(
           backgroundColor: AppColors.secondary,
-          padding: EdgeInsets.symmetric(vertical: 18),
+          padding: const EdgeInsets.symmetric(vertical: 18),
           elevation: 5,
           shadowColor: AppColors.secondary,
           textStyle: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
@@ -29,7 +29,7 @@ class BasicButton extends StatelessWidget {
             borderRadius: BorderRadius.circular(50),
           ),
         ),
-        child: Text(title, style: TextStyle(color: Colors.white)),
+        child: Text(title, style: const TextStyle(color: Colors.white)),
       ),
     );
   }

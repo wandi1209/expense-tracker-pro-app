@@ -15,7 +15,7 @@ class _SplashPageState extends State<SplashPage> {
   @override
   void initState() {
     super.initState();
-    Future.delayed(Duration(seconds: 3), () {
+    Future.delayed(const Duration(seconds: 3), () {
       context.go('/intro');
     });
   }
@@ -27,7 +27,7 @@ class _SplashPageState extends State<SplashPage> {
       body: Stack(
         children: [
           SvgPicture.asset(AppVectors.splashParticle),
-          Center(
+          const Center(
             child: Text(
               'mono',
               style: TextStyle(
