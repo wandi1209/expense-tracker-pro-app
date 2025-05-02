@@ -2,11 +2,11 @@ import 'package:go_router/go_router.dart';
 
 import '../../../../common/buttons/basic_button.dart';
 import '../../../../common/inputs/basic_input.dart';
-import 'package:expense_tracker_pro/core/configs/theme/app_colors.dart';
+import '../../../../core/configs/theme/app_colors.dart';
 import 'package:flutter/material.dart';
 
-class LoginPage extends StatelessWidget {
-  const LoginPage({super.key});
+class RegisterPage extends StatelessWidget {
+  const RegisterPage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -15,12 +15,12 @@ class LoginPage extends StatelessWidget {
         child: SafeArea(
           top: true,
           child: Padding(
-            padding: const EdgeInsets.only(left: 25, right: 25, top: 80),
+            padding: const EdgeInsets.symmetric(horizontal: 25),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 const Text(
-                  "Login to your account.",
+                  "Create your new account.",
                   style: TextStyle(
                     fontWeight: FontWeight.bold,
                     fontSize: 34,
@@ -29,9 +29,11 @@ class LoginPage extends StatelessWidget {
                 ),
                 const SizedBox(height: 5),
                 const Text(
-                  "Please sign in to your account",
+                  "Create an account to start looking for the food you like",
                   style: TextStyle(color: Colors.blueGrey),
                 ),
+                const SizedBox(height: 15),
+                const BasicInput(title: 'Name', hintText: 'John Doe'),
                 const SizedBox(height: 15),
                 const BasicInput(
                   title: 'Email Address',
@@ -43,29 +45,25 @@ class LoginPage extends StatelessWidget {
                   hintText: '••••••••',
                   obscure: true,
                 ),
-                const SizedBox(height: 10),
-                const Row(
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  children: [
-                    Text(
-                      'Forgot Password?',
-                      style: TextStyle(color: AppColors.primary),
-                    ),
-                  ],
+                const SizedBox(height: 20),
+                const BasicInput(
+                  title: 'Confirm Password',
+                  hintText: '••••••••',
+                  obscure: true,
                 ),
                 const SizedBox(height: 30),
-                BasicButton(title: 'Sign In', onPressed: () {}),
+                BasicButton(title: 'Register', onPressed: () {}),
                 const SizedBox(height: 30),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    const Text("Don't have account? "),
+                    const Text("Have an account? "),
                     GestureDetector(
                       onTap: () {
-                        context.go('/register');
+                        context.go('/login');
                       },
                       child: const Text(
-                        "Register",
+                        "Sign In",
                         style: TextStyle(color: AppColors.primary),
                       ),
                     ),
