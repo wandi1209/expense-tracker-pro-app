@@ -1,5 +1,7 @@
 import 'package:expense_tracker_pro/features/auth/presentation/pages/forgot_password_page.dart';
+import 'package:expense_tracker_pro/features/auth/presentation/pages/new_password_page.dart';
 import 'package:expense_tracker_pro/features/auth/presentation/pages/register_page.dart';
+import 'package:expense_tracker_pro/features/auth/presentation/pages/reset_password_page.dart';
 
 import '../../features/auth/presentation/pages/login_page.dart';
 import '../../features/introduction/presentation/pages/intro_page.dart';
@@ -8,7 +10,7 @@ import 'package:go_router/go_router.dart';
 
 class AppRouter {
   get router => GoRouter(
-    initialLocation: '/forgot-password',
+    initialLocation: '/new-password',
     routes: [
       GoRoute(
         path: '/splash',
@@ -40,6 +42,20 @@ class AppRouter {
         pageBuilder:
             (context, state) =>
                 const NoTransitionPage(child: ForgotPasswordPage()),
+      ),
+      GoRoute(
+        path: '/reset-password',
+        name: 'reset-password',
+        pageBuilder:
+            (context, state) =>
+                const NoTransitionPage(child: ResetPasswordPage()),
+      ),
+      GoRoute(
+        path: '/new-password',
+        name: 'new-password',
+        pageBuilder:
+            (context, state) =>
+                const NoTransitionPage(child: NewPasswordPage()),
       ),
     ],
   );
