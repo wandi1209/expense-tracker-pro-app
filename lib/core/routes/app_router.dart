@@ -1,3 +1,4 @@
+import 'package:expense_tracker_pro/features/auth/presentation/pages/forgot_password_page.dart';
 import 'package:expense_tracker_pro/features/auth/presentation/pages/register_page.dart';
 
 import '../../features/auth/presentation/pages/login_page.dart';
@@ -7,7 +8,7 @@ import 'package:go_router/go_router.dart';
 
 class AppRouter {
   get router => GoRouter(
-    initialLocation: '/register',
+    initialLocation: '/forgot-password',
     routes: [
       GoRoute(
         path: '/splash',
@@ -32,6 +33,13 @@ class AppRouter {
         name: 'register',
         pageBuilder:
             (context, state) => const NoTransitionPage(child: RegisterPage()),
+      ),
+      GoRoute(
+        path: '/forgot-password',
+        name: 'forgot-password',
+        pageBuilder:
+            (context, state) =>
+                const NoTransitionPage(child: ForgotPasswordPage()),
       ),
     ],
   );

@@ -44,12 +44,17 @@ class LoginPage extends StatelessWidget {
                   obscure: true,
                 ),
                 const SizedBox(height: 10),
-                const Row(
+                Row(
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: [
-                    Text(
-                      'Forgot Password?',
-                      style: TextStyle(color: AppColors.primary),
+                    GestureDetector(
+                      onTap: () {
+                        context.go('/forgot-password');
+                      },
+                      child: const Text(
+                        'Forgot Password?',
+                        style: TextStyle(color: AppColors.primary),
+                      ),
                     ),
                   ],
                 ),
