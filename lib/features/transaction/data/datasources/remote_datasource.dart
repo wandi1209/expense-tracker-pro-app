@@ -21,15 +21,23 @@ class TransactioRemoteDatasourceImplementation
   TransactioRemoteDatasourceImplementation(this.dio);
 
   @override
-  Future<Map<String, dynamic>> addExpense(int amount, String remarks) {
-    // TODO: implement addExpense
-    throw UnimplementedError();
+  Future<Map<String, dynamic>> addExpense(int amount, String remarks) async {
+    Map<String, dynamic> data = {'amount': amount, 'remarks': remarks};
+    var response = await dio.post('/transaction/addIncome', data: data);
+    return {
+      'status': response.data['status'],
+      'message': response.data['message'],
+    };
   }
 
   @override
-  Future<Map<String, dynamic>> addIncome(int amount, String remarks) {
-    // TODO: implement addIncome
-    throw UnimplementedError();
+  Future<Map<String, dynamic>> addIncome(int amount, String remarks) async {
+    Map<String, dynamic> data = {'amount': amount, 'remarks': remarks};
+    var response = await dio.post('/transaction/addExpense', data: data);
+    return {
+      'status': response.data['status'],
+      'message': response.data['message'],
+    };
   }
 
   @override
