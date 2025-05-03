@@ -6,7 +6,7 @@ class GetTransaction {
 
   GetTransaction({required this.transactionRepository});
 
-  Future<Transaction> execute() async {
+  Future<List<Transaction>> execute() async {
     return await transactionRepository.getTransactions();
   }
 }

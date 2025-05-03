@@ -24,4 +24,9 @@ class TransactionModel extends Transaction {
   Map<String, dynamic> toJson() {
     return {'amount': amount, 'remarks': remarks};
   }
+
+  static List<TransactionModel> fromJsonList(List data) {
+    if (data.isEmpty) return [];
+    return data.map((e) => TransactionModel.fromJson(e)).toList();
+  }
 }
