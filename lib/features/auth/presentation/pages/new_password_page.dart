@@ -1,6 +1,7 @@
 import 'package:expense_tracker_pro/common/buttons/basic_button.dart';
 import 'package:expense_tracker_pro/common/inputs/basic_input.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
 class NewPasswordPage extends StatelessWidget {
   const NewPasswordPage({super.key});
@@ -34,7 +35,12 @@ class NewPasswordPage extends StatelessWidget {
                   obscure: true,
                 ),
                 const SizedBox(height: 40),
-                BasicButton(title: 'Submit', onPressed: () {}),
+                BasicButton(
+                  title: 'Submit',
+                  onPressed: () {
+                    context.go('/dashboard');
+                  },
+                ),
               ],
             ),
           ),
