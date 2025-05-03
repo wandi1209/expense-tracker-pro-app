@@ -23,7 +23,7 @@ class TransactioRemoteDatasourceImplementation
   @override
   Future<Map<String, dynamic>> addExpense(int amount, String remarks) async {
     Map<String, dynamic> data = {'amount': amount, 'remarks': remarks};
-    var response = await dio.post('/transaction/addIncome', data: data);
+    var response = await dio.post('/transactions/addIncome', data: data);
     return {
       'status': response.data['status'],
       'message': response.data['message'],
@@ -33,7 +33,7 @@ class TransactioRemoteDatasourceImplementation
   @override
   Future<Map<String, dynamic>> addIncome(int amount, String remarks) async {
     Map<String, dynamic> data = {'amount': amount, 'remarks': remarks};
-    var response = await dio.post('/transaction/addExpense', data: data);
+    var response = await dio.post('/transactions/addExpense', data: data);
     return {
       'status': response.data['status'],
       'message': response.data['message'],
@@ -41,9 +41,12 @@ class TransactioRemoteDatasourceImplementation
   }
 
   @override
-  Future<Map<String, dynamic>> deleteTransaction(String id) {
-    // TODO: implement deleteTransaction
-    throw UnimplementedError();
+  Future<Map<String, dynamic>> deleteTransaction(String id) async {
+    var response = await dio.delete('.transactions/$id');
+    return {
+      'status': response.data['status'],
+      'message': response.data['message'],
+    };
   }
 
   @override
@@ -51,14 +54,23 @@ class TransactioRemoteDatasourceImplementation
     String id,
     int amount,
     String transactionType,
-  ) {
-    // TODO: implement editTransaction
-    throw UnimplementedError();
+  ) async {
+    Map<String, dynamic> data = {
+      'transaction_id': id,
+      'amount': amount,
+      'transaction_field': transactionType,
+    };
+
+    var response = await dio.patch('/transactions', data: data);
+    return {
+      'status': response.data['status'],
+      'message': response.data['message'],
+    };
   }
 
   @override
   Future<List<TransactionModel>> getTransactions() async {
-    var response = await dio.get('/transactions/');
+    var response = await dio.get('/transactions');
     final List data = response.data;
     return TransactionModel.fromJsonList(data);
   }
