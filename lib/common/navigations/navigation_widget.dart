@@ -8,6 +8,8 @@ class NavigationWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final location = GoRouterState.of(context).uri.toString();
+
     return Scaffold(
       body: child,
       floatingActionButton: FloatingActionButton(
@@ -28,13 +30,27 @@ class NavigationWidget extends StatelessWidget {
               onPressed: () {
                 context.go('/dashboard');
               },
-              icon: const Icon(Icons.home, color: AppColors.primary, size: 30),
+              icon: Icon(
+                Icons.home,
+                color:
+                    location == '/dashboard'
+                        ? AppColors.primary
+                        : Colors.black54,
+                size: 30,
+              ),
             ),
             IconButton(
               onPressed: () {
                 context.push('/transactions');
               },
-              icon: const Icon(Icons.bar_chart, size: 30),
+              icon: Icon(
+                Icons.bar_chart,
+                color:
+                    location == '/transactions'
+                        ? AppColors.primary
+                        : Colors.black54,
+                size: 30,
+              ),
             ),
           ],
         ),
