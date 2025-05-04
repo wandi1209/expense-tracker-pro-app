@@ -1,7 +1,6 @@
-import 'package:expense_tracker_pro/core/configs/assets/app_vectors.dart';
-import 'package:expense_tracker_pro/core/configs/theme/app_colors.dart';
+import 'package:expense_tracker_pro/common/listviews/transaction_listview.dart';
+import 'package:expense_tracker_pro/features/transaction/domain/entities/transaction.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:go_router/go_router.dart';
 
 class HistoryWidget extends StatefulWidget {
@@ -29,29 +28,33 @@ class _HistoryWidgetState extends State<HistoryWidget> {
             ),
           ],
         ),
-        ListView.builder(
-          itemCount: 5,
-          shrinkWrap: true,
-          physics: const NeverScrollableScrollPhysics(),
-          itemBuilder: (context, index) {
-            return ListTile(
-              title: const Text('Testing'),
-              subtitle: const Text('12-09-2024'),
-              leading: CircleAvatar(
-                radius: 20,
-                backgroundColor: AppColors.secondary,
-                child: SvgPicture.asset(AppVectors.arrowDown),
-              ),
-              trailing: Text(
-                'Rp. 20.000',
-                style: TextStyle(
-                  fontWeight: FontWeight.bold,
-                  fontSize: 16,
-                  color: Colors.green.shade600,
-                ),
-              ),
-            );
-          },
+        TransactionListview(
+          listData: [
+            Transaction(
+              id: '0',
+              userId: '002',
+              amount: 12000,
+              transactionType: 'expense',
+              remarks: 'Nonton Film',
+              createdAt: DateTime.now(),
+            ),
+            Transaction(
+              id: '1',
+              userId: '003',
+              amount: 14000,
+              transactionType: 'income',
+              remarks: 'Testing 2',
+              createdAt: DateTime.now(),
+            ),
+            Transaction(
+              id: '2',
+              userId: '003',
+              amount: 14000,
+              transactionType: 'expense',
+              remarks: 'Testing 3',
+              createdAt: DateTime(2024, 9, 12),
+            ),
+          ],
         ),
       ],
     );
