@@ -35,7 +35,7 @@ class DashboardPage extends StatelessWidget {
                         fontWeight: FontWeight.bold,
                       ),
                     ),
-                    CardWidget(),
+                    CardWidget(income: 20000, expense: 20000),
                     HistoryWidget(),
                   ],
                 ),

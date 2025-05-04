@@ -1,10 +1,13 @@
 import 'package:expense_tracker_pro/core/configs/assets/app_vectors.dart';
 import 'package:expense_tracker_pro/core/configs/theme/app_colors.dart';
+import 'package:expense_tracker_pro/core/utils/formatter.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
 class CardWidget extends StatelessWidget {
-  const CardWidget({super.key});
+  final double income;
+  final double expense;
+  const CardWidget({super.key, required this.income, required this.expense});
 
   @override
   Widget build(BuildContext context) {
@@ -53,7 +56,7 @@ class CardWidget extends StatelessWidget {
                       ),
                     ],
                   ),
-                  _text('120.000'),
+                  _text(rupiahFormatter.format(expense)),
                 ],
               ),
               Column(
@@ -69,7 +72,7 @@ class CardWidget extends StatelessWidget {
                       ),
                     ],
                   ),
-                  _text('120.000'),
+                  _text(rupiahFormatter.format(expense)),
                 ],
               ),
             ],

@@ -1,16 +1,12 @@
+import 'package:expense_tracker_pro/core/utils/formatter.dart';
 import 'package:expense_tracker_pro/features/transaction/domain/entities/transaction.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
 class TransactionListview extends StatelessWidget {
-  final formatter = NumberFormat.currency(
-    locale: 'id_ID',
-    symbol: 'Rp. ',
-    decimalDigits: 0,
-  );
   final List<Transaction> listData;
 
-  TransactionListview({super.key, required this.listData});
+  const TransactionListview({super.key, required this.listData});
 
   String formatDate(DateTime date) {
     final now = DateTime.now();
@@ -55,7 +51,7 @@ class TransactionListview extends StatelessWidget {
             ),
           ),
           trailing: Text(
-            '$symbol ${formatter.format(data.amount)}',
+            '$symbol ${rupiahFormatter.format(data.amount)}',
             style: TextStyle(
               fontWeight: FontWeight.bold,
               fontSize: 16,
