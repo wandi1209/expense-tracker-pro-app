@@ -4,7 +4,7 @@ import 'package:expense_tracker_pro/features/auth/presentation/pages/new_passwor
 import 'package:expense_tracker_pro/features/auth/presentation/pages/register_page.dart';
 import 'package:expense_tracker_pro/features/auth/presentation/pages/reset_password_page.dart';
 import 'package:expense_tracker_pro/features/dashboard/presentation/pages/dashboard_page.dart';
-import 'package:expense_tracker_pro/features/transaction/presentation/pages/transaction_page.dart';
+import 'package:expense_tracker_pro/features/transaction/presentation/pages/statistic_page.dart';
 
 import '../../features/auth/presentation/pages/login_page.dart';
 import '../../features/introduction/presentation/pages/intro_page.dart';
@@ -78,7 +78,7 @@ class AppRouter {
             name: 'transactions',
             pageBuilder:
                 (context, state) =>
-                    const NoTransitionPage(child: TransactionPage()),
+                    const NoTransitionPage(child: StatisticPage()),
           ),
         ],
       ),

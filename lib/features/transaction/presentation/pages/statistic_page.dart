@@ -1,10 +1,12 @@
+import 'package:expense_tracker_pro/core/configs/assets/app_vectors.dart';
 import 'package:expense_tracker_pro/core/configs/theme/app_colors.dart';
 import 'package:expense_tracker_pro/features/transaction/presentation/widgets/line_chart_widget.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:go_router/go_router.dart';
 
-class TransactionPage extends StatelessWidget {
-  const TransactionPage({super.key});
+class StatisticPage extends StatelessWidget {
+  const StatisticPage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -17,7 +19,7 @@ class TransactionPage extends StatelessWidget {
           },
         ),
         title: const Text(
-          'Transactions',
+          'Statistics',
           style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
         ),
       ),
@@ -100,6 +102,61 @@ class TransactionPage extends StatelessWidget {
               width: double.infinity,
               height: 250,
               child: const LineChartWidget(),
+            ),
+            Expanded(
+              child: SingleChildScrollView(
+                child: Padding(
+                  padding: const EdgeInsets.all(20),
+                  child: Column(
+                    children: [
+                      const Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text(
+                            'Top Spending',
+                            style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              fontSize: 20,
+                            ),
+                          ),
+                          Icon(Icons.swap_vert),
+                        ],
+                      ),
+                      ListView.builder(
+                        shrinkWrap: true,
+                        itemCount: 10,
+                        itemBuilder: (context, index) {
+                          return Container(
+                            margin: const EdgeInsets.symmetric(vertical: 5),
+                            decoration: BoxDecoration(
+                              color: Colors.grey.shade100,
+                              borderRadius: BorderRadius.circular(10),
+                            ),
+                            child: ListTile(
+                              leading: CircleAvatar(
+                                backgroundColor: AppColors.secondary,
+                                child: SvgPicture.asset(AppVectors.arrowDown),
+                              ),
+                              title: const Text(
+                                'Testing',
+                                style: TextStyle(fontWeight: FontWeight.w500),
+                              ),
+                              trailing: Text(
+                                'Rp. 20.000',
+                                style: TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 16,
+                                  color: Colors.green.shade600,
+                                ),
+                              ),
+                            ),
+                          );
+                        },
+                      ),
+                    ],
+                  ),
+                ),
+              ),
             ),
           ],
         ),
