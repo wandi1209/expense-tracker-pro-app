@@ -1,5 +1,6 @@
 import 'package:expense_tracker_pro/core/configs/assets/app_images.dart';
-import 'package:expense_tracker_pro/core/configs/theme/app_colors.dart';
+import 'package:expense_tracker_pro/features/dashboard/presentation/widgets/card_widget.dart';
+import 'package:expense_tracker_pro/features/dashboard/presentation/widgets/history_widget.dart';
 import 'package:flutter/material.dart';
 
 class DashboardPage extends StatelessWidget {
@@ -13,20 +14,20 @@ class DashboardPage extends StatelessWidget {
           children: [
             Image.asset(AppImages.dashboardBg),
             Image.asset(AppImages.dashboardParticle),
-            SafeArea(
+            const SafeArea(
               child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 20),
+                padding: EdgeInsets.symmetric(horizontal: 20),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    const Text(
+                    Text(
                       'Welcome back,',
                       style: TextStyle(
                         color: Colors.white,
                         fontWeight: FontWeight.w600,
                       ),
                     ),
-                    const Text(
+                    Text(
                       'Wandi',
                       style: TextStyle(
                         color: Colors.white,
@@ -34,40 +35,8 @@ class DashboardPage extends StatelessWidget {
                         fontWeight: FontWeight.bold,
                       ),
                     ),
-                    Container(
-                      margin: const EdgeInsets.symmetric(vertical: 30),
-                      padding: const EdgeInsets.all(20),
-                      width: double.infinity,
-                      height: 200,
-                      decoration: BoxDecoration(
-                        color: AppColors.primary,
-                        borderRadius: BorderRadius.circular(20),
-                      ),
-                      child: const Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            'Total Balance',
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 20,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                          Text(
-                            'Rp. 120.000.000,00',
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 30,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                          Row(children: [
-                            
-                          ],)
-                        ],
-                      ),
-                    ),
+                    CardWidget(),
+                    HistoryWidget(),
                   ],
                 ),
               ),
