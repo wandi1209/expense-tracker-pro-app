@@ -9,7 +9,7 @@ class LineChartWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return LineChart(
       LineChartData(
-        gridData: FlGridData(show: false),
+        gridData: const FlGridData(show: false),
         borderData: FlBorderData(
           show: false, // Ini akan menghilangkan semua border di chart
         ),
@@ -21,14 +21,16 @@ class LineChartWidget extends StatelessWidget {
           LineChartBarData(
             color: AppColors.primary,
             spots: [
-              FlSpot(1, 20000),
-              FlSpot(2, 10000),
-              FlSpot(3, 30000),
-              FlSpot(4, 10000),
-              FlSpot(5, 80000),
+              const FlSpot(1, 20000),
+              const FlSpot(2, 10000),
+              const FlSpot(3, 30000),
+              const FlSpot(4, 10000),
+              const FlSpot(5, 80000),
+              const FlSpot(6, 40000),
+              const FlSpot(7, 30000),
             ],
             isCurved: true,
-            dotData: FlDotData(show: false),
+            dotData: const FlDotData(show: false),
             belowBarData: BarAreaData(
               show: true,
               gradient: LinearGradient(
@@ -71,9 +73,15 @@ class LineChartWidget extends StatelessWidget {
               },
             ),
           ),
-          leftTitles: AxisTitles(sideTitles: SideTitles(showTitles: false)),
-          rightTitles: AxisTitles(sideTitles: SideTitles(showTitles: false)),
-          topTitles: AxisTitles(sideTitles: SideTitles(showTitles: false)),
+          leftTitles: const AxisTitles(
+            sideTitles: SideTitles(showTitles: false),
+          ),
+          rightTitles: const AxisTitles(
+            sideTitles: SideTitles(showTitles: false),
+          ),
+          topTitles: const AxisTitles(
+            sideTitles: SideTitles(showTitles: false),
+          ),
         ),
       ),
     );
