@@ -36,4 +36,17 @@ class StatisticRepositoryImplementation extends StatisticRepository {
       }
     }).toList();
   }
+
+  @override
+  Future<List<Transaction>> topSpending(bool top) async {
+    var allTransactions = await transactioRemoteDatasource.getTransactions();
+
+    allTransactions.sort((a, b) => b.amount.compareTo(a.amount));
+
+    if (top) {
+      return allTransactions.take(5).toList();
+    } else {
+      return allTransactions.reversed.take(5).toList();
+    }
+  }
 }
