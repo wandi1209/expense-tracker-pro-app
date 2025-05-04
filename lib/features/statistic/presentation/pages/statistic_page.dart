@@ -1,7 +1,7 @@
 import 'package:expense_tracker_pro/common/appbars/basic_app_bar.dart';
-import 'package:expense_tracker_pro/features/transaction/presentation/widgets/line_chart_widget.dart';
-import 'package:expense_tracker_pro/features/transaction/presentation/widgets/list_chart_view_widget.dart';
-import 'package:expense_tracker_pro/features/transaction/presentation/widgets/top_spending_widget.dart';
+import 'package:expense_tracker_pro/features/statistic/presentation/widgets/line_chart_widget.dart';
+import 'package:expense_tracker_pro/features/statistic/presentation/widgets/list_chart_view_widget.dart';
+import 'package:expense_tracker_pro/features/statistic/presentation/widgets/top_spending_widget.dart';
 import 'package:flutter/material.dart';
 
 class StatisticPage extends StatelessWidget {

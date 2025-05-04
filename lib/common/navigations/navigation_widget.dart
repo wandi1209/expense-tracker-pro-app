@@ -40,12 +40,12 @@ class NavigationWidget extends StatelessWidget {
             ),
             IconButton(
               onPressed: () {
-                context.push('/transactions');
+                context.push('/statistic');
               },
               icon: Icon(
                 Icons.bar_chart,
                 color:
-                    location == '/transactions'
+                    location == '/statistic'
                         ? AppColors.primary
                         : Colors.black54,
                 size: 30,
