@@ -7,6 +7,7 @@ import 'package:flutter_svg/svg.dart';
 class CardWidget extends StatelessWidget {
   final double income;
   final double expense;
+  final double balance = 200000;
   const CardWidget({super.key, required this.income, required this.expense});
 
   @override
@@ -31,9 +32,9 @@ class CardWidget extends StatelessWidget {
               fontWeight: FontWeight.bold,
             ),
           ),
-          const Text(
-            'Rp. 1.200.000',
-            style: TextStyle(
+          Text(
+            rupiahFormatter.format(balance),
+            style: const TextStyle(
               color: Colors.white,
               fontSize: 30,
               fontWeight: FontWeight.bold,
