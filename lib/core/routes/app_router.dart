@@ -13,7 +13,7 @@ import 'package:go_router/go_router.dart';
 
 class AppRouter {
   get router => GoRouter(
-    initialLocation: '/dashboard',
+    initialLocation: '/transactions',
     routes: [
       ShellRoute(
         builder: (context, state, child) {

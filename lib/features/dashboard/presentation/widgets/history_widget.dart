@@ -24,7 +24,7 @@ class _HistoryWidgetState extends State<HistoryWidget> {
               style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
             ),
             GestureDetector(
-              onTap: () => context.go('/transactions'),
+              onTap: () => context.push('/transactions'),
               child: const Text('See All'),
             ),
           ],

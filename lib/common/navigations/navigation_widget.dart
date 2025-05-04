@@ -19,7 +19,7 @@ class NavigationWidget extends StatelessWidget {
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       bottomNavigationBar: BottomAppBar(
-        color: AppColors.primary,
+        color: Colors.white,
         shape: const CircularNotchedRectangle(),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -28,13 +28,13 @@ class NavigationWidget extends StatelessWidget {
               onPressed: () {
                 context.go('/dashboard');
               },
-              icon: const Icon(Icons.home, color: Colors.white, size: 30),
+              icon: const Icon(Icons.home, color: AppColors.primary, size: 30),
             ),
             IconButton(
               onPressed: () {
-                context.go('/transactions');
+                context.push('/transactions');
               },
-              icon: const Icon(Icons.bar_chart, color: Colors.white, size: 30),
+              icon: const Icon(Icons.bar_chart, size: 30),
             ),
           ],
         ),
