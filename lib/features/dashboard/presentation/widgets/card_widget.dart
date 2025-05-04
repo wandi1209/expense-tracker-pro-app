@@ -29,7 +29,7 @@ class CardWidget extends StatelessWidget {
             ),
           ),
           const Text(
-            'Rp. 120.000.000,00',
+            'Rp. 1.200.000',
             style: TextStyle(
               color: Colors.white,
               fontSize: 30,
@@ -53,14 +53,7 @@ class CardWidget extends StatelessWidget {
                       ),
                     ],
                   ),
-                  const Text(
-                    '120.000',
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontWeight: FontWeight.bold,
-                      fontSize: 20,
-                    ),
-                  ),
+                  _text('120.000'),
                 ],
               ),
               Column(
@@ -76,19 +69,23 @@ class CardWidget extends StatelessWidget {
                       ),
                     ],
                   ),
-                  const Text(
-                    '120.000.000',
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontWeight: FontWeight.bold,
-                      fontSize: 20,
-                    ),
-                  ),
+                  _text('120.000'),
                 ],
               ),
             ],
           ),
         ],
+      ),
+    );
+  }
+
+  Text _text(String text) {
+    return Text(
+      text,
+      style: const TextStyle(
+        color: Colors.white,
+        fontWeight: FontWeight.bold,
+        fontSize: 20,
       ),
     );
   }

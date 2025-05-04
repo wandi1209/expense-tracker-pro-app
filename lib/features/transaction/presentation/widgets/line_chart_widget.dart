@@ -10,9 +10,7 @@ class LineChartWidget extends StatelessWidget {
     return LineChart(
       LineChartData(
         gridData: const FlGridData(show: false),
-        borderData: FlBorderData(
-          show: false, // Ini akan menghilangkan semua border di chart
-        ),
+        borderData: FlBorderData(show: false),
         minX: 0,
         maxX: 7,
         minY: 0,
@@ -73,17 +71,15 @@ class LineChartWidget extends StatelessWidget {
               },
             ),
           ),
-          leftTitles: const AxisTitles(
-            sideTitles: SideTitles(showTitles: false),
-          ),
-          rightTitles: const AxisTitles(
-            sideTitles: SideTitles(showTitles: false),
-          ),
-          topTitles: const AxisTitles(
-            sideTitles: SideTitles(showTitles: false),
-          ),
+          leftTitles: _axisTiles(),
+          rightTitles: _axisTiles(),
+          topTitles: _axisTiles(),
         ),
       ),
     );
+  }
+
+  AxisTitles _axisTiles() {
+    return const AxisTitles(sideTitles: SideTitles(showTitles: false));
   }
 }
