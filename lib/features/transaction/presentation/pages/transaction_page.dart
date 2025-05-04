@@ -1,3 +1,4 @@
+import 'package:expense_tracker_pro/features/transaction/presentation/widgets/line_chart_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
@@ -19,9 +20,15 @@ class TransactionPage extends StatelessWidget {
           style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
         ),
       ),
-      body: const Padding(
-        padding: EdgeInsets.all(20),
-        child: Column(children: [Text('data')]),
+      body: Column(
+        children: [
+          Container(
+            margin: EdgeInsets.only(right: 40),
+            width: double.infinity,
+            height: 300,
+            child: LineChartWidget(),
+          ),
+        ],
       ),
     );
   }
