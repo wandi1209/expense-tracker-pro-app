@@ -5,7 +5,7 @@ abstract class Dashboard {
 
   Dashboard({required this.dashboardRepository});
 
-  Future<Map<String, dynamic>> esecute() async {
+  Future<Map<String, dynamic>> execute() async {
     return await dashboardRepository.getDashboard();
   }
 }
