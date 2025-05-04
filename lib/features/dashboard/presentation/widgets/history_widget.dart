@@ -2,6 +2,7 @@ import 'package:expense_tracker_pro/core/configs/assets/app_vectors.dart';
 import 'package:expense_tracker_pro/core/configs/theme/app_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:go_router/go_router.dart';
 
 class HistoryWidget extends StatefulWidget {
   const HistoryWidget({super.key});
@@ -15,14 +16,17 @@ class _HistoryWidgetState extends State<HistoryWidget> {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        const Row(
+        Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Text(
+            const Text(
               'Transactions History',
               style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
             ),
-            Text('See All'),
+            GestureDetector(
+              onTap: () => context.go('/transactions'),
+              child: const Text('See All'),
+            ),
           ],
         ),
         ListView.builder(

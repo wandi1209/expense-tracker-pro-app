@@ -1,5 +1,6 @@
 import 'package:expense_tracker_pro/core/configs/theme/app_colors.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
 class NavigationWidget extends StatelessWidget {
   final Widget child;
@@ -11,9 +12,10 @@ class NavigationWidget extends StatelessWidget {
       body: child,
       floatingActionButton: FloatingActionButton(
         shape: const CircleBorder(),
-        backgroundColor: Colors.white,
+        foregroundColor: Colors.white,
+        backgroundColor: AppColors.primary,
         onPressed: () {},
-        child: const Icon(Icons.add),
+        child: const Icon(Icons.add, size: 30),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       bottomNavigationBar: BottomAppBar(
@@ -23,12 +25,16 @@ class NavigationWidget extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
             IconButton(
-              onPressed: () {},
-              icon: const Icon(Icons.home, color: Colors.white),
+              onPressed: () {
+                context.go('/dashboard');
+              },
+              icon: const Icon(Icons.home, color: Colors.white, size: 30),
             ),
             IconButton(
-              onPressed: () {},
-              icon: const Icon(Icons.bar_chart, color: Colors.white),
+              onPressed: () {
+                context.go('/transactions');
+              },
+              icon: const Icon(Icons.bar_chart, color: Colors.white, size: 30),
             ),
           ],
         ),
