@@ -7,6 +7,7 @@ import 'package:expense_tracker_pro/features/dashboard/presentation/pages/dashbo
 import 'package:expense_tracker_pro/features/statistic/presentation/pages/statistic_page.dart';
 import 'package:expense_tracker_pro/features/transaction/domain/entities/transaction.dart';
 import 'package:expense_tracker_pro/features/transaction/presentation/pages/transaction_page.dart';
+import 'package:expense_tracker_pro/features/user/presentation/pages/profile_page.dart';
 
 import '../../features/auth/presentation/pages/login_page.dart';
 import '../../features/introduction/presentation/pages/intro_page.dart';
@@ -15,7 +16,7 @@ import 'package:go_router/go_router.dart';
 
 class AppRouter {
   get router => GoRouter(
-    initialLocation: '/statistic',
+    initialLocation: '/profile',
     routes: [
       ShellRoute(
         builder: (context, state, child) {
@@ -81,6 +82,13 @@ class AppRouter {
             pageBuilder:
                 (context, state) =>
                     const NoTransitionPage(child: StatisticPage()),
+          ),
+          GoRoute(
+            path: '/profile',
+            name: 'profile',
+            pageBuilder:
+                (context, state) =>
+                    const NoTransitionPage(child: ProfilePage()),
           ),
           GoRoute(
             path: '/transactions',

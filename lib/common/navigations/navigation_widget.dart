@@ -11,13 +11,16 @@ class NavigationWidget extends StatelessWidget {
     final location = GoRouterState.of(context).uri.toString();
     return Scaffold(
       body: child,
-      floatingActionButton: FloatingActionButton(
-        shape: const CircleBorder(),
-        foregroundColor: Colors.white,
-        backgroundColor: AppColors.primary,
-        onPressed: () {},
-        child: const Icon(Icons.add, size: 30),
-      ),
+      floatingActionButton:
+          location == '/dashboard'
+              ? FloatingActionButton(
+                shape: const CircleBorder(),
+                foregroundColor: Colors.white,
+                backgroundColor: AppColors.primary,
+                onPressed: () {},
+                child: const Icon(Icons.add, size: 30),
+              )
+              : null,
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       bottomNavigationBar: BottomAppBar(
         color: Colors.white,
@@ -66,11 +69,12 @@ class NavigationWidget extends StatelessWidget {
             ),
             IconButton(
               onPressed: () {
-                context.push('/transactions');
+                context.push('/profile');
               },
               icon: Icon(
                 Icons.person,
-                color: location == '/' ? AppColors.primary : Colors.black54,
+                color:
+                    location == '/profile' ? AppColors.primary : Colors.black54,
                 size: 30,
               ),
             ),
