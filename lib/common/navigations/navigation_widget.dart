@@ -57,7 +57,10 @@ class NavigationWidget extends StatelessWidget {
               },
               icon: Icon(
                 Icons.wallet,
-                color: location == '/' ? AppColors.primary : Colors.black54,
+                color:
+                    location == '/transactions'
+                        ? AppColors.primary
+                        : Colors.black54,
                 size: 30,
               ),
             ),
