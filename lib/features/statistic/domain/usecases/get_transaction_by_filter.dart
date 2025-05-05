@@ -5,13 +5,15 @@ import 'package:expense_tracker_pro/features/transaction/domain/entities/transac
 class GetTransactionByFilter {
   final StatisticRepository statisticRepository;
   final DateFilter dateFilter;
+  final String type;
 
   GetTransactionByFilter({
     required this.statisticRepository,
     required this.dateFilter,
+    required this.type,
   });
 
   Future<List<Transaction>> execute() async {
-    return await statisticRepository.getTransactionByFilter(dateFilter);
+    return await statisticRepository.getTransactionByFilter(dateFilter, type);
   }
 }

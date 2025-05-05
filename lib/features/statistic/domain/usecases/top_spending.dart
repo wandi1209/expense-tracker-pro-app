@@ -4,10 +4,15 @@ import 'package:expense_tracker_pro/features/transaction/domain/entities/transac
 class TopSpending {
   final StatisticRepository statisticRepository;
   final bool top;
+  final String type;
 
-  TopSpending({required this.statisticRepository, required this.top});
+  TopSpending({
+    required this.statisticRepository,
+    required this.top,
+    required this.type,
+  });
 
   Future<List<Transaction>> execute() async {
-    return await statisticRepository.topSpending(top);
+    return await statisticRepository.topSpending(top, type);
   }
 }
