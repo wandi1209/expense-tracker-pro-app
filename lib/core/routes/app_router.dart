@@ -5,6 +5,7 @@ import 'package:expense_tracker_pro/features/auth/presentation/pages/register_pa
 import 'package:expense_tracker_pro/features/auth/presentation/pages/reset_password_page.dart';
 import 'package:expense_tracker_pro/features/dashboard/presentation/pages/dashboard_page.dart';
 import 'package:expense_tracker_pro/features/statistic/presentation/pages/statistic_page.dart';
+import 'package:expense_tracker_pro/features/transaction/domain/entities/transaction.dart';
 import 'package:expense_tracker_pro/features/transaction/presentation/pages/transaction_page.dart';
 
 import '../../features/auth/presentation/pages/login_page.dart';
@@ -85,8 +86,36 @@ class AppRouter {
             path: '/transactions',
             name: 'transactions',
             pageBuilder:
-                (context, state) =>
-                    const NoTransitionPage(child: TransactionPage()),
+                (context, state) => NoTransitionPage(
+                  child: TransactionPage(
+                    listData: [
+                      Transaction(
+                        id: '0',
+                        userId: '002',
+                        amount: 12000,
+                        transactionType: 'expense',
+                        remarks: 'Nonton Film',
+                        createdAt: DateTime.now(),
+                      ),
+                      Transaction(
+                        id: '1',
+                        userId: '003',
+                        amount: 14000,
+                        transactionType: 'income',
+                        remarks: 'Testing 2',
+                        createdAt: DateTime.now(),
+                      ),
+                      Transaction(
+                        id: '2',
+                        userId: '003',
+                        amount: 14000,
+                        transactionType: 'expense',
+                        remarks: 'Testing 3',
+                        createdAt: DateTime(2024, 9, 12),
+                      ),
+                    ],
+                  ),
+                ),
           ),
         ],
       ),

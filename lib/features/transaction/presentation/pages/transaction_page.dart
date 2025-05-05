@@ -4,7 +4,8 @@ import 'package:expense_tracker_pro/features/transaction/presentation/widgets/sl
 import 'package:flutter/material.dart';
 
 class TransactionPage extends StatefulWidget {
-  const TransactionPage({super.key});
+  final List<Transaction> listData;
+  const TransactionPage({super.key, required this.listData});
 
   @override
   State<TransactionPage> createState() => _TransactionPageState();
@@ -17,30 +18,15 @@ class _TransactionPageState extends State<TransactionPage> {
       appBar: const BasicAppBar(title: 'Transactions'),
       body: Padding(
         padding: const EdgeInsets.all(0),
-        child: Column(
-          children: [
-            SlidableWidget(
-              listData: [
-                Transaction(
-                  id: '01',
-                  userId: '01',
-                  amount: 12000,
-                  transactionType: 'expense',
-                  remarks: 'Mabar ML',
-                  createdAt: DateTime.now(),
-                ),
-                Transaction(
-                  id: '01',
-                  userId: '01',
-                  amount: 12000,
-                  transactionType: 'income',
-                  remarks: 'Freelance',
-                  createdAt: DateTime.now(),
-                ),
-              ],
-            ),
-          ],
-        ),
+        child:
+            widget.listData.isEmpty
+                ? Center(
+                  child: Text(
+                    'No Transactions available.',
+                    style: TextStyle(color: Colors.grey.shade700),
+                  ),
+                )
+                : SlidableWidget(listData: widget.listData),
       ),
     );
   }

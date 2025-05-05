@@ -57,31 +57,36 @@ class SlidableWidget extends StatelessWidget {
             ],
           ),
           child: ListTile(
-            title: Text(
-              data.remarks,
-              maxLines: 1,
-              overflow: TextOverflow.ellipsis,
-              style: const TextStyle(fontWeight: FontWeight.w500),
-            ),
-            subtitle: Text(formatDate(data.createdAt)),
-            leading: CircleAvatar(
-              radius: 20,
-              backgroundColor:
-                  isExpense ? Colors.red.shade400 : Colors.green.shade600,
-              child: Icon(
-                isExpense ? Icons.arrow_upward : Icons.arrow_downward,
-                color: Colors.white,
-              ),
-            ),
-            trailing: Text(
-              '$symbol ${rupiahFormatter.format(data.amount)}',
-              style: TextStyle(
-                fontWeight: FontWeight.bold,
-                fontSize: 16,
-                color: isExpense ? Colors.red.shade400 : Colors.green.shade600,
-              ),
-            ),
-          ),
+                    title: Text(
+                      data.remarks,
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                      style: const TextStyle(fontWeight: FontWeight.w500),
+                    ),
+                    subtitle: Text(formatDate(data.createdAt)),
+                    leading: CircleAvatar(
+                      radius: 20,
+                      backgroundColor:
+                          isExpense
+                              ? Colors.red.shade400
+                              : Colors.green.shade600,
+                      child: Icon(
+                        isExpense ? Icons.arrow_upward : Icons.arrow_downward,
+                        color: Colors.white,
+                      ),
+                    ),
+                    trailing: Text(
+                      '$symbol ${rupiahFormatter.format(data.amount)}',
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 16,
+                        color:
+                            isExpense
+                                ? Colors.red.shade400
+                                : Colors.green.shade600,
+                      ),
+                    ),
+                  ),
         );
       },
     );
