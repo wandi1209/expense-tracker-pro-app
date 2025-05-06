@@ -4,7 +4,8 @@ import 'package:expense_tracker_pro/core/configs/theme/app_colors.dart';
 import 'package:flutter/material.dart';
 
 class DropdownWidget extends StatefulWidget {
-  const DropdownWidget({super.key});
+  const DropdownWidget({super.key, this.full});
+  final bool? full;
 
   @override
   State<DropdownWidget> createState() => _DropdownWidgetState();
@@ -19,7 +20,7 @@ class _DropdownWidgetState extends State<DropdownWidget> {
     return Container(
       margin: const EdgeInsets.only(right: 20, top: 10),
       padding: const EdgeInsets.symmetric(horizontal: 10),
-      width: 120,
+      width: widget.full == true ? double.infinity : 120,
       height: 40,
       decoration: BoxDecoration(
         color: Colors.white,

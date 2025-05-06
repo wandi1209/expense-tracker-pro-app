@@ -1,3 +1,4 @@
+import 'package:expense_tracker_pro/common/sheet/sheet_add_widget.dart';
 import 'package:expense_tracker_pro/core/configs/theme/app_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
@@ -17,7 +18,15 @@ class NavigationWidget extends StatelessWidget {
                 shape: const CircleBorder(),
                 foregroundColor: Colors.white,
                 backgroundColor: AppColors.primary,
-                onPressed: () {},
+                onPressed: () {
+                  showModalBottomSheet(
+                    context: context,
+                    isScrollControlled: true,
+                    builder: (BuildContext context) {
+                      return const SheetAddWidget();
+                    },
+                  );
+                },
                 child: const Icon(Icons.add, size: 30),
               )
               : null,
