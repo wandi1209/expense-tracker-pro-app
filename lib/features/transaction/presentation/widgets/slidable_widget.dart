@@ -1,3 +1,4 @@
+import 'package:expense_tracker_pro/common/dialogs/dialog_widget.dart';
 import 'package:expense_tracker_pro/common/sheet/sheet_edit_widget.dart';
 import 'package:expense_tracker_pro/core/configs/theme/app_colors.dart';
 import 'package:expense_tracker_pro/core/utils/formatter.dart';
@@ -6,11 +7,16 @@ import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:intl/intl.dart';
 
-class SlidableWidget extends StatelessWidget {
+class SlidableWidget extends StatefulWidget {
   final List<Transaction> listData;
 
   const SlidableWidget({super.key, required this.listData});
 
+  @override
+  State<SlidableWidget> createState() => _SlidableWidgetState();
+}
+
+class _SlidableWidgetState extends State<SlidableWidget> {
   String formatDate(DateTime date) {
     final now = DateTime.now();
     final today = DateTime(now.year, now.month, now.day);
@@ -29,11 +35,11 @@ class SlidableWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListView.builder(
-      itemCount: listData.length,
+      itemCount: widget.listData.length,
       shrinkWrap: true,
       physics: const NeverScrollableScrollPhysics(),
       itemBuilder: (context, index) {
-        Transaction data = listData[index];
+        Transaction data = widget.listData[index];
         bool isExpense = data.transactionType == 'expense';
         String symbol = isExpense ? '-' : '+';
 
@@ -46,12 +52,11 @@ class SlidableWidget extends StatelessWidget {
                 icon: Icons.edit,
                 foregroundColor: Colors.white,
                 label: 'Edit',
-                onPressed: (context) {
+                onPressed: (ctx) {
                   showModalBottomSheet(
                     context: context,
                     isScrollControlled: true,
                     builder: (BuildContext context) {
-                      
                       return const SheetEditWidget();
                     },
                   );
@@ -62,7 +67,11 @@ class SlidableWidget extends StatelessWidget {
                 icon: Icons.delete,
                 foregroundColor: Colors.white,
                 label: 'Delete',
-                onPressed: (context) {},
+                onPressed: (ctx) {
+                  warningDialog(context, 'Are you sure?', () {
+                    successDialog(context, 'Berhasil dihapus').show();
+                  }).show();
+                },
               ),
             ],
           ),

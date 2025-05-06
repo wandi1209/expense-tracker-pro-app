@@ -1,7 +1,7 @@
 import 'dart:async';
 
 import 'package:expense_tracker_pro/common/buttons/basic_button.dart';
-import 'package:expense_tracker_pro/common/dialogs/success_dialog_widget.dart';
+import 'package:expense_tracker_pro/common/dialogs/dialog_widget.dart';
 import 'package:expense_tracker_pro/common/inputs/basic_input.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
@@ -58,7 +58,10 @@ class _SheetEditWidgetState extends State<SheetEditWidget> {
                 BasicButton(
                   title: 'Submit',
                   onPressed: () async {
-                    final dialog = successDialog(context, 'Success', '');
+                    final dialog = successDialog(
+                      context,
+                      'Edit Transaction Successfuly',
+                    );
 
                     dialog.show();
 
