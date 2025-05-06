@@ -48,7 +48,7 @@ class UserAuthRepositoryImplementation extends UserAuthRepository {
   @override
   Future<UserAuthResModel> resetPassword(
     String email,
-    String resetCode,
+    int resetCode,
     String newPassword,
   ) async {
     UserAuthResModel hasil = await remoteDatasource.resetPassword(

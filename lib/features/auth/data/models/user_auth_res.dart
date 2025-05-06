@@ -12,4 +12,6 @@ class UserAuthResModel {
       token: dataResponse['token'],
     );
   }
+
+  void fold(void Function(dynamic failure) param0, void Function(dynamic user) param1) {}
 }

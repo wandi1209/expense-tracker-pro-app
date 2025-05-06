@@ -1,6 +1,6 @@
 class ResetPasswordReqModel {
   final String email;
-  final String resetCode;
+  final int resetCode;
   final String newPassword;
 
   ResetPasswordReqModel({
