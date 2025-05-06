@@ -1,6 +1,10 @@
+import 'dart:async';
+
 import 'package:expense_tracker_pro/common/buttons/basic_button.dart';
+import 'package:expense_tracker_pro/common/dialogs/dialog_widget.dart';
 import 'package:expense_tracker_pro/common/inputs/basic_input.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
 class SheetAddWidget extends StatefulWidget {
   const SheetAddWidget({super.key});
@@ -51,7 +55,24 @@ class _SheetAddWidgetState extends State<SheetAddWidget> {
                   ],
                 ),
                 const SizedBox(height: 20),
-                BasicButton(title: 'Add Transaction', onPressed: () {}),
+                BasicButton(
+                  title: 'Add Transaction',
+                  onPressed: () {
+                    final dialog = successDialog(
+                      context,
+                      'Add Transaction Success',
+                    );
+                    dialog.show();
+
+                    Timer(const Duration(seconds: 2), () {
+                      dialog.dismiss();
+
+                      if (mounted) {
+                        context.pop();
+                      }
+                    });
+                  },
+                ),
                 const SizedBox(height: 60),
               ],
             ),

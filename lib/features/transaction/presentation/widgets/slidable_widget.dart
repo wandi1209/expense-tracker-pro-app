@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:expense_tracker_pro/common/dialogs/dialog_widget.dart';
 import 'package:expense_tracker_pro/common/sheet/sheet_edit_widget.dart';
 import 'package:expense_tracker_pro/core/configs/theme/app_colors.dart';
@@ -69,7 +71,11 @@ class _SlidableWidgetState extends State<SlidableWidget> {
                 label: 'Delete',
                 onPressed: (ctx) {
                   warningDialog(context, 'Are you sure?', () {
-                    successDialog(context, 'Berhasil dihapus').show();
+                    final dialog = successDialog(context, 'Berhasil dihapus');
+                    dialog.show();
+                    Timer(const Duration(seconds: 2), () {
+                      dialog.dismiss();
+                    });
                   }).show();
                 },
               ),
