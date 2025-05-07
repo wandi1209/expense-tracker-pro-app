@@ -19,7 +19,7 @@ import 'package:go_router/go_router.dart';
 
 class AppRouter {
   get router => GoRouter(
-    initialLocation: '/login',
+    initialLocation: '/splash',
     routes: [
       GoRoute(
         path: '/splash',
@@ -30,8 +30,7 @@ class AppRouter {
       GoRoute(
         path: '/intro',
         name: 'intro',
-        pageBuilder:
-            (context, state) => const NoTransitionPage(child: IntroPage()),
+        pageBuilder: (context, state) => NoTransitionPage(child: IntroPage()),
       ),
       GoRoute(
         path: '/login',

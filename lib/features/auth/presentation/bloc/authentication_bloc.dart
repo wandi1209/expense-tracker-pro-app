@@ -1,6 +1,6 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
-import 'package:expense_tracker_pro/core/routes/auth_service.dart';
+import 'package:expense_tracker_pro/core/services/auth_service.dart';
 import 'package:expense_tracker_pro/features/auth/domain/usecases/forgot_password.dart';
 import 'package:expense_tracker_pro/features/auth/domain/usecases/login.dart';
 import 'package:expense_tracker_pro/features/auth/domain/usecases/register.dart';
@@ -33,7 +33,7 @@ class AuthenticationBloc
           event.confirmPassword,
         );
         if (result.status == 'success') {
-          await authService.saveToken(result.accessToken ?? '');
+          await authService.saveToken(result.accessToken);
           emit(AuthenticationSuccess(result.status, result.message));
         } else {
           emit(AuthenticationFailure(result.message));
@@ -48,7 +48,7 @@ class AuthenticationBloc
         emit(AuthenticationLoading());
         final result = await login.call(event.email, event.password);
         if (result.status == 'success') {
-          await authService.saveToken(result.accessToken ?? '');
+          await authService.saveToken(result.accessToken);
           emit(AuthenticationSuccess(result.status, result.message));
         } else {
           emit(AuthenticationFailure(result.message));

@@ -1,3 +1,5 @@
+import 'package:expense_tracker_pro/core/services/auth_service.dart';
+
 import '../../../../common/buttons/basic_button.dart';
 import '../../../../core/configs/assets/app_images.dart';
 import '../../../../core/configs/assets/app_vectors.dart';
@@ -7,7 +9,8 @@ import 'package:flutter_svg/svg.dart';
 import 'package:go_router/go_router.dart';
 
 class IntroPage extends StatelessWidget {
-  const IntroPage({super.key});
+  IntroPage({super.key});
+  final _authService = AuthService();
 
   @override
   Widget build(BuildContext context) {
@@ -31,11 +34,19 @@ class IntroPage extends StatelessWidget {
               Container(
                 width: double.infinity,
                 height: 104,
-                padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 20),
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 30,
+                  vertical: 20,
+                ),
                 child: BasicButton(
                   title: "Get Started",
-                  onPressed: () {
-                    context.go('/login');
+                  onPressed: () async {
+                    final token = await _authService.getToken();
+                    if (token == null) {
+                      context.go('/login');
+                    } else {
+                      context.go('/dashboard');
+                    }
                   },
                 ),
               ),
@@ -46,8 +57,13 @@ class IntroPage extends StatelessWidget {
                   children: [
                     const Text("Already Have Account? "),
                     GestureDetector(
-                      onTap: () {
-                        context.go('/login');
+                      onTap: () async {
+                        final token = await _authService.getToken();
+                        if (token == null) {
+                          context.go('/login');
+                        } else {
+                          context.go('/dashboard');
+                        }
                       },
                       child: const Text(
                         "Log In",

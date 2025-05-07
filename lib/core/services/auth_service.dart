@@ -3,11 +3,13 @@ import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 class AuthService {
   final FlutterSecureStorage _storage = const FlutterSecureStorage();
 
-  Future<void> saveToken(String token) async {
-    await _storage.write(key: 'token', value: token);
+  Future<void> saveToken(String? token) async {
+    if (token != null) {
+      await _storage.write(key: 'token', value: token);
 
-    String timestamp = DateTime.now().toIso8601String();
-    await _storage.write(key: 'token_timestamp', value: timestamp);
+      String timestamp = DateTime.now().toIso8601String();
+      await _storage.write(key: 'token_timestamp', value: timestamp);
+    }
   }
 
   Future<String?> getToken() async {
