@@ -13,9 +13,10 @@ class AuthenticationLoading extends AuthenticationState {
 }
 
 class AuthenticationSuccess extends AuthenticationState {
+  final String status;
   final String message;
 
-  AuthenticationSuccess(this.message);
+  AuthenticationSuccess(this.status, this.message);
 
   @override
   List<Object?> get props => [message];

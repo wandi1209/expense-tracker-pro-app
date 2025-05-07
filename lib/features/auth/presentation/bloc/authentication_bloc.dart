@@ -26,14 +26,18 @@ class AuthenticationBloc
     on<AuthEventRegister>((event, emit) async {
       try {
         emit(AuthenticationLoading());
-        final user = await register.call(
+        final result = await register.call(
           event.name,
           event.email,
           event.password,
           event.confirmPassword,
         );
-        await _storage.write(key: 'token', value: user.accessToken);
-        emit(AuthenticationSuccess("Registration Success"));
+        if (result.status == 'success') {
+          await _storage.write(key: 'token', value: result.accessToken);
+          emit(AuthenticationSuccess(result.status, result.message));
+        } else {
+          emit(AuthenticationFailure(result.message));
+        }
       } catch (e) {
         emit(AuthenticationFailure('Registration Failed'));
       }
@@ -42,9 +46,13 @@ class AuthenticationBloc
     on<AuthEventLogin>((event, emit) async {
       try {
         emit(AuthenticationLoading());
-        final user = await login.call(event.email, event.password);
-        await _storage.write(key: 'token', value: user.accessToken);
-        emit(AuthenticationSuccess("Login Success"));
+        final result = await login.call(event.email, event.password);
+        if (result.status == 'success') {
+          await _storage.write(key: 'token', value: result.accessToken);
+          emit(AuthenticationSuccess(result.status, result.message));
+        } else {
+          emit(AuthenticationFailure(result.message));
+        }
       } catch (e) {
         emit(AuthenticationFailure('Login Failed'));
       }
@@ -53,8 +61,8 @@ class AuthenticationBloc
     on<AuthEventForgotPassword>((event, emit) async {
       try {
         emit(AuthenticationLoading());
-        await forgotPassword.call(event.email);
-        emit(AuthenticationSuccess("Forgot password request success"));
+        final result = await forgotPassword.call(event.email);
+        emit(AuthenticationSuccess(result.status, result.message));
       } catch (e) {
         emit(AuthenticationFailure('Forgot password request failed'));
       }
@@ -63,12 +71,12 @@ class AuthenticationBloc
     on<AuthEventResetPassword>((event, emit) async {
       try {
         emit(AuthenticationLoading());
-        await resetPassword.call(
+        final result = await resetPassword.call(
           event.email,
           event.resetCode,
           event.newPassword,
         );
-        emit(AuthenticationSuccess("Reset password success"));
+        emit(AuthenticationSuccess(result.status, result.message));
       } catch (e) {
         emit(AuthenticationFailure('Reset password failed'));
       }

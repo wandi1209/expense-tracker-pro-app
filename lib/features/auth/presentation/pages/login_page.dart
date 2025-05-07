@@ -34,22 +34,24 @@ class _LoginPageState extends State<LoginPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: BlocBuilder<AuthenticationBloc, AuthenticationState>(
-        builder: (context, state) {
-          if (state is AuthenticationLoading) {
-            return const Center(child: CircularProgressIndicator());
-          } else if (state is AuthenticationFailure) {
-            ScaffoldMessenger.of(
-              context,
-            ).showSnackBar(SnackBar(content: Text(state.error)));
+      body: BlocListener<AuthenticationBloc, AuthenticationState>(
+        listener: (context, state) {
+          if (state is AuthenticationFailure) {
+            ScaffoldMessenger.of(context).showSnackBar(
+              SnackBar(content: Text(state.error), backgroundColor: Colors.red),
+            );
           } else if (state is AuthenticationSuccess) {
-            
-            WidgetsBinding.instance.addPostFrameCallback((_) {
-              context.go('/dashboard');
-            });
+            context.go('/dashboard');
           }
-          return buildLoginForm();
         },
+        child: BlocBuilder<AuthenticationBloc, AuthenticationState>(
+          builder: (context, state) {
+            if (state is AuthenticationLoading) {
+              return const Center(child: CircularProgressIndicator());
+            }
+            return buildLoginForm();
+          },
+        ),
       ),
     );
   }
