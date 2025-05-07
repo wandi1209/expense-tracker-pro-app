@@ -16,7 +16,7 @@ class RegisterReqModel {
       'name': name,
       'email': email,
       'password': password,
-      'confirmPassword': confirmPassword,
+      'confirm_password': confirmPassword,
     };
   }
 }

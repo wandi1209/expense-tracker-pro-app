@@ -48,7 +48,12 @@ class AppRouter {
         path: '/register',
         name: 'register',
         pageBuilder:
-            (context, state) => const NoTransitionPage(child: RegisterPage()),
+            (context, state) => NoTransitionPage(
+              child: BlocProvider(
+                create: (_) => locator<AuthenticationBloc>(),
+                child: const RegisterPage(),
+              ),
+            ),
       ),
       GoRoute(
         path: '/forgot-password',

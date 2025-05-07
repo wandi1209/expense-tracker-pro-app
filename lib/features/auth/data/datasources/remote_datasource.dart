@@ -21,7 +21,7 @@ class UserAuthRemoteDatasourceImplementation extends UserAuthRemoteDatasource {
   @override
   Future<AuthResModel> register(RegisterReqModel dataRegister) async {
     try {
-      final response = await Dio().post(
+      final response = await dio.post(
         '/users/register',
         data: dataRegister.toJson(),
       );
