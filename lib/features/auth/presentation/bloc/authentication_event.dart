@@ -20,13 +20,12 @@ class AuthenticationEventRegister extends AuthenticationEvent {
 }
 
 class AuthenticationEventLogin extends AuthenticationEvent {
-  final String email;
-  final String password;
+  final LoginReqModel req;
 
-  AuthenticationEventLogin({required this.email, required this.password});
+  AuthenticationEventLogin({required this.req});
 
   @override
-  List<Object?> get props => [email, password];
+  List<Object?> get props => [req];
 }
 
 class AuthenticationEventForgotPassword extends AuthenticationEvent {

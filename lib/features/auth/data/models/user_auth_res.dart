@@ -13,5 +13,8 @@ class UserAuthResModel {
     );
   }
 
-  void fold(void Function(dynamic failure) param0, void Function(dynamic user) param1) {}
+  void fold(
+    void Function(dynamic failure) param0,
+    void Function(dynamic user) param1,
+  ) {}
 }

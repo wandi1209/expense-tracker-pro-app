@@ -14,6 +14,8 @@ class SheetEditWidget extends StatefulWidget {
 }
 
 class _SheetEditWidgetState extends State<SheetEditWidget> {
+  TextEditingController remarks = TextEditingController();
+  TextEditingController amount = TextEditingController();
   var selectedType = 'Expense';
   List<String> types = ['Expense', 'Income'];
 
@@ -39,9 +41,18 @@ class _SheetEditWidgetState extends State<SheetEditWidget> {
                   style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
                 ),
                 const SizedBox(height: 20),
-                const BasicInput(title: 'Remarks', hintText: 'Type here...'),
+                BasicInput(
+                  title: 'Remarks',
+                  hintText: 'Type here...',
+                  controller: remarks,
+                ),
                 const SizedBox(height: 10),
-                const BasicInput(title: 'Amount', hintText: '0', num: true),
+                BasicInput(
+                  title: 'Amount',
+                  hintText: '0',
+                  num: true,
+                  controller: amount,
+                ),
                 const SizedBox(height: 10),
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,

@@ -4,6 +4,7 @@ import 'package:flutter/services.dart';
 class BasicInput extends StatefulWidget {
   final String title;
   final String hintText;
+  final TextEditingController controller;
   final bool? obscure;
   final bool? num;
 
@@ -11,6 +12,7 @@ class BasicInput extends StatefulWidget {
     super.key,
     required this.title,
     required this.hintText,
+    required this.controller,
     this.obscure,
     this.num,
   });
@@ -42,6 +44,7 @@ class _BasicInputState extends State<BasicInput> {
         Text(widget.title, style: const TextStyle(fontWeight: FontWeight.w500)),
         const SizedBox(height: 10),
         TextField(
+          controller: widget.controller,
           keyboardType: widget.num == true ? TextInputType.number : null,
           inputFormatters:
               widget.num == true

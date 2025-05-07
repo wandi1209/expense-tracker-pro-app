@@ -19,10 +19,8 @@ class UserAuthRepositoryImplementation extends UserAuthRepository {
   }
 
   @override
-  Future<UserAuthResModel> login(String email, String password) async {
-    UserAuthResModel hasil = await remoteDatasource.login(
-      {email: email, password: password} as LoginReqModel,
-    );
+  Future<UserAuthResModel> login(LoginReqModel req) async {
+    UserAuthResModel hasil = await remoteDatasource.login(req);
     return hasil;
   }
 

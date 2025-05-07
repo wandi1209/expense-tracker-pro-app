@@ -8,6 +8,10 @@ class NewPasswordPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // TextEditingController email = TextEditingController();
+    // TextEditingController resetCode = TextEditingController();
+    TextEditingController newPassword = TextEditingController();
+
     return Scaffold(
       body: SingleChildScrollView(
         child: SafeArea(
@@ -29,10 +33,11 @@ class NewPasswordPage extends StatelessWidget {
                   style: TextStyle(color: Colors.grey.shade600),
                 ),
                 const SizedBox(height: 20),
-                const BasicInput(
+                BasicInput(
                   title: 'New Password',
                   hintText: '••••••••',
                   obscure: true,
+                  controller: newPassword,
                 ),
                 const SizedBox(height: 40),
                 BasicButton(

@@ -7,6 +7,8 @@ class ForgotPasswordPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    TextEditingController email = TextEditingController();
+
     return Scaffold(
       body: SingleChildScrollView(
         child: SafeArea(
@@ -28,9 +30,10 @@ class ForgotPasswordPage extends StatelessWidget {
                   style: TextStyle(color: Colors.grey.shade600),
                 ),
                 const SizedBox(height: 20),
-                const BasicInput(
+                BasicInput(
                   title: 'Email Address',
                   hintText: 'john@gmail.com',
+                  controller: email,
                 ),
                 const SizedBox(height: 40),
                 BasicButton(title: 'Continue', onPressed: () {}),

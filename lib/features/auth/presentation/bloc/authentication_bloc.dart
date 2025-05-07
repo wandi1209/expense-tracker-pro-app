@@ -1,5 +1,6 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
+import 'package:expense_tracker_pro/features/auth/data/models/login_req.dart';
 import 'package:expense_tracker_pro/features/auth/domain/entities/user_auth.dart';
 import 'package:expense_tracker_pro/features/auth/domain/usecases/forgot_password.dart';
 import 'package:expense_tracker_pro/features/auth/domain/usecases/login.dart';
@@ -35,7 +36,7 @@ class AuthenticationBloc
       );
     });
     on<AuthenticationEventLogin>((event, emit) async {
-      final result = await login(event.email, event.password);
+      final result = await login(event.req);
       result.fold(
         (failure) => emit(AuthenticationFailure(failure.message)),
         (user) => emit(AuthenticationAuthenticated(user)),

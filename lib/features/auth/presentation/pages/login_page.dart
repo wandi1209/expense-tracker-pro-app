@@ -1,3 +1,6 @@
+import 'package:expense_tracker_pro/features/auth/data/models/login_req.dart';
+import 'package:expense_tracker_pro/features/auth/domain/usecases/login.dart';
+import 'package:expense_tracker_pro/service_locator.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../../../common/buttons/basic_button.dart';
@@ -10,6 +13,15 @@ class LoginPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    TextEditingController email = TextEditingController();
+    TextEditingController password = TextEditingController();
+
+    void login() async {
+      await locator<Login>().call(
+        LoginReqModel(email: email.text, password: password.text),
+      );
+    }
+
     return Scaffold(
       body: SingleChildScrollView(
         child: SafeArea(
@@ -33,15 +45,17 @@ class LoginPage extends StatelessWidget {
                   style: TextStyle(color: Colors.blueGrey),
                 ),
                 const SizedBox(height: 15),
-                const BasicInput(
+                BasicInput(
                   title: 'Email Address',
                   hintText: 'john@gmail.com',
+                  controller: email,
                 ),
                 const SizedBox(height: 20),
-                const BasicInput(
+                BasicInput(
                   title: 'Password',
                   hintText: '••••••••',
                   obscure: true,
+                  controller: password,
                 ),
                 const SizedBox(height: 10),
                 Row(
@@ -59,7 +73,12 @@ class LoginPage extends StatelessWidget {
                   ],
                 ),
                 const SizedBox(height: 30),
-                BasicButton(title: 'Sign In', onPressed: () {}),
+                BasicButton(
+                  title: 'Sign In',
+                  onPressed: () {
+                    login();
+                  },
+                ),
                 const SizedBox(height: 30),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,

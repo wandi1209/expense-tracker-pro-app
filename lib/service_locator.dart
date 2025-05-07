@@ -13,7 +13,14 @@ import 'package:get_it/get_it.dart';
 var locator = GetIt.instance;
 
 Future<void> init() async {
-  final Dio dio = Dio(BaseOptions(baseUrl: '${dotenv.env["BASE_URL"]}'));
+  final Dio dio = Dio(
+    BaseOptions(
+      baseUrl: '${dotenv.env["BASE_URL"]}',
+      validateStatus: (status) {
+        return status! < 500; // Menerima semua status di bawah 500
+      },
+    ),
+  );
   locator.registerLazySingleton(() => dio);
 
   // Feature - Auth

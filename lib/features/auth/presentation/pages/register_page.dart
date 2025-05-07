@@ -10,6 +10,10 @@ class RegisterPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    TextEditingController name = TextEditingController();
+    TextEditingController email = TextEditingController();
+    TextEditingController password = TextEditingController();
+    TextEditingController confirmPassword = TextEditingController();
     return Scaffold(
       body: SingleChildScrollView(
         child: SafeArea(
@@ -33,23 +37,26 @@ class RegisterPage extends StatelessWidget {
                   style: TextStyle(color: Colors.blueGrey),
                 ),
                 const SizedBox(height: 15),
-                const BasicInput(title: 'Name', hintText: 'John Doe'),
+                BasicInput(title: 'Name', hintText: 'John Doe', controller: name,),
                 const SizedBox(height: 15),
-                const BasicInput(
+                BasicInput(
                   title: 'Email Address',
                   hintText: 'john@gmail.com',
+controller: email,
                 ),
                 const SizedBox(height: 20),
-                const BasicInput(
+                BasicInput(
                   title: 'Password',
                   hintText: '••••••••',
                   obscure: true,
+                  controller: password,
                 ),
                 const SizedBox(height: 20),
-                const BasicInput(
+                BasicInput(
                   title: 'Confirm Password',
                   hintText: '••••••••',
                   obscure: true,
+                  controller: confirmPassword,
                 ),
                 const SizedBox(height: 30),
                 BasicButton(title: 'Register', onPressed: () {}),
