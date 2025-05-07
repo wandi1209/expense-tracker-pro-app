@@ -1,10 +1,10 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
+import 'package:expense_tracker_pro/core/routes/auth_service.dart';
 import 'package:expense_tracker_pro/features/auth/domain/usecases/forgot_password.dart';
 import 'package:expense_tracker_pro/features/auth/domain/usecases/login.dart';
 import 'package:expense_tracker_pro/features/auth/domain/usecases/register.dart';
 import 'package:expense_tracker_pro/features/auth/domain/usecases/reset_password.dart';
-import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
 part 'authentication_event.dart';
 part 'authentication_state.dart';
@@ -15,7 +15,7 @@ class AuthenticationBloc
   final Register register;
   final ForgotPassword forgotPassword;
   final ResetPassword resetPassword;
-  final _storage = const FlutterSecureStorage();
+  final authService = AuthService();
 
   AuthenticationBloc({
     required this.login,
@@ -33,7 +33,7 @@ class AuthenticationBloc
           event.confirmPassword,
         );
         if (result.status == 'success') {
-          await _storage.write(key: 'token', value: result.accessToken);
+          await authService.saveToken(result.accessToken ?? '');
           emit(AuthenticationSuccess(result.status, result.message));
         } else {
           emit(AuthenticationFailure(result.message));
@@ -48,7 +48,7 @@ class AuthenticationBloc
         emit(AuthenticationLoading());
         final result = await login.call(event.email, event.password);
         if (result.status == 'success') {
-          await _storage.write(key: 'token', value: result.accessToken);
+          await authService.saveToken(result.accessToken ?? '');
           emit(AuthenticationSuccess(result.status, result.message));
         } else {
           emit(AuthenticationFailure(result.message));
