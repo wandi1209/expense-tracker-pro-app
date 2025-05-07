@@ -1,4 +1,4 @@
-import '../../data/models/user_auth_res.dart';
+import '../../data/models/auth_res_model.dart';
 import '../repositories/user_auth_repository.dart';
 
 class ResetPassword {
@@ -6,7 +6,7 @@ class ResetPassword {
 
   ResetPassword({required this.userAuthRepository});
 
-  Future<UserAuthResModel> call(
+  Future<AuthResModel> call(
     String email,
     int resetCode,
     String newPassword,

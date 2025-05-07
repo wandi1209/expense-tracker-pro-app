@@ -1,9 +1,10 @@
+import 'package:expense_tracker_pro/features/auth/data/models/login_req.dart';
+
 import '../datasources/remote_datasource.dart';
 import '../models/forgot_password_req.dart';
-import '../models/login_req.dart';
 import '../models/register_req.dart';
 import '../models/reset_password_req.dart';
-import '../models/user_auth_res.dart';
+import '../models/auth_res_model.dart';
 import '../../domain/repositories/user_auth_repository.dart';
 
 class UserAuthRepositoryImplementation extends UserAuthRepository {
@@ -11,48 +12,68 @@ class UserAuthRepositoryImplementation extends UserAuthRepository {
 
   UserAuthRepositoryImplementation({required this.remoteDatasource});
   @override
-  Future<UserAuthResModel> forgotPassword(String email) async {
-    UserAuthResModel hasil = await remoteDatasource.forgotPassword(
-      {email: email} as ForgotPasswordReqModel,
-    );
-    return hasil;
+  Future<AuthResModel> forgotPassword(String email) async {
+    try {
+      final response = await remoteDatasource.forgotPassword(
+        ForgotPasswordReqModel(email: email),
+      );
+      return response;
+    } catch (e) {
+      return AuthResModel(status: 'error', message: e.toString());
+    }
   }
 
   @override
-  Future<UserAuthResModel> login(LoginReqModel req) async {
-    UserAuthResModel hasil = await remoteDatasource.login(req);
-    return hasil;
+  Future<AuthResModel> login(String email, String password) async {
+    try {
+      final response = await remoteDatasource.login(
+        LoginReqModel(email: email, password: password),
+      );
+      return response;
+    } catch (e) {
+      return AuthResModel(status: 'error', message: e.toString());
+    }
   }
 
   @override
-  Future<UserAuthResModel> register(
+  Future<AuthResModel> register(
     String name,
     String email,
     String password,
     String confirmPassword,
   ) async {
-    UserAuthResModel hasil = await remoteDatasource.register(
-      {
-            name: name,
-            email: email,
-            password: password,
-            confirmPassword: confirmPassword,
-          }
-          as RegisterReqModel,
-    );
-    return hasil;
+    try {
+      final response = await remoteDatasource.register(
+        RegisterReqModel(
+          name: name,
+          email: email,
+          password: password,
+          confirmPassword: confirmPassword,
+        ),
+      );
+      return response;
+    } catch (e) {
+      return AuthResModel(status: 'error', message: e.toString());
+    }
   }
 
   @override
-  Future<UserAuthResModel> resetPassword(
+  Future<AuthResModel> resetPassword(
     String email,
     int resetCode,
     String newPassword,
   ) async {
-    UserAuthResModel hasil = await remoteDatasource.resetPassword(
-      {email: email, resetCode: resetCode, newPassword: newPassword}
-          as ResetPasswordReqModel,
-    );
-    return hasil;
+    try {
+      final response = await remoteDatasource.resetPassword(
+        ResetPasswordReqModel(
+          email: email,
+          resetCode: resetCode,
+          newPassword: newPassword,
+        ),
+      );
+      return response;
+    } catch (e) {
+      return AuthResModel(status: 'error', message: e.toString());
+    }
   }
 }

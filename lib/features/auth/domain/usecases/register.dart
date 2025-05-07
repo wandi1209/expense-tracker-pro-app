@@ -1,4 +1,4 @@
-import '../../data/models/user_auth_res.dart';
+import '../../data/models/auth_res_model.dart';
 import '../repositories/user_auth_repository.dart';
 
 class Register {
@@ -6,7 +6,7 @@ class Register {
 
   Register({required this.userAuthRepository});
 
-  Future<UserAuthResModel> call(
+  Future<AuthResModel> call(
     String name,
     String email,
     String password,

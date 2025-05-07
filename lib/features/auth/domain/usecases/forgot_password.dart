@@ -1,4 +1,4 @@
-import '../../data/models/user_auth_res.dart';
+import '../../data/models/auth_res_model.dart';
 import '../repositories/user_auth_repository.dart';
 
 class ForgotPassword {
@@ -6,7 +6,7 @@ class ForgotPassword {
 
   ForgotPassword({required this.userAuthRepository});
 
-  Future<UserAuthResModel> call(String email) async {
+  Future<AuthResModel> call(String email) async {
     return await userAuthRepository.forgotPassword(email);
   }
 }

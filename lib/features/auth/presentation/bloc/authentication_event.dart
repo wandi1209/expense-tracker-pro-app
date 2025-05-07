@@ -2,47 +2,45 @@ part of 'authentication_bloc.dart';
 
 abstract class AuthenticationEvent extends Equatable {}
 
-class AuthenticationEventRegister extends AuthenticationEvent {
+class AuthEventRegister extends AuthenticationEvent {
   final String name;
   final String email;
   final String password;
   final String confirmPassword;
 
-  AuthenticationEventRegister({
+  AuthEventRegister({
     required this.name,
     required this.email,
     required this.password,
     required this.confirmPassword,
   });
-
   @override
   List<Object?> get props => [name, email, password, confirmPassword];
 }
 
-class AuthenticationEventLogin extends AuthenticationEvent {
-  final LoginReqModel req;
+class AuthEventLogin extends AuthenticationEvent {
+  final String email;
+  final String password;
 
-  AuthenticationEventLogin({required this.req});
-
+  AuthEventLogin({required this.email, required this.password});
   @override
-  List<Object?> get props => [req];
+  List<Object?> get props => [email, password];
 }
 
-class AuthenticationEventForgotPassword extends AuthenticationEvent {
+class AuthEventForgotPassword extends AuthenticationEvent {
   final String email;
 
-  AuthenticationEventForgotPassword({required this.email});
-
+  AuthEventForgotPassword({required this.email});
   @override
   List<Object?> get props => [email];
 }
 
-class AuthenticationEventResetPassword extends AuthenticationEvent {
+class AuthEventResetPassword extends AuthenticationEvent {
   final String email;
   final int resetCode;
   final String newPassword;
 
-  AuthenticationEventResetPassword({
+  AuthEventResetPassword({
     required this.email,
     required this.resetCode,
     required this.newPassword,

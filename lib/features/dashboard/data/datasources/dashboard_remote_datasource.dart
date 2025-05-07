@@ -1,5 +1,5 @@
 import 'package:dio/dio.dart';
-import 'package:expense_tracker_pro/features/auth/data/models/user_model.dart';
+import 'package:expense_tracker_pro/features/user/data/models/user_model.dart';
 import 'package:expense_tracker_pro/features/transaction/data/models/transaction_model.dart';
 
 abstract class DashboardRemoteDatasource {
