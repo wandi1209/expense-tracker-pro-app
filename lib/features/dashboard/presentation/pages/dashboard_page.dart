@@ -57,7 +57,11 @@ class _DashboardPageState extends State<DashboardPage> {
                                 fontWeight: FontWeight.bold,
                               ),
                             ),
-                            const CardWidget(income: 20000, expense: 20000),
+                            CardWidget(
+                              income: user.balance,
+                              expense: user.balance,
+                              balance: user.balance,
+                            ),
                             const HistoryWidget(),
                           ],
                         ),

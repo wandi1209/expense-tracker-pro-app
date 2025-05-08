@@ -18,8 +18,17 @@ class DashboardBloc extends Bloc<DashboardEvent, DashboardState> {
       try {
         emit(DashboardStateLoading());
         final result = await getDashboard.call();
+        final income = await getTotalAmount.call('income');
+        final expense = await getTotalAmount.call('expense');
+
         if (result.status == 'success') {
-          emit(DashboardStateGetDashboardSuccess(data: result));
+          emit(
+            DashboardStateGetDashboardSuccess(
+              data: result,
+              expense: expense,
+              income: income,
+            ),
+          );
         } else {
           emit(DashboardStateFailure(error: 'Data getting failed'));
         }
