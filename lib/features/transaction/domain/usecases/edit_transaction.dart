@@ -1,3 +1,4 @@
+import 'package:expense_tracker_pro/core/respons/response_model.dart';
 import 'package:expense_tracker_pro/features/transaction/domain/repositories/transaction_repository.dart';
 
 class EditTransaction {
@@ -5,7 +6,7 @@ class EditTransaction {
 
   EditTransaction({required this.transactionRepository});
 
-  Future<Map<String, dynamic>> execute(
+  Future<ResponseModel> execute(
     String id,
     int amount,
     String transactionType,

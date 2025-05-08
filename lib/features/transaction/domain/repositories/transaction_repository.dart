@@ -1,13 +1,14 @@
+import 'package:expense_tracker_pro/core/respons/response_model.dart';
 import 'package:expense_tracker_pro/features/transaction/domain/entities/transaction.dart';
 
 abstract class TransactionRepository {
   Future<List<Transaction>> getTransactions();
-  Future<Map<String, dynamic>> addIncome(int amount, String remarks);
-  Future<Map<String, dynamic>> addExpense(int amount, String remarks);
-  Future<Map<String, dynamic>> editTransaction(
+  Future<ResponseModel> addIncome(int amount, String remarks);
+  Future<ResponseModel> addExpense(int amount, String remarks);
+  Future<ResponseModel> editTransaction(
     String id,
     int amount,
     String transactionType,
   );
-  Future<Map<String, dynamic>> deleteTransaction(String id);
+  Future<ResponseModel> deleteTransaction(String id);
 }

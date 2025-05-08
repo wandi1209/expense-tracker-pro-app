@@ -1,3 +1,4 @@
+import 'package:expense_tracker_pro/core/respons/response_model.dart';
 import 'package:expense_tracker_pro/features/transaction/domain/repositories/transaction_repository.dart';
 
 class AddIncome {
@@ -5,7 +6,7 @@ class AddIncome {
 
   AddIncome({required this.transactionRepository});
 
-  Future<Map<String, dynamic>> execute(int amount, String remarks) async {
+  Future<ResponseModel> execute(int amount, String remarks) async {
     return await transactionRepository.addIncome(amount, remarks);
   }
 }

@@ -1,17 +1,17 @@
 import 'package:dio/dio.dart';
+import 'package:expense_tracker_pro/core/respons/response_model.dart';
 import 'package:expense_tracker_pro/features/transaction/data/models/transaction_model.dart';
-import 'package:expense_tracker_pro/features/transaction/domain/entities/transaction.dart';
 
 abstract class TransactioRemoteDatasource {
-  Future<List<Transaction>> getTransactions();
-  Future<Map<String, dynamic>> addIncome(int amount, String remarks);
-  Future<Map<String, dynamic>> addExpense(int amount, String remarks);
-  Future<Map<String, dynamic>> editTransaction(
+  Future<List<TransactionModel>> getTransactions();
+  Future<ResponseModel> addIncome(int amount, String remarks);
+  Future<ResponseModel> addExpense(int amount, String remarks);
+  Future<ResponseModel> editTransaction(
     String id,
     int amount,
     String transactionType,
   );
-  Future<Map<String, dynamic>> deleteTransaction(String id);
+  Future<ResponseModel> deleteTransaction(String id);
 }
 
 class TransactioRemoteDatasourceImplementation
@@ -21,36 +21,27 @@ class TransactioRemoteDatasourceImplementation
   TransactioRemoteDatasourceImplementation(this.dio);
 
   @override
-  Future<Map<String, dynamic>> addExpense(int amount, String remarks) async {
+  Future<ResponseModel> addExpense(int amount, String remarks) async {
     Map<String, dynamic> data = {'amount': amount, 'remarks': remarks};
     var response = await dio.post('/transactions/addIncome', data: data);
-    return {
-      'status': response.data['status'],
-      'message': response.data['message'],
-    };
+    return ResponseModel.fromJson(response.data);
   }
 
   @override
-  Future<Map<String, dynamic>> addIncome(int amount, String remarks) async {
+  Future<ResponseModel> addIncome(int amount, String remarks) async {
     Map<String, dynamic> data = {'amount': amount, 'remarks': remarks};
     var response = await dio.post('/transactions/addExpense', data: data);
-    return {
-      'status': response.data['status'],
-      'message': response.data['message'],
-    };
+    return ResponseModel.fromJson(response.data);
   }
 
   @override
-  Future<Map<String, dynamic>> deleteTransaction(String id) async {
+  Future<ResponseModel> deleteTransaction(String id) async {
     var response = await dio.delete('.transactions/$id');
-    return {
-      'status': response.data['status'],
-      'message': response.data['message'],
-    };
+    return ResponseModel.fromJson(response.data);
   }
 
   @override
-  Future<Map<String, dynamic>> editTransaction(
+  Future<ResponseModel> editTransaction(
     String id,
     int amount,
     String transactionType,
@@ -62,10 +53,7 @@ class TransactioRemoteDatasourceImplementation
     };
 
     var response = await dio.patch('/transactions', data: data);
-    return {
-      'status': response.data['status'],
-      'message': response.data['message'],
-    };
+    return ResponseModel.fromJson(response.data);
   }
 
   @override

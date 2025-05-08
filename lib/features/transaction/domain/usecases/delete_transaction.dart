@@ -1,3 +1,4 @@
+import 'package:expense_tracker_pro/core/respons/response_model.dart';
 import 'package:expense_tracker_pro/features/transaction/domain/repositories/transaction_repository.dart';
 
 class DeleteTransaction {
@@ -5,7 +6,7 @@ class DeleteTransaction {
 
   DeleteTransaction({required this.transactionRepository});
 
-  Future<Map<String, dynamic>> execute(String id) async {
+  Future<ResponseModel> execute(String id) async {
     return await transactionRepository.deleteTransaction(id);
   }
 }
