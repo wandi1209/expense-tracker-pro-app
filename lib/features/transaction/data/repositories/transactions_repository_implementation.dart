@@ -12,7 +12,7 @@ class TransactionsRepositoryImplementation extends TransactionRepository {
   });
 
   @override
-  Future<ResponseModel> addExpense(int amount, String remarks) async {
+  Future<ResponseModel> addExpense(double amount, String remarks) async {
     try {
       final response = await transactionRemoteDatasource.addExpense(
         amount,
@@ -25,7 +25,7 @@ class TransactionsRepositoryImplementation extends TransactionRepository {
   }
 
   @override
-  Future<ResponseModel> addIncome(int amount, String remarks) async {
+  Future<ResponseModel> addIncome(double amount, String remarks) async {
     try {
       final response = await transactionRemoteDatasource.addIncome(
         amount,
@@ -50,7 +50,7 @@ class TransactionsRepositoryImplementation extends TransactionRepository {
   @override
   Future<ResponseModel> editTransaction(
     String id,
-    int amount,
+    double amount,
     String transactionType,
   ) async {
     try {

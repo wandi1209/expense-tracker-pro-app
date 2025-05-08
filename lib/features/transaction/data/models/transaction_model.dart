@@ -14,7 +14,7 @@ class TransactionModel extends Transaction {
     return TransactionModel(
       id: dataJson['_id'],
       userId: dataJson['user_id'],
-      amount: dataJson['amount'],
+      amount: (dataJson['amount'] as num).toDouble(),
       transactionType: dataJson['transaction_field'],
       remarks: dataJson['remarks'],
       createdAt: DateTime.parse(dataJson['createdAt']),

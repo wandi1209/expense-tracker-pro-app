@@ -3,11 +3,11 @@ import 'package:expense_tracker_pro/features/transaction/data/models/transaction
 
 abstract class TransactionRepository {
   Future<List<TransactionModel>> getTransactions();
-  Future<ResponseModel> addIncome(int amount, String remarks);
-  Future<ResponseModel> addExpense(int amount, String remarks);
+  Future<ResponseModel> addIncome(double amount, String remarks);
+  Future<ResponseModel> addExpense(double amount, String remarks);
   Future<ResponseModel> editTransaction(
     String id,
-    int amount,
+    double amount,
     String transactionType,
   );
   Future<ResponseModel> deleteTransaction(String id);

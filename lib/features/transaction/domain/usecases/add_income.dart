@@ -6,7 +6,7 @@ class AddIncome {
 
   AddIncome({required this.transactionRepository});
 
-  Future<ResponseModel> execute(int amount, String remarks) async {
+  Future<ResponseModel> execute(double amount, String remarks) async {
     return await transactionRepository.addIncome(amount, remarks);
   }
 }

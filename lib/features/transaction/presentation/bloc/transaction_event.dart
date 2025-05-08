@@ -10,7 +10,7 @@ class TransactionEventGetTransactions extends TransactionEvent {
 }
 
 class TransactionEventAddIncome extends TransactionEvent {
-  final int amount;
+  final double amount;
   final String remarks;
 
   TransactionEventAddIncome({required this.amount, required this.remarks});
@@ -19,7 +19,7 @@ class TransactionEventAddIncome extends TransactionEvent {
 }
 
 class TransactionEventAddExpense extends TransactionEvent {
-  final int amount;
+  final double amount;
   final String remarks;
 
   TransactionEventAddExpense({required this.amount, required this.remarks});
@@ -29,7 +29,7 @@ class TransactionEventAddExpense extends TransactionEvent {
 
 class TransactionEventEdit extends TransactionEvent {
   final String id;
-  final int amount;
+  final double amount;
   final String transactionType;
 
   TransactionEventEdit({

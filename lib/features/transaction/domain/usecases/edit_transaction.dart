@@ -8,7 +8,7 @@ class EditTransaction {
 
   Future<ResponseModel> execute(
     String id,
-    int amount,
+    double amount,
     String transactionType,
   ) async {
     return await transactionRepository.editTransaction(

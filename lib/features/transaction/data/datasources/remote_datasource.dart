@@ -5,11 +5,11 @@ import 'package:flutter/material.dart';
 
 abstract class TransactionRemoteDatasource {
   Future<List<TransactionModel>> getTransactions();
-  Future<ResponseModel> addIncome(int amount, String remarks);
-  Future<ResponseModel> addExpense(int amount, String remarks);
+  Future<ResponseModel> addIncome(double amount, String remarks);
+  Future<ResponseModel> addExpense(double amount, String remarks);
   Future<ResponseModel> editTransaction(
     String id,
-    int amount,
+    double amount,
     String transactionType,
   );
   Future<ResponseModel> deleteTransaction(String id);
@@ -22,14 +22,14 @@ class TransactionRemoteDatasourceImplementation
   TransactionRemoteDatasourceImplementation(this.dio);
 
   @override
-  Future<ResponseModel> addExpense(int amount, String remarks) async {
+  Future<ResponseModel> addExpense(double amount, String remarks) async {
     Map<String, dynamic> data = {'amount': amount, 'remarks': remarks};
     var response = await dio.post('/transactions/addIncome', data: data);
     return ResponseModel.fromJson(response.data);
   }
 
   @override
-  Future<ResponseModel> addIncome(int amount, String remarks) async {
+  Future<ResponseModel> addIncome(double amount, String remarks) async {
     Map<String, dynamic> data = {'amount': amount, 'remarks': remarks};
     var response = await dio.post('/transactions/addExpense', data: data);
     return ResponseModel.fromJson(response.data);
@@ -44,7 +44,7 @@ class TransactionRemoteDatasourceImplementation
   @override
   Future<ResponseModel> editTransaction(
     String id,
-    int amount,
+    double amount,
     String transactionType,
   ) async {
     Map<String, dynamic> data = {
@@ -61,7 +61,7 @@ class TransactionRemoteDatasourceImplementation
   Future<List<TransactionModel>> getTransactions() async {
     var response = await dio.get('/transactions');
     if (response.statusCode == 200) {
-      final List<Map<String, dynamic>> data = response.data['data'];
+      final List data = response.data['data'];
       return TransactionModel.fromJsonList(data);
     }
     debugPrint('${response.statusCode}');
