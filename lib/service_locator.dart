@@ -15,6 +15,13 @@ import 'package:expense_tracker_pro/features/dashboard/domain/usecases/dashboard
 import 'package:expense_tracker_pro/features/dashboard/domain/usecases/get_total_amount.dart';
 import 'package:expense_tracker_pro/features/dashboard/presentation/bloc/dashboard_bloc.dart';
 import 'package:expense_tracker_pro/features/transaction/data/datasources/remote_datasource.dart';
+import 'package:expense_tracker_pro/features/transaction/data/repositories/transactions_repository_implementation.dart';
+import 'package:expense_tracker_pro/features/transaction/domain/repositories/transaction_repository.dart';
+import 'package:expense_tracker_pro/features/transaction/domain/usecases/add_expense.dart';
+import 'package:expense_tracker_pro/features/transaction/domain/usecases/add_income.dart';
+import 'package:expense_tracker_pro/features/transaction/domain/usecases/delete_transaction.dart';
+import 'package:expense_tracker_pro/features/transaction/domain/usecases/edit_transaction.dart';
+import 'package:expense_tracker_pro/features/transaction/presentation/bloc/transaction_bloc.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:get_it/get_it.dart';
 
@@ -68,9 +75,34 @@ Future<void> init() async {
 
   // Feature - TRANSACTION
   // BLOC
+  locator.registerFactory(
+    () => TransactionBloc(
+      getTransaction: locator(),
+      addExpense: locator(),
+      addIncome: locator(),
+      editTransaction: locator(),
+      deleteTransaction: locator(),
+    ),
+  );
   // USECASE
+  locator.registerLazySingleton(
+    () => AddExpense(transactionRepository: locator()),
+  );
+  locator.registerLazySingleton(
+    () => AddIncome(transactionRepository: locator()),
+  );
+  locator.registerLazySingleton(
+    () => EditTransaction(transactionRepository: locator()),
+  );
+  locator.registerLazySingleton(
+    () => DeleteTransaction(transactionRepository: locator()),
+  );
   // REPOSITORY
-  // USECASE
+  locator.registerLazySingleton<TransactionRepository>(
+    () => TransactionsRepositoryImplementation(
+      transactioRemoteDatasource: locator(),
+    ),
+  );
   // DATASOURCE
   locator.registerLazySingleton<TransactioRemoteDatasource>(
     () => TransactioRemoteDatasourceImplementation(dio),
