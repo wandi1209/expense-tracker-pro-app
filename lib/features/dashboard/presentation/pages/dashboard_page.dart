@@ -3,6 +3,7 @@ import 'package:expense_tracker_pro/features/dashboard/data/models/dashboard_mod
 import 'package:expense_tracker_pro/features/dashboard/presentation/bloc/dashboard_bloc.dart';
 import 'package:expense_tracker_pro/features/dashboard/presentation/widgets/card_widget.dart';
 import 'package:expense_tracker_pro/features/dashboard/presentation/widgets/history_widget.dart';
+import 'package:expense_tracker_pro/features/transaction/data/models/transaction_model.dart';
 import 'package:expense_tracker_pro/features/user/data/models/user_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -29,6 +30,7 @@ class _DashboardPageState extends State<DashboardPage> {
             } else if (state is DashboardStateGetDashboardSuccess) {
               DashboardModel data = state.data;
               UserModel user = data.user;
+              List<TransactionModel> transactions = data.transactions;
 
               return SingleChildScrollView(
                 child: Stack(
@@ -62,7 +64,7 @@ class _DashboardPageState extends State<DashboardPage> {
                               expense: user.balance,
                               balance: user.balance,
                             ),
-                            const HistoryWidget(),
+                            HistoryWidget(lisData: transactions),
                           ],
                         ),
                       ),
