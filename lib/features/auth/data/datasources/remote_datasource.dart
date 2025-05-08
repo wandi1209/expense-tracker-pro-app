@@ -28,13 +28,13 @@ class UserAuthRemoteDatasourceImplementation extends UserAuthRemoteDatasource {
       return AuthResModel.fromJson({
         'status': response.data['status'],
         'message': response.data['message'],
-        'token': response.data['accessToken'],
+        'accessToken': response.data['accessToken'],
       });
     } on DioException catch (e) {
       return AuthResModel.fromJson({
         'status': e.response?.data['status']?.toString(),
         'message': e.response?.data['message']?.toString(),
-        'token': null,
+        'accessToken': null,
       });
     }
   }
@@ -43,18 +43,18 @@ class UserAuthRemoteDatasourceImplementation extends UserAuthRemoteDatasource {
   Future<AuthResModel> login(LoginReqModel dataLogin) async {
     try {
       final response = await dio.post('/users/login', data: dataLogin.toJson());
-      debugPrint(response.data['message']);
+      debugPrint(response.data['accessToken']);
       return AuthResModel.fromJson({
         'status': response.data['status'],
         'message': response.data['message'],
-        'token': response.data['accessToken'],
+        'accessToken': response.data['accessToken'],
       });
     } on DioException catch (e) {
       debugPrint(e.message);
       return AuthResModel.fromJson({
         'status': e.response?.data['status']?.toString(),
         'message': e.response?.data['message']?.toString(),
-        'token': null,
+        'accessToken': null,
       });
     }
   }

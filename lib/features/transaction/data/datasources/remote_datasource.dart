@@ -1,8 +1,9 @@
 import 'package:dio/dio.dart';
 import 'package:expense_tracker_pro/core/respons/response_model.dart';
 import 'package:expense_tracker_pro/features/transaction/data/models/transaction_model.dart';
+import 'package:flutter/material.dart';
 
-abstract class TransactioRemoteDatasource {
+abstract class TransactionRemoteDatasource {
   Future<List<TransactionModel>> getTransactions();
   Future<ResponseModel> addIncome(int amount, String remarks);
   Future<ResponseModel> addExpense(int amount, String remarks);
@@ -14,11 +15,11 @@ abstract class TransactioRemoteDatasource {
   Future<ResponseModel> deleteTransaction(String id);
 }
 
-class TransactioRemoteDatasourceImplementation
-    extends TransactioRemoteDatasource {
+class TransactionRemoteDatasourceImplementation
+    extends TransactionRemoteDatasource {
   final Dio dio;
 
-  TransactioRemoteDatasourceImplementation(this.dio);
+  TransactionRemoteDatasourceImplementation(this.dio);
 
   @override
   Future<ResponseModel> addExpense(int amount, String remarks) async {
@@ -59,7 +60,11 @@ class TransactioRemoteDatasourceImplementation
   @override
   Future<List<TransactionModel>> getTransactions() async {
     var response = await dio.get('/transactions');
-    final List data = response.data;
-    return TransactionModel.fromJsonList(data);
+    if (response.statusCode == 200) {
+      final List<Map<String, dynamic>> data = response.data['data'];
+      return TransactionModel.fromJsonList(data);
+    }
+    debugPrint('${response.statusCode}');
+    throw Exception('Failed to load transactions');
   }
 }

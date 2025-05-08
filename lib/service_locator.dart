@@ -21,7 +21,9 @@ import 'package:expense_tracker_pro/features/transaction/domain/usecases/add_exp
 import 'package:expense_tracker_pro/features/transaction/domain/usecases/add_income.dart';
 import 'package:expense_tracker_pro/features/transaction/domain/usecases/delete_transaction.dart';
 import 'package:expense_tracker_pro/features/transaction/domain/usecases/edit_transaction.dart';
+import 'package:expense_tracker_pro/features/transaction/domain/usecases/get_transaction.dart';
 import 'package:expense_tracker_pro/features/transaction/presentation/bloc/transaction_bloc.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:get_it/get_it.dart';
 
@@ -30,11 +32,12 @@ var locator = GetIt.instance;
 Future<void> init() async {
   final authService = AuthService();
   String? token = await authService.getToken();
+  debugPrint("token nih : ${token}");
 
   final Dio dio = Dio(
     BaseOptions(
       baseUrl: '${dotenv.env["BASE_URL"]}',
-      headers: {'Authorization': token != null ? 'Bearer $token' : ''},
+      headers: token != null ? {'Authorization': 'Bearer $token'} : null,
       validateStatus: (status) {
         return status! < 500; // Menerima semua status di bawah 500
       },
@@ -86,6 +89,9 @@ Future<void> init() async {
   );
   // USECASE
   locator.registerLazySingleton(
+    () => GetTransaction(transactionRepository: locator()),
+  );
+  locator.registerLazySingleton(
     () => AddExpense(transactionRepository: locator()),
   );
   locator.registerLazySingleton(
@@ -100,12 +106,12 @@ Future<void> init() async {
   // REPOSITORY
   locator.registerLazySingleton<TransactionRepository>(
     () => TransactionsRepositoryImplementation(
-      transactioRemoteDatasource: locator(),
+      transactionRemoteDatasource: locator(),
     ),
   );
   // DATASOURCE
-  locator.registerLazySingleton<TransactioRemoteDatasource>(
-    () => TransactioRemoteDatasourceImplementation(dio),
+  locator.registerLazySingleton<TransactionRemoteDatasource>(
+    () => TransactionRemoteDatasourceImplementation(dio),
   );
 
   // Feature - DASHBOARD
@@ -124,7 +130,7 @@ Future<void> init() async {
   locator.registerLazySingleton<DashboardRepository>(
     () => DashboardRepositoryImplementation(
       dashboardRemoteDatasource: locator(),
-      transactioRemoteDatasource: locator(),
+      transactionRemoteDatasource: locator(),
     ),
   );
   // DATASOURCE

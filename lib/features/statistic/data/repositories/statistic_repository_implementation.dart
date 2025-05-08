@@ -4,16 +4,18 @@ import 'package:expense_tracker_pro/features/transaction/data/datasources/remote
 import 'package:expense_tracker_pro/features/transaction/domain/entities/transaction.dart';
 
 class StatisticRepositoryImplementation extends StatisticRepository {
-  final TransactioRemoteDatasource transactioRemoteDatasource;
+  final TransactionRemoteDatasource transactionRemoteDatasource;
 
-  StatisticRepositoryImplementation({required this.transactioRemoteDatasource});
+  StatisticRepositoryImplementation({
+    required this.transactionRemoteDatasource,
+  });
 
   @override
   Future<List<Transaction>> getTransactionByFilter(
     DateFilter dateFilter,
     String type,
   ) async {
-    var allTransactions = await transactioRemoteDatasource.getTransactions();
+    var allTransactions = await transactionRemoteDatasource.getTransactions();
     final DateTime now = DateTime.now();
 
     return allTransactions.where((tx) {
@@ -52,7 +54,7 @@ class StatisticRepositoryImplementation extends StatisticRepository {
 
   @override
   Future<List<Transaction>> topSpending(bool top, String type) async {
-    var allTransactions = await transactioRemoteDatasource.getTransactions();
+    var allTransactions = await transactionRemoteDatasource.getTransactions();
 
     var filteredTransactions =
         allTransactions.where((tx) {

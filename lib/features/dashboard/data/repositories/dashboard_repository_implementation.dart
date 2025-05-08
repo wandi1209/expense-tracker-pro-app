@@ -4,12 +4,12 @@ import 'package:expense_tracker_pro/features/dashboard/domain/repositories/dashb
 import 'package:expense_tracker_pro/features/transaction/data/datasources/remote_datasource.dart';
 
 class DashboardRepositoryImplementation extends DashboardRepository {
-  final TransactioRemoteDatasource transactioRemoteDatasource;
+  final TransactionRemoteDatasource transactionRemoteDatasource;
   final DashboardRemoteDatasource dashboardRemoteDatasource;
 
   DashboardRepositoryImplementation({
     required this.dashboardRemoteDatasource,
-    required this.transactioRemoteDatasource,
+    required this.transactionRemoteDatasource,
   });
   @override
   Future<DashboardModel> getDashboard() async {
@@ -18,7 +18,7 @@ class DashboardRepositoryImplementation extends DashboardRepository {
 
   @override
   Future<double> getTotalAmount(String type) async {
-    final allTransactions = await transactioRemoteDatasource.getTransactions();
+    final allTransactions = await transactionRemoteDatasource.getTransactions();
     double total = 0;
     for (var transaction in allTransactions) {
       if (type == transaction.transactionType) {

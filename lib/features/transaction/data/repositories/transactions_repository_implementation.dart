@@ -2,18 +2,19 @@ import 'package:expense_tracker_pro/core/respons/response_model.dart';
 import 'package:expense_tracker_pro/features/transaction/data/datasources/remote_datasource.dart';
 import 'package:expense_tracker_pro/features/transaction/data/models/transaction_model.dart';
 import 'package:expense_tracker_pro/features/transaction/domain/repositories/transaction_repository.dart';
+import 'package:flutter/material.dart';
 
 class TransactionsRepositoryImplementation extends TransactionRepository {
-  final TransactioRemoteDatasource transactioRemoteDatasource;
+  final TransactionRemoteDatasource transactionRemoteDatasource;
 
   TransactionsRepositoryImplementation({
-    required this.transactioRemoteDatasource,
+    required this.transactionRemoteDatasource,
   });
 
   @override
   Future<ResponseModel> addExpense(int amount, String remarks) async {
     try {
-      final response = await transactioRemoteDatasource.addExpense(
+      final response = await transactionRemoteDatasource.addExpense(
         amount,
         remarks,
       );
@@ -26,7 +27,7 @@ class TransactionsRepositoryImplementation extends TransactionRepository {
   @override
   Future<ResponseModel> addIncome(int amount, String remarks) async {
     try {
-      final response = await transactioRemoteDatasource.addIncome(
+      final response = await transactionRemoteDatasource.addIncome(
         amount,
         remarks,
       );
@@ -39,7 +40,7 @@ class TransactionsRepositoryImplementation extends TransactionRepository {
   @override
   Future<ResponseModel> deleteTransaction(String id) async {
     try {
-      final response = await transactioRemoteDatasource.deleteTransaction(id);
+      final response = await transactionRemoteDatasource.deleteTransaction(id);
       return response;
     } catch (e) {
       return ResponseModel(status: 'failed', message: e.toString());
@@ -53,7 +54,7 @@ class TransactionsRepositoryImplementation extends TransactionRepository {
     String transactionType,
   ) async {
     try {
-      final response = await transactioRemoteDatasource.editTransaction(
+      final response = await transactionRemoteDatasource.editTransaction(
         id,
         amount,
         transactionType,
@@ -68,9 +69,11 @@ class TransactionsRepositoryImplementation extends TransactionRepository {
   Future<List<TransactionModel>> getTransactions() async {
     try {
       List<TransactionModel> response =
-          await transactioRemoteDatasource.getTransactions();
+          await transactionRemoteDatasource.getTransactions();
+
       return response;
     } catch (e) {
+      debugPrint('Error: $e');
       return [];
     }
   }

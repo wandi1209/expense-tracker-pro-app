@@ -7,7 +7,7 @@ import 'package:expense_tracker_pro/features/auth/presentation/pages/reset_passw
 import 'package:expense_tracker_pro/features/dashboard/presentation/bloc/dashboard_bloc.dart';
 import 'package:expense_tracker_pro/features/dashboard/presentation/pages/dashboard_page.dart';
 import 'package:expense_tracker_pro/features/statistic/presentation/pages/statistic_page.dart';
-import 'package:expense_tracker_pro/features/transaction/domain/entities/transaction.dart';
+import 'package:expense_tracker_pro/features/transaction/presentation/bloc/transaction_bloc.dart';
 import 'package:expense_tracker_pro/features/transaction/presentation/pages/transaction_page.dart';
 import 'package:expense_tracker_pro/features/user/presentation/pages/profile_page.dart';
 import 'package:expense_tracker_pro/service_locator.dart';
@@ -87,7 +87,7 @@ class AppRouter {
             pageBuilder:
                 (context, state) => NoTransitionPage(
                   child: BlocProvider(
-                    create: (context) => locator<DashboardBloc>(),
+                    create: (_) => locator<DashboardBloc>(),
                     child: const DashboardPage(),
                   ),
                 ),
@@ -111,33 +111,9 @@ class AppRouter {
             name: 'transactions',
             pageBuilder:
                 (context, state) => NoTransitionPage(
-                  child: TransactionPage(
-                    listData: [
-                      Transaction(
-                        id: '0',
-                        userId: '002',
-                        amount: 12000,
-                        transactionType: 'expense',
-                        remarks: 'Nonton Film',
-                        createdAt: DateTime.now(),
-                      ),
-                      Transaction(
-                        id: '1',
-                        userId: '003',
-                        amount: 14000,
-                        transactionType: 'income',
-                        remarks: 'Testing 2',
-                        createdAt: DateTime.now(),
-                      ),
-                      Transaction(
-                        id: '2',
-                        userId: '003',
-                        amount: 14000,
-                        transactionType: 'expense',
-                        remarks: 'Testing 3',
-                        createdAt: DateTime(2024, 9, 12),
-                      ),
-                    ],
+                  child: BlocProvider(
+                    create: (_) => locator<TransactionBloc>(),
+                    child: const TransactionPage(),
                   ),
                 ),
           ),

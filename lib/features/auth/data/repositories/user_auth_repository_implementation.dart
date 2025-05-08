@@ -1,4 +1,5 @@
 import 'package:expense_tracker_pro/features/auth/data/models/login_req.dart';
+import 'package:flutter/material.dart';
 
 import '../datasources/remote_datasource.dart';
 import '../models/forgot_password_req.dart';
@@ -29,6 +30,7 @@ class UserAuthRepositoryImplementation extends UserAuthRepository {
       final response = await remoteDatasource.login(
         LoginReqModel(email: email, password: password),
       );
+      debugPrint('${response.accessToken}');
       return response;
     } catch (e) {
       return AuthResModel(status: 'error', message: e.toString());
