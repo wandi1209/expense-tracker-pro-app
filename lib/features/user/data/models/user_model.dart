@@ -13,7 +13,7 @@ class UserModel extends User {
       id: userData['_id'],
       name: userData['name'],
       email: userData['email'],
-      balance: userData['balance'],
+      balance: (userData['balance'] as num).toDouble(),
     );
   }
 }
