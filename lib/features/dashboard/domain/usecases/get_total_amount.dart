@@ -2,11 +2,10 @@ import 'package:expense_tracker_pro/features/dashboard/domain/repositories/dashb
 
 class GetTotalAmount {
   final DashboardRepository dashboardRepository;
-  final String type;
 
-  GetTotalAmount({required this.dashboardRepository, required this.type});
+  GetTotalAmount({required this.dashboardRepository});
 
-  Future<double> execute() async {
+  Future<double> call(String type) async {
     return await dashboardRepository.getTotalAmount(type);
   }
 }

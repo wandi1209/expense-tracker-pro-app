@@ -1,9 +1,8 @@
 import 'package:dio/dio.dart';
-import 'package:expense_tracker_pro/features/user/data/models/user_model.dart';
-import 'package:expense_tracker_pro/features/transaction/data/models/transaction_model.dart';
+import 'package:expense_tracker_pro/features/dashboard/data/models/dashboard_model.dart';
 
 abstract class DashboardRemoteDatasource {
-  Future<Map<String, dynamic>> dashboard();
+  Future<DashboardModel> dashboard();
 }
 
 class DashboardRemoteDatasourceImplementation
@@ -13,13 +12,8 @@ class DashboardRemoteDatasourceImplementation
   DashboardRemoteDatasourceImplementation({required this.dio});
 
   @override
-  Future<Map<String, dynamic>> dashboard() async {
+  Future<DashboardModel> dashboard() async {
     var response = await dio.get('/users/dashboard');
-    return {
-      'user': UserModel.fromJson(response.data['data']),
-      'transaction': TransactionModel.fromJsonList(
-        response.data['transaction'],
-      ),
-    };
+    return DashboardModel.fromJson(response.data);
   }
 }

@@ -41,7 +41,7 @@ class _LoginPageState extends State<LoginPage> {
               SnackBar(content: Text(state.error), backgroundColor: Colors.red),
             );
           } else if (state is AuthenticationSuccess) {
-            context.go('/dashboard');
+            context.go('/transactions');
           }
         },
         child: BlocBuilder<AuthenticationBloc, AuthenticationState>(

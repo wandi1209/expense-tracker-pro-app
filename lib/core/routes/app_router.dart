@@ -4,6 +4,7 @@ import 'package:expense_tracker_pro/features/auth/presentation/pages/forgot_pass
 import 'package:expense_tracker_pro/features/auth/presentation/pages/new_password_page.dart';
 import 'package:expense_tracker_pro/features/auth/presentation/pages/register_page.dart';
 import 'package:expense_tracker_pro/features/auth/presentation/pages/reset_password_page.dart';
+import 'package:expense_tracker_pro/features/dashboard/presentation/bloc/dashboard_bloc.dart';
 import 'package:expense_tracker_pro/features/dashboard/presentation/pages/dashboard_page.dart';
 import 'package:expense_tracker_pro/features/statistic/presentation/pages/statistic_page.dart';
 import 'package:expense_tracker_pro/features/transaction/domain/entities/transaction.dart';
@@ -84,8 +85,12 @@ class AppRouter {
             path: '/dashboard',
             name: 'dashboard',
             pageBuilder:
-                (context, state) =>
-                    const NoTransitionPage(child: DashboardPage()),
+                (context, state) => NoTransitionPage(
+                  child: BlocProvider(
+                    create: (context) => locator<DashboardBloc>(),
+                    child: const DashboardPage(),
+                  ),
+                ),
           ),
           GoRoute(
             path: '/statistic',
