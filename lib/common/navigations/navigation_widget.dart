@@ -1,6 +1,9 @@
 import 'package:expense_tracker_pro/common/sheet/sheet_add_widget.dart';
 import 'package:expense_tracker_pro/core/configs/theme/app_colors.dart';
+import 'package:expense_tracker_pro/features/transaction/presentation/bloc/transaction_bloc.dart';
+import 'package:expense_tracker_pro/service_locator.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 
 class NavigationWidget extends StatelessWidget {
@@ -23,7 +26,10 @@ class NavigationWidget extends StatelessWidget {
                     context: context,
                     isScrollControlled: true,
                     builder: (BuildContext context) {
-                      return const SheetAddWidget();
+                      return BlocProvider(
+                        create: (context) => locator<TransactionBloc>(),
+                        child: const SheetAddWidget(),
+                      );
                     },
                   );
                 },

@@ -78,7 +78,12 @@ class AppRouter {
       ),
       ShellRoute(
         builder: (context, state, child) {
-          return NavigationWidget(child: child);
+          return MultiBlocProvider(
+            providers: [
+              BlocProvider(create: (_) => locator<TransactionBloc>()),
+            ],
+            child: NavigationWidget(child: child),
+          );
         },
         routes: [
           GoRoute(

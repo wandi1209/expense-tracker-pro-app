@@ -3,7 +3,9 @@ import 'dart:async';
 import 'package:expense_tracker_pro/common/buttons/basic_button.dart';
 import 'package:expense_tracker_pro/common/dialogs/dialog_widget.dart';
 import 'package:expense_tracker_pro/common/inputs/basic_input.dart';
+import 'package:expense_tracker_pro/features/transaction/presentation/bloc/transaction_bloc.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 
 class SheetAddWidget extends StatefulWidget {
@@ -14,8 +16,8 @@ class SheetAddWidget extends StatefulWidget {
 }
 
 class _SheetAddWidgetState extends State<SheetAddWidget> {
-    TextEditingController remarks = TextEditingController();
-    TextEditingController amount = TextEditingController();
+  TextEditingController remarks = TextEditingController();
+  TextEditingController amount = TextEditingController();
   var selectedType = 'Expense';
   List<String> types = ['Expense', 'Income'];
 
@@ -41,9 +43,18 @@ class _SheetAddWidgetState extends State<SheetAddWidget> {
                   style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
                 ),
                 const SizedBox(height: 20),
-                BasicInput(title: 'Remarks', hintText: 'Type here...', controller: remarks,),
+                BasicInput(
+                  title: 'Remarks',
+                  hintText: 'Type here...',
+                  controller: remarks,
+                ),
                 const SizedBox(height: 10),
-                BasicInput(title: 'Amount', hintText: '0', num: true, controller: amount,),
+                BasicInput(
+                  title: 'Amount',
+                  hintText: '0',
+                  num: true,
+                  controller: amount,
+                ),
                 const SizedBox(height: 10),
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -57,22 +68,59 @@ class _SheetAddWidgetState extends State<SheetAddWidget> {
                   ],
                 ),
                 const SizedBox(height: 20),
-                BasicButton(
-                  title: 'Add Transaction',
-                  onPressed: () {
-                    final dialog = successDialog(
-                      context,
-                      'Add Transaction Success',
+                BlocConsumer<TransactionBloc, TransactionState>(
+                  listener: (context, state) {
+                    if (state is AddTransactionSuccess) {
+                      final dialog = successDialog(
+                        context,
+                        'Add Transaction Success',
+                      );
+                      dialog.show();
+
+                      Timer(const Duration(seconds: 2), () {
+                        dialog.dismiss();
+
+                        if (mounted) {
+                          context.pop();
+                        }
+                      });
+                    } else if (state is TransactionFailure) {
+                      final dialog = errorDialog(context, state.error);
+                      dialog.show();
+
+                      Timer(const Duration(seconds: 2), () {
+                        dialog.dismiss();
+                      });
+                    }
+                  },
+                  builder: (context, state) {
+                    if (state is TransactionLoading) {
+                      return const CircularProgressIndicator();
+                    }
+                    return BasicButton(
+                      title: 'Add Transaction',
+                      onPressed: () async {
+                        final double parsedAmount =
+                            double.tryParse(amount.text) ?? 0;
+                        final type = selectedType.toLowerCase();
+
+                        if (type == 'expense') {
+                          context.read<TransactionBloc>().add(
+                            TransactionEventAddExpense(
+                              amount: parsedAmount,
+                              remarks: remarks.text,
+                            ),
+                          );
+                        } else {
+                          context.read<TransactionBloc>().add(
+                            TransactionEventAddIncome(
+                              amount: parsedAmount,
+                              remarks: remarks.text,
+                            ),
+                          );
+                        }
+                      },
                     );
-                    dialog.show();
-
-                    Timer(const Duration(seconds: 2), () {
-                      dialog.dismiss();
-
-                      if (mounted) {
-                        context.pop();
-                      }
-                    });
                   },
                 ),
                 const SizedBox(height: 60),

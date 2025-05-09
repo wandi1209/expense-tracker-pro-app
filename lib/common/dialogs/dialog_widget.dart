@@ -36,3 +36,17 @@ AwesomeDialog warningDialog(
     btnOkOnPress: onPressOk,
   );
 }
+
+AwesomeDialog errorDialog(BuildContext context, String desc) {
+  return AwesomeDialog(
+    context: context,
+    dialogType: DialogType.error,
+    animType: AnimType.rightSlide,
+    headerAnimationLoop: false,
+    title: 'Error',
+    desc: desc,
+    btnOkOnPress: () {},
+    btnOkIcon: Icons.cancel,
+    btnOkColor: Colors.red,
+  );
+}
