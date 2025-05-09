@@ -73,6 +73,7 @@ class TransactionBloc extends Bloc<TransactionEvent, TransactionState> {
         final result = await deleteTransaction.execute(event.id);
         if (result.status == 'success') {
           emit(DeleteTransactionSuccess(message: result.message));
+          add(TransactionEventGetTransactions());
         } else {
           emit(TransactionFailure(error: result.message));
         }
@@ -84,6 +85,7 @@ class TransactionBloc extends Bloc<TransactionEvent, TransactionState> {
       try {
         emit(TransactionLoading());
         final result = await getTransaction.execute();
+
         emit(GetTransactionSuccess(transactions: result));
       } catch (e) {
         emit(TransactionFailure(error: e.toString()));

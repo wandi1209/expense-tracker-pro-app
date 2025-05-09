@@ -5,7 +5,9 @@ import 'package:expense_tracker_pro/common/sheet/sheet_edit_widget.dart';
 import 'package:expense_tracker_pro/core/configs/theme/app_colors.dart';
 import 'package:expense_tracker_pro/core/utils/formatter.dart';
 import 'package:expense_tracker_pro/features/transaction/domain/entities/transaction.dart';
+import 'package:expense_tracker_pro/features/transaction/presentation/bloc/transaction_bloc.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:intl/intl.dart';
 
@@ -64,19 +66,40 @@ class _SlidableWidgetState extends State<SlidableWidget> {
                   );
                 },
               ),
-              SlidableAction(
-                backgroundColor: Colors.red.shade500,
-                icon: Icons.delete,
-                foregroundColor: Colors.white,
-                label: 'Delete',
-                onPressed: (ctx) {
-                  warningDialog(context, 'Are you sure?', () {
+              BlocConsumer<TransactionBloc, TransactionState>(
+                listener: (context, state) {
+                  if (state is DeleteTransactionSuccess) {
                     final dialog = successDialog(context, 'Berhasil dihapus');
                     dialog.show();
                     Timer(const Duration(seconds: 2), () {
-                      dialog.dismiss();
+                      if (mounted) {
+                        dialog.dismiss();
+                      }
                     });
-                  }).show();
+                  } else if (state is TransactionFailure) {
+                    final dialog = errorDialog(context, state.error);
+                    dialog.show();
+                    Timer(const Duration(seconds: 2), () {
+                      if (mounted) {
+                        dialog.dismiss();
+                      }
+                    });
+                  }
+                },
+                builder: (contexts, state) {
+                  return SlidableAction(
+                    backgroundColor: Colors.red.shade500,
+                    icon: Icons.delete,
+                    foregroundColor: Colors.white,
+                    label: 'Delete',
+                    onPressed: (ctx) {
+                      warningDialog(context, 'Are you sure?', () {
+                        context.read<TransactionBloc>().add(
+                          TransactionEventDelete(id: data.id),
+                        );
+                      }).show();
+                    },
+                  );
                 },
               ),
             ],

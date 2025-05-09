@@ -37,7 +37,7 @@ class TransactionRemoteDatasourceImplementation
 
   @override
   Future<ResponseModel> deleteTransaction(String id) async {
-    var response = await dio.delete('.transactions/$id');
+    var response = await dio.delete('/transactions/$id');
     return ResponseModel.fromJson(response.data);
   }
 
