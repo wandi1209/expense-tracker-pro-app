@@ -26,7 +26,9 @@ class _TransactionPageState extends State<TransactionPage> {
             if (state is TransactionLoading) {
               return const Center(child: CircularProgressIndicator());
             } else if (state is GetTransactionSuccess) {
-              return SlidableWidget(listData: state.transactions);
+              return SingleChildScrollView(
+                child: SlidableWidget(listData: state.transactions),
+              );
             }
             return Center(
               child: Text(
