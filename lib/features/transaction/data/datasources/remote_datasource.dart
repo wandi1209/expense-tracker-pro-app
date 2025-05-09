@@ -24,14 +24,14 @@ class TransactionRemoteDatasourceImplementation
   @override
   Future<ResponseModel> addExpense(double amount, String remarks) async {
     Map<String, dynamic> data = {'amount': amount, 'remarks': remarks};
-    var response = await dio.post('/transactions/addIncome', data: data);
+    var response = await dio.post('/transactions/addExpense', data: data);
     return ResponseModel.fromJson(response.data);
   }
 
   @override
   Future<ResponseModel> addIncome(double amount, String remarks) async {
     Map<String, dynamic> data = {'amount': amount, 'remarks': remarks};
-    var response = await dio.post('/transactions/addExpense', data: data);
+    var response = await dio.post('/transactions/addIncome', data: data);
     return ResponseModel.fromJson(response.data);
   }
 

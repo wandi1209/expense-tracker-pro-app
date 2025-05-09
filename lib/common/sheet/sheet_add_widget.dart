@@ -111,14 +111,14 @@ class _SheetAddWidgetState extends State<SheetAddWidget> {
                               remarks: remarks.text,
                             ),
                           );
-                        } else {
+                        } else if (type == 'income') {
                           context.read<TransactionBloc>().add(
                             TransactionEventAddIncome(
                               amount: parsedAmount,
                               remarks: remarks.text,
                             ),
                           );
-                        }
+                        } 
                       },
                     );
                   },
