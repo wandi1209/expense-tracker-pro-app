@@ -81,6 +81,7 @@ class _SheetAddWidgetState extends State<SheetAddWidget> {
                         dialog.dismiss();
 
                         if (mounted) {
+                          context.push('/dashboard');
                           context.pop();
                         }
                       });
@@ -118,7 +119,7 @@ class _SheetAddWidgetState extends State<SheetAddWidget> {
                               remarks: remarks.text,
                             ),
                           );
-                        } 
+                        }
                       },
                     );
                   },

@@ -45,7 +45,7 @@ class NavigationWidget extends StatelessWidget {
           children: [
             IconButton(
               onPressed: () {
-                context.go('/dashboard');
+                context.push('/dashboard');
               },
               icon: Icon(
                 Icons.home,

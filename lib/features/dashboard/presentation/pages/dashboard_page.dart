@@ -17,67 +17,68 @@ class DashboardPage extends StatefulWidget {
 
 class _DashboardPageState extends State<DashboardPage> {
   @override
+  void initState() {
+    context.read<DashboardBloc>().add(DashboardEventGetDashboard());
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: BlocListener<DashboardBloc, DashboardState>(
-        listener: (context, state) {},
-        child: BlocBuilder<DashboardBloc, DashboardState>(
-          bloc: BlocProvider.of<DashboardBloc>(context)
-            ..add(DashboardEventGetDashboard()),
-          builder: (context, state) {
-            if (state is DashboardStateLoading) {
-              return const Center(child: CircularProgressIndicator());
-            } else if (state is DashboardStateGetDashboardSuccess) {
-              DashboardModel data = state.data;
-              UserModel user = data.user;
-              List<TransactionModel> transactions = data.transactions;
-
-              return SingleChildScrollView(
-                child: Stack(
-                  children: [
-                    Image.asset(AppImages.dashboardBg),
-                    Image.asset(AppImages.dashboardParticle),
-                    SafeArea(
-                      child: Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 20),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            const Text(
-                              'Welcome back,',
-                              style: TextStyle(
-                                color: Colors.white,
-                                fontWeight: FontWeight.w600,
-                              ),
+      body: BlocBuilder<DashboardBloc, DashboardState>(
+        builder: (context, state) {
+          if (state is DashboardStateLoading) {
+            return const Center(child: CircularProgressIndicator());
+          } else if (state is DashboardStateGetDashboardSuccess) {
+            DashboardModel data = state.data;
+            UserModel user = data.user;
+            List<TransactionModel> transactions = data.transactions;
+      
+            return SingleChildScrollView(
+              child: Stack(
+                children: [
+                  Image.asset(AppImages.dashboardBg),
+                  Image.asset(AppImages.dashboardParticle),
+                  SafeArea(
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 20),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          const Text(
+                            'Welcome back,',
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontWeight: FontWeight.w600,
                             ),
-
-                            Text(
-                              user.name,
-                              style: const TextStyle(
-                                color: Colors.white,
-                                fontSize: 20,
-                                fontWeight: FontWeight.bold,
-                              ),
+                          ),
+      
+                          Text(
+                            user.name,
+                            style: const TextStyle(
+                              color: Colors.white,
+                              fontSize: 20,
+                              fontWeight: FontWeight.bold,
                             ),
-                            CardWidget(
-                              income: user.balance,
-                              expense: user.balance,
-                              balance: user.balance,
-                            ),
-                            HistoryWidget(lisData: transactions),
-                          ],
-                        ),
+                          ),
+                          CardWidget(
+                            income: user.balance,
+                            expense: user.balance,
+                            balance: user.balance,
+                          ),
+                          HistoryWidget(lisData: transactions),
+                        ],
                       ),
                     ),
-                  ],
-                ),
-              );
-            } else if (state is DashboardStateFailure) {
-              return Text(state.error);
-            }
-            return const Text("EROR");
-          },
-        ),
+                  ),
+                ],
+              ),
+            );
+          } else if (state is DashboardStateFailure) {
+            return Text(state.error);
+          }
+          return const Text("EROR");
+        },
       ),
     );
   }
