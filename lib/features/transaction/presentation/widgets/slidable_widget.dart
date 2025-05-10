@@ -67,9 +67,9 @@ class _SlidableWidgetState extends State<SlidableWidget> {
                 },
               ),
               BlocConsumer<TransactionBloc, TransactionState>(
-                listener: (context, state) {
+                listener: (ctx, state) {
                   if (state is DeleteTransactionSuccess) {
-                    final dialog = successDialog(context, 'Berhasil dihapus');
+                    final dialog = successDialog(context, state.message);
                     dialog.show();
                     Timer(const Duration(seconds: 2), () {
                       if (mounted) {
