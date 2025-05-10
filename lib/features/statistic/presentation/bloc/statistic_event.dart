@@ -3,19 +3,24 @@ part of 'statistic_bloc.dart';
 abstract class StatisticEvent extends Equatable {}
 
 class StatisticEventGetTransactionsByFilter extends StatisticEvent {
-  final List<TransactionModel> transactions;
+  final DateFilter dateFilter;
+  final String type;
 
-  StatisticEventGetTransactionsByFilter({required this.transactions});
+  StatisticEventGetTransactionsByFilter({
+    required this.dateFilter,
+    required this.type,
+  });
 
   @override
-  List<Object?> get props => [transactions];
+  List<Object?> get props => [dateFilter, type];
 }
 
 class StatisticEventGetTopTransactions extends StatisticEvent {
-  final List<TransactionModel> transactions;
+  final bool top;
+  final String type;
 
-  StatisticEventGetTopTransactions({required this.transactions});
+  StatisticEventGetTopTransactions({required this.top, required this.type});
 
   @override
-  List<Object?> get props => [transactions];
+  List<Object?> get props => [top, type];
 }

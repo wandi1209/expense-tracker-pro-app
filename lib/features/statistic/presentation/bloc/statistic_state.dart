@@ -7,7 +7,7 @@ class StatisticInitial extends StatisticState {
   List<Object?> get props => [];
 }
 
-class StatisticEventLoading extends StatisticState {
+class StatisticStateLoading extends StatisticState {
   @override
   List<Object?> get props => [];
 }
@@ -30,10 +30,10 @@ class StatisticGetTopTransactionsSuccess extends StatisticState {
   List<Object?> get props => [topTransactions];
 }
 
-class StatisticEventFailure extends StatisticState {
+class StatisticStateFailure extends StatisticState {
   final String error;
 
-  StatisticEventFailure({required this.error});
+  StatisticStateFailure({required this.error});
 
   @override
   List<Object?> get props => [error];

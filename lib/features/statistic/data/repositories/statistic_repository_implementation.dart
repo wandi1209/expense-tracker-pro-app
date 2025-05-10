@@ -2,7 +2,6 @@ import 'package:expense_tracker_pro/core/utils/enum.dart';
 import 'package:expense_tracker_pro/features/statistic/domain/repositories/statistic_repository.dart';
 import 'package:expense_tracker_pro/features/transaction/data/datasources/remote_datasource.dart';
 import 'package:expense_tracker_pro/features/transaction/data/models/transaction_model.dart';
-import 'package:expense_tracker_pro/features/transaction/domain/entities/transaction.dart';
 
 class StatisticRepositoryImplementation extends StatisticRepository {
   final TransactionRemoteDatasource transactionRemoteDatasource;
@@ -12,7 +11,7 @@ class StatisticRepositoryImplementation extends StatisticRepository {
   });
 
   @override
-  Future<List<Transaction>> getTransactionByFilter(
+  Future<List<TransactionModel>> getTransactionByFilter(
     DateFilter dateFilter,
     String type,
   ) async {
