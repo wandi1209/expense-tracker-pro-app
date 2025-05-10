@@ -14,6 +14,11 @@ import 'package:expense_tracker_pro/features/dashboard/domain/repositories/dashb
 import 'package:expense_tracker_pro/features/dashboard/domain/usecases/dashboard.dart';
 import 'package:expense_tracker_pro/features/dashboard/domain/usecases/get_total_amount.dart';
 import 'package:expense_tracker_pro/features/dashboard/presentation/bloc/dashboard_bloc.dart';
+import 'package:expense_tracker_pro/features/statistic/data/repositories/statistic_repository_implementation.dart';
+import 'package:expense_tracker_pro/features/statistic/domain/repositories/statistic_repository.dart';
+import 'package:expense_tracker_pro/features/statistic/domain/usecases/get_transaction_by_filter.dart';
+import 'package:expense_tracker_pro/features/statistic/domain/usecases/top_spending.dart';
+import 'package:expense_tracker_pro/features/statistic/presentation/bloc/statistic_bloc.dart';
 import 'package:expense_tracker_pro/features/transaction/data/datasources/remote_datasource.dart';
 import 'package:expense_tracker_pro/features/transaction/data/repositories/transactions_repository_implementation.dart';
 import 'package:expense_tracker_pro/features/transaction/domain/repositories/transaction_repository.dart';
@@ -146,4 +151,27 @@ Future<void> init() async {
   locator.registerLazySingleton<DashboardRemoteDatasource>(
     () => DashboardRemoteDatasourceImplementation(dio: dio),
   );
+
+  // FEATUTE - STATISTIC
+  // BLOC
+  locator.registerFactory(
+    () => StatisticBloc(
+      getTransactionByFilter: locator(),
+      topTransactions: locator(),
+    ),
+  );
+  // USECASE
+  locator.registerLazySingleton(
+    () => GetTransactionByFilter(statisticRepository: locator()),
+  );
+  locator.registerLazySingleton(
+    () => TopSpending(statisticRepository: locator()),
+  );
+  // REPOSITORY
+  locator.registerLazySingleton<StatisticRepository>(
+    () => StatisticRepositoryImplementation(
+      transactionRemoteDatasource: locator(),
+    ),
+  );
+  // DATASOURCE
 }
