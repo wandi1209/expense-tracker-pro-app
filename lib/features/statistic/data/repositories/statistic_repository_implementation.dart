@@ -1,6 +1,7 @@
 import 'package:expense_tracker_pro/core/utils/enum.dart';
 import 'package:expense_tracker_pro/features/statistic/domain/repositories/statistic_repository.dart';
 import 'package:expense_tracker_pro/features/transaction/data/datasources/remote_datasource.dart';
+import 'package:expense_tracker_pro/features/transaction/data/models/transaction_model.dart';
 import 'package:expense_tracker_pro/features/transaction/domain/entities/transaction.dart';
 
 class StatisticRepositoryImplementation extends StatisticRepository {
@@ -21,7 +22,6 @@ class StatisticRepositoryImplementation extends StatisticRepository {
     return allTransactions.where((tx) {
       final txDate = tx.createdAt;
 
-      // Filter berdasarkan waktu
       bool isInDateRange;
       switch (dateFilter) {
         case DateFilter.day:
@@ -45,7 +45,6 @@ class StatisticRepositoryImplementation extends StatisticRepository {
           break;
       }
 
-      // Filter berdasarkan tipe
       bool isTypeMatch = tx.transactionType == type;
 
       return isInDateRange && isTypeMatch;
@@ -53,7 +52,7 @@ class StatisticRepositoryImplementation extends StatisticRepository {
   }
 
   @override
-  Future<List<Transaction>> topSpending(bool top, String type) async {
+  Future<List<TransactionModel>> topSpending(bool top, String type) async {
     var allTransactions = await transactionRemoteDatasource.getTransactions();
 
     var filteredTransactions =
