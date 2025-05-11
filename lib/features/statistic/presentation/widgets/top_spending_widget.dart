@@ -4,19 +4,29 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class TopSpendingWidget extends StatefulWidget {
-  const TopSpendingWidget({super.key});
+  final String selectedType;
+  const TopSpendingWidget({super.key, required this.selectedType});
 
   @override
   State<TopSpendingWidget> createState() => _TopSpendingWidgetState();
 }
 
 class _TopSpendingWidgetState extends State<TopSpendingWidget> {
+  bool top = true;
+
   @override
   void initState() {
-    context.read<StatisticBloc>().add(
-      StatisticEventGetTopTransactions(top: true, type: 'expense'),
-    );
+    _getTop();
     super.initState();
+  }
+
+  void _getTop() {
+    context.read<StatisticBloc>().add(
+      StatisticEventGetTopTransactions(
+        top: top,
+        type: widget.selectedType.toLowerCase(),
+      ),
+    );
   }
 
   @override
@@ -43,7 +53,12 @@ class _TopSpendingWidgetState extends State<TopSpendingWidget> {
                           ),
                         ),
                         GestureDetector(
-                          onTap: () {},
+                          onTap: () {
+                            setState(() {
+                              top = !top;
+                              _getTop();
+                            });
+                          },
                           child: const Icon(Icons.swap_vert),
                         ),
                       ],
@@ -53,10 +68,8 @@ class _TopSpendingWidgetState extends State<TopSpendingWidget> {
                 ),
               ),
             );
-          } else if (state is StatisticStateFailure) {
-            return Text('${state.error}');
           }
-          return Text('data');
+          return const Text('No data available');
         },
       ),
     );

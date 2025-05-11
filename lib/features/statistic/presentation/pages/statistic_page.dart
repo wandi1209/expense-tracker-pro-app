@@ -13,6 +13,14 @@ class StatisticPage extends StatefulWidget {
 }
 
 class _StatisticPageState extends State<StatisticPage> {
+  final List<String> types = ['Expense', 'Income'];
+  String selectedType = 'Expense';
+  void onChangedType(String newType) {
+    setState(() {
+      selectedType = newType;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -22,9 +30,15 @@ class _StatisticPageState extends State<StatisticPage> {
         child: Column(
           children: [
             const ListChartViewWidget(),
-            const Row(
+            Row(
               mainAxisAlignment: MainAxisAlignment.end,
-              children: [DropdownWidget()],
+              children: [
+                DropdownWidget(
+                  selectedType: selectedType,
+                  types: types,
+                  onChanged: onChangedType,
+                ),
+              ],
             ),
             Container(
               margin: const EdgeInsets.only(right: 40),
@@ -32,7 +46,7 @@ class _StatisticPageState extends State<StatisticPage> {
               height: 180,
               child: const LineChartWidget(),
             ),
-            const TopSpendingWidget(),
+            TopSpendingWidget(selectedType: selectedType),
           ],
         ),
       ),

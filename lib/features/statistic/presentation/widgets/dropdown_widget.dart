@@ -4,23 +4,28 @@ import 'package:expense_tracker_pro/core/configs/theme/app_colors.dart';
 import 'package:flutter/material.dart';
 
 class DropdownWidget extends StatefulWidget {
-  const DropdownWidget({super.key, this.full});
-  final bool? full;
+  final String selectedType;
+  final List<String> types;
+  final ValueChanged<String> onChanged;
+
+  const DropdownWidget({
+    super.key,
+    required this.selectedType,
+    required this.types,
+    required this.onChanged,
+  });
 
   @override
   State<DropdownWidget> createState() => _DropdownWidgetState();
 }
 
 class _DropdownWidgetState extends State<DropdownWidget> {
-  String selectedType = 'Expense';
-  final List<String> types = ['Expense', 'Income'];
-
   @override
   Widget build(BuildContext context) {
     return Container(
       margin: const EdgeInsets.only(right: 20, top: 10),
       padding: const EdgeInsets.symmetric(horizontal: 10),
-      width: widget.full == true ? double.infinity : 120,
+      width: 120,
       height: 40,
       decoration: BoxDecoration(
         color: Colors.white,
@@ -30,16 +35,14 @@ class _DropdownWidgetState extends State<DropdownWidget> {
       child: DropdownButtonHideUnderline(
         child: DropdownButton<String>(
           dropdownColor: Colors.white,
-          value: selectedType,
+          value: widget.selectedType,
           onChanged: (value) {
             if (value != null) {
-              setState(() {
-                selectedType = value;
-              });
+              widget.onChanged(value);
             }
           },
           items:
-              types.map((type) {
+              widget.types.map((type) {
                 return DropdownMenuItem(
                   value: type,
                   child: Text(
