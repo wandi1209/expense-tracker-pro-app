@@ -13,57 +13,42 @@ class TopSpendingWidget extends StatefulWidget {
 }
 
 class _TopSpendingWidgetState extends State<TopSpendingWidget> {
-  // bool top = true;
-
-  // void _getTop() {
-  //   context.read<StatisticBloc>().add(
-  //     StatisticEventGetTopTransactions(
-  //       top: top,
-  //       type: widget.selectedType.toLowerCase(),
-  //     ),
-  //   );
-  // }
-
   @override
   Widget build(BuildContext context) {
     return Expanded(
       child: BlocBuilder<StatisticBloc, StatisticState>(
         builder: (context, state) {
-          if (state is StatisticStateLoading) {
-            return const Center(child: CircularProgressIndicator());
-          } else if (state is StatisticGetTopTransactionsSuccess) {
-            return SingleChildScrollView(
-              child: Padding(
-                padding: const EdgeInsets.all(20),
-                child: Column(
-                  children: [
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        const Text(
-                          'Top Spending',
-                          style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            fontSize: 20,
-                          ),
+          return SingleChildScrollView(
+            child: Padding(
+              padding: const EdgeInsets.all(20),
+              child: Column(
+                children: [
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      const Text(
+                        'Top Spending',
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 20,
                         ),
-                        GestureDetector(
-                          onTap: () {
-                            setState(() {
-                              widget.changedTop();
-                            });
-                          },
-                          child: const Icon(Icons.swap_vert),
-                        ),
-                      ],
-                    ),
+                      ),
+                      GestureDetector(
+                        onTap: () {
+                          widget.changedTop();
+                        },
+                        child: const Icon(Icons.swap_vert),
+                      ),
+                    ],
+                  ),
+                  if (state is StatisticStateLoading)
+                    const Center(child: CircularProgressIndicator()),
+                  if (state is StatisticGetTopTransactionsSuccess)
                     TransactionListview(listData: state.topTransactions),
-                  ],
-                ),
+                ],
               ),
-            );
-          }
-          return const Text('No data available');
+            ),
+          );
         },
       ),
     );

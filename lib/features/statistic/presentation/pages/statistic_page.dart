@@ -54,9 +54,6 @@ class _StatisticPageState extends State<StatisticPage> {
       body: BlocConsumer<StatisticBloc, StatisticState>(
         listener: (context, state) {},
         builder: (context, state) {
-          if (state is StatisticStateLoading) {
-            return const Center(child: CircularProgressIndicator());
-          }
           return Padding(
             padding: const EdgeInsets.only(top: 20),
             child: Column(
