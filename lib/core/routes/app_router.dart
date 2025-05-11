@@ -6,6 +6,7 @@ import 'package:expense_tracker_pro/features/auth/presentation/pages/register_pa
 import 'package:expense_tracker_pro/features/auth/presentation/pages/reset_password_page.dart';
 import 'package:expense_tracker_pro/features/dashboard/presentation/bloc/dashboard_bloc.dart';
 import 'package:expense_tracker_pro/features/dashboard/presentation/pages/dashboard_page.dart';
+import 'package:expense_tracker_pro/features/statistic/presentation/bloc/statistic_bloc.dart';
 import 'package:expense_tracker_pro/features/statistic/presentation/pages/statistic_page.dart';
 import 'package:expense_tracker_pro/features/transaction/presentation/bloc/transaction_bloc.dart';
 import 'package:expense_tracker_pro/features/transaction/presentation/pages/transaction_page.dart';
@@ -101,8 +102,12 @@ class AppRouter {
             path: '/statistic',
             name: 'statistic',
             pageBuilder:
-                (context, state) =>
-                    const NoTransitionPage(child: StatisticPage()),
+                (context, state) => NoTransitionPage(
+                  child: BlocProvider(
+                    create: (_) => locator<StatisticBloc>(),
+                    child: const StatisticPage(),
+                  ),
+                ),
           ),
           GoRoute(
             path: '/profile',

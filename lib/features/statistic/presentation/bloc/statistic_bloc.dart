@@ -28,5 +28,14 @@ class StatisticBloc extends Bloc<StatisticEvent, StatisticState> {
         emit(StatisticStateFailure(error: e.toString()));
       }
     });
+    on<StatisticEventGetTopTransactions>((event, emit) async {
+      try {
+        emit(StatisticStateLoading());
+        final result = await topTransactions.execute(event.top, event.type);
+        emit(StatisticGetTopTransactionsSuccess(topTransactions: result));
+      } catch (e) {
+        emit(StatisticStateFailure(error: e.toString()));
+      }
+    });
   }
 }

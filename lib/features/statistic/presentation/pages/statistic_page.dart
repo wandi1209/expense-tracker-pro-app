@@ -5,9 +5,14 @@ import 'package:expense_tracker_pro/features/statistic/presentation/widgets/list
 import 'package:expense_tracker_pro/features/statistic/presentation/widgets/top_spending_widget.dart';
 import 'package:flutter/material.dart';
 
-class StatisticPage extends StatelessWidget {
+class StatisticPage extends StatefulWidget {
   const StatisticPage({super.key});
 
+  @override
+  State<StatisticPage> createState() => _StatisticPageState();
+}
+
+class _StatisticPageState extends State<StatisticPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
