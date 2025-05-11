@@ -4,30 +4,25 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class TopSpendingWidget extends StatefulWidget {
-  final String selectedType;
-  const TopSpendingWidget({super.key, required this.selectedType});
+  final VoidCallback changedTop;
+
+  const TopSpendingWidget({super.key, required this.changedTop});
 
   @override
   State<TopSpendingWidget> createState() => _TopSpendingWidgetState();
 }
 
 class _TopSpendingWidgetState extends State<TopSpendingWidget> {
-  bool top = true;
+  // bool top = true;
 
-  @override
-  void initState() {
-    _getTop();
-    super.initState();
-  }
-
-  void _getTop() {
-    context.read<StatisticBloc>().add(
-      StatisticEventGetTopTransactions(
-        top: top,
-        type: widget.selectedType.toLowerCase(),
-      ),
-    );
-  }
+  // void _getTop() {
+  //   context.read<StatisticBloc>().add(
+  //     StatisticEventGetTopTransactions(
+  //       top: top,
+  //       type: widget.selectedType.toLowerCase(),
+  //     ),
+  //   );
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -55,8 +50,7 @@ class _TopSpendingWidgetState extends State<TopSpendingWidget> {
                         GestureDetector(
                           onTap: () {
                             setState(() {
-                              top = !top;
-                              _getTop();
+                              widget.changedTop();
                             });
                           },
                           child: const Icon(Icons.swap_vert),
