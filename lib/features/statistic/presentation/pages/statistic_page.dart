@@ -85,7 +85,7 @@ class _StatisticPageState extends State<StatisticPage> {
                   margin: const EdgeInsets.only(right: 40),
                   width: double.infinity,
                   height: 180,
-                  child: LineChartWidget(),
+                  child: LineChartWidget(selectedDate: selectedDate),
                 ),
                 state is StatisticGetTopTransactionsSuccess
                     ? TopSpendingWidget(changedTop: onChangedTop)
