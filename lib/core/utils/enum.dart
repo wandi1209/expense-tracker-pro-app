@@ -1,1 +1,1 @@
-enum DateFilter { day, week, month, year }
+enum DateFilter { week, year }

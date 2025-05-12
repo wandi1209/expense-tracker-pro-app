@@ -19,7 +19,7 @@ class _StatisticPageState extends State<StatisticPage> {
   bool top = true;
   final List<String> types = ['Expense', 'Income'];
   String selectedType = 'Expense';
-  DateFilter selectedDate = DateFilter.day;
+  DateFilter selectedDate = DateFilter.week;
 
   void onChangedDateFilter(DateFilter dateFilter) {
     setState(() {
@@ -67,10 +67,13 @@ class _StatisticPageState extends State<StatisticPage> {
             padding: const EdgeInsets.only(top: 20),
             child: Column(
               children: [
-                ListChartViewWidget(selectedDate: selectedDate,onChangedDateFilter: onChangedDateFilter),
                 Row(
-                  mainAxisAlignment: MainAxisAlignment.end,
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
+                    ListChartViewWidget(
+                      selectedDate: selectedDate,
+                      onChangedDateFilter: onChangedDateFilter,
+                    ),
                     DropdownWidget(
                       selectedType: selectedType,
                       types: types,
@@ -82,7 +85,7 @@ class _StatisticPageState extends State<StatisticPage> {
                   margin: const EdgeInsets.only(right: 40),
                   width: double.infinity,
                   height: 180,
-                  child: const LineChartWidget(),
+                  child: LineChartWidget(),
                 ),
                 state is StatisticGetTopTransactionsSuccess
                     ? TopSpendingWidget(changedTop: onChangedTop)

@@ -23,7 +23,7 @@ class _DropdownWidgetState extends State<DropdownWidget> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: const EdgeInsets.only(right: 20, top: 10),
+      margin: const EdgeInsets.only(right: 20),
       padding: const EdgeInsets.symmetric(horizontal: 10),
       width: 120,
       height: 40,

@@ -23,21 +23,12 @@ class StatisticRepositoryImplementation extends StatisticRepository {
 
       bool isInDateRange;
       switch (dateFilter) {
-        case DateFilter.day:
-          isInDateRange =
-              txDate.year == now.year &&
-              txDate.month == now.month &&
-              txDate.day == now.day;
-          break;
         case DateFilter.week:
           final weekStart = now.subtract(Duration(days: now.weekday - 1));
           final weekEnd = weekStart.add(const Duration(days: 6));
           isInDateRange =
               txDate.isAfter(weekStart.subtract(const Duration(seconds: 1))) &&
               txDate.isBefore(weekEnd.add(const Duration(days: 1)));
-          break;
-        case DateFilter.month:
-          isInDateRange = txDate.year == now.year && txDate.month == now.month;
           break;
         case DateFilter.year:
           isInDateRange = txDate.year == now.year;
