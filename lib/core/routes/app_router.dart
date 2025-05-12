@@ -113,8 +113,12 @@ class AppRouter {
             path: '/profile',
             name: 'profile',
             pageBuilder:
-                (context, state) =>
-                    const NoTransitionPage(child: ProfilePage()),
+                (context, state) => NoTransitionPage(
+                  child: BlocProvider(
+                    create: (_) => locator<DashboardBloc>(),
+                    child: const ProfilePage(),
+                  ),
+                ),
           ),
           GoRoute(
             path: '/transactions',
