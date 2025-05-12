@@ -1,4 +1,5 @@
 import 'package:expense_tracker_pro/common/appbars/basic_app_bar.dart';
+import 'package:expense_tracker_pro/core/utils/enum.dart';
 import 'package:expense_tracker_pro/features/statistic/presentation/bloc/statistic_bloc.dart';
 import 'package:expense_tracker_pro/features/statistic/presentation/widgets/dropdown_widget.dart';
 import 'package:expense_tracker_pro/features/statistic/presentation/widgets/line_chart_widget.dart';
@@ -18,6 +19,14 @@ class _StatisticPageState extends State<StatisticPage> {
   bool top = true;
   final List<String> types = ['Expense', 'Income'];
   String selectedType = 'Expense';
+  DateFilter selectedDate = DateFilter.day;
+
+  void onChangedDateFilter(DateFilter dateFilter) {
+    setState(() {
+      selectedDate = dateFilter;
+    });
+  }
+
   void onChangedType(String newType) {
     setState(() {
       selectedType = newType;
@@ -58,7 +67,7 @@ class _StatisticPageState extends State<StatisticPage> {
             padding: const EdgeInsets.only(top: 20),
             child: Column(
               children: [
-                const ListChartViewWidget(),
+                ListChartViewWidget(selectedDate: selectedDate,onChangedDateFilter: onChangedDateFilter),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: [
