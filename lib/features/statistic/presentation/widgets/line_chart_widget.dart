@@ -65,7 +65,7 @@ class _LineChartWidgetState extends State<LineChartWidget> {
                   sideTitles: SideTitles(
                     showTitles: true,
                     reservedSize: 30,
-                    interval: widget.selectedDate == DateFilter.week ? 1 : 2,
+                    interval: 1,
                     getTitlesWidget: (value, meta) {
                       if (widget.selectedDate == DateFilter.week) {
                         switch (value.toInt()) {
