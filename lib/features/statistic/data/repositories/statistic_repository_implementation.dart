@@ -16,10 +16,9 @@ class StatisticRepositoryImplementation extends StatisticRepository {
     String type,
   ) async {
     var allTransactions = await transactionRemoteDatasource.getTransactions();
-    final DateTime now = DateTime.now();
-
     return allTransactions.where((tx) {
-      final txDate = tx.createdAt;
+      final txDate = tx.createdAt.toLocal();
+      final DateTime now = DateTime.now();
 
       bool isInDateRange;
       switch (dateFilter) {

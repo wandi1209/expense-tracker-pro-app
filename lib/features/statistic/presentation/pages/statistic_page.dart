@@ -31,6 +31,7 @@ class _StatisticPageState extends State<StatisticPage> {
     setState(() {
       selectedType = newType;
       _getTop();
+      _getTransByFilter();
     });
   }
 
@@ -43,8 +44,9 @@ class _StatisticPageState extends State<StatisticPage> {
 
   @override
   void initState() {
-    _getTop();
     super.initState();
+    _getTop();
+    _getTransByFilter();
   }
 
   void _getTop() {
@@ -56,44 +58,46 @@ class _StatisticPageState extends State<StatisticPage> {
     );
   }
 
+  void _getTransByFilter() {
+    context.read<StatisticBloc>().add(
+      StatisticEventGetTransactionsByFilter(
+        dateFilter: selectedDate,
+        type: selectedType.toLowerCase(),
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: const BasicAppBar(title: 'Statistics'),
-      body: BlocConsumer<StatisticBloc, StatisticState>(
-        listener: (context, state) {},
-        builder: (context, state) {
-          return Padding(
-            padding: const EdgeInsets.only(top: 20),
-            child: Column(
+      body: Padding(
+        padding: const EdgeInsets.only(top: 20),
+        child: Column(
+          children: [
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
-                  children: [
-                    ListChartViewWidget(
-                      selectedDate: selectedDate,
-                      onChangedDateFilter: onChangedDateFilter,
-                    ),
-                    DropdownWidget(
-                      selectedType: selectedType,
-                      types: types,
-                      onChanged: onChangedType,
-                    ),
-                  ],
+                ListChartViewWidget(
+                  selectedDate: selectedDate,
+                  onChangedDateFilter: onChangedDateFilter,
                 ),
-                Container(
-                  margin: const EdgeInsets.only(right: 40),
-                  width: double.infinity,
-                  height: 180,
-                  child: LineChartWidget(selectedDate: selectedDate),
+                DropdownWidget(
+                  selectedType: selectedType,
+                  types: types,
+                  onChanged: onChangedType,
                 ),
-                state is StatisticGetTopTransactionsSuccess
-                    ? TopSpendingWidget(changedTop: onChangedTop)
-                    : const SizedBox.shrink(),
               ],
             ),
-          );
-        },
+            Container(
+              margin: const EdgeInsets.only(right: 40),
+              width: double.infinity,
+              height: 180,
+              child: LineChartWidget(selectedDate: selectedDate),
+            ),
+            TopSpendingWidget(changedTop: onChangedTop),
+          ],
+        ),
       ),
     );
   }

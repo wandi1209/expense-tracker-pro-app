@@ -1,106 +1,152 @@
 import 'package:expense_tracker_pro/core/configs/theme/app_colors.dart';
 import 'package:expense_tracker_pro/core/utils/enum.dart';
+import 'package:expense_tracker_pro/features/statistic/presentation/bloc/statistic_bloc.dart';
+import 'package:expense_tracker_pro/features/transaction/data/models/transaction_model.dart';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
-class LineChartWidget extends StatelessWidget {
+class LineChartWidget extends StatefulWidget {
   final DateFilter selectedDate;
   const LineChartWidget({super.key, required this.selectedDate});
 
   @override
+  State<LineChartWidget> createState() => _LineChartWidgetState();
+}
+
+class _LineChartWidgetState extends State<LineChartWidget> {
+  @override
   Widget build(BuildContext context) {
-    return LineChart(
-      LineChartData(
-        gridData: const FlGridData(show: false),
-        borderData: FlBorderData(show: false),
-        minX: 0,
-        maxX: selectedDate == DateFilter.week ? 7 : 12,
-        minY: 0,
-        maxY: 100000,
-        lineBarsData: [
-          LineChartBarData(
-            color: AppColors.primary,
-            spots: [
-              const FlSpot(1, 20000),
-              const FlSpot(2, 10000),
-              const FlSpot(3, 30000),
-              const FlSpot(4, 10000),
-              const FlSpot(5, 80000),
-              const FlSpot(6, 40000),
-              const FlSpot(7, 30000),
-            ],
-            isCurved: true,
-            dotData: const FlDotData(show: false),
-            belowBarData: BarAreaData(
-              show: true,
-              gradient: LinearGradient(
-                colors: [
-                  AppColors.primary.withAlpha(100),
-                  AppColors.primary.withAlpha(0),
-                ],
-                begin: Alignment.topCenter,
-                end: Alignment.bottomCenter,
+    return BlocBuilder<StatisticBloc, StatisticState>(
+      buildWhen: (previous, current) => current is StatisticGetByFilterSuccess,
+      builder: (context, state) {
+        if (state is StatisticGetByFilterSuccess) {
+          List<TransactionModel> data = state.transactions;
+          double getMax() {
+            double max = 0;
+            for (var element in data) {
+              if (element.amount > max) {
+                max = element.amount;
+              }
+            }
+            return max;
+          }
+
+          return LineChart(
+            LineChartData(
+              gridData: const FlGridData(show: false),
+              borderData: FlBorderData(show: false),
+              minX: 0,
+              maxX: widget.selectedDate == DateFilter.week ? 7 : 12,
+              minY: 0,
+              maxY: getMax() + 20000,
+              lineBarsData: [
+                LineChartBarData(
+                  color: AppColors.primary,
+                  spots: _generateFlSpots(data, widget.selectedDate),
+                  isCurved: true,
+                  dotData: const FlDotData(show: false),
+                  belowBarData: BarAreaData(
+                    show: true,
+                    gradient: LinearGradient(
+                      colors: [
+                        AppColors.primary.withAlpha(100),
+                        AppColors.primary.withAlpha(0),
+                      ],
+                      begin: Alignment.topCenter,
+                      end: Alignment.bottomCenter,
+                    ),
+                  ),
+                ),
+              ],
+              titlesData: FlTitlesData(
+                show: true,
+                bottomTitles: AxisTitles(
+                  sideTitles: SideTitles(
+                    showTitles: true,
+                    reservedSize: 30,
+                    interval: widget.selectedDate == DateFilter.week ? 1 : 2,
+                    getTitlesWidget: (value, meta) {
+                      if (widget.selectedDate == DateFilter.week) {
+                        switch (value.toInt()) {
+                          case 1:
+                            return const Text('Mon');
+                          case 2:
+                            return const Text('Tue');
+                          case 3:
+                            return const Text('Wed');
+                          case 4:
+                            return const Text('Thu');
+                          case 5:
+                            return const Text('Fri');
+                          case 6:
+                            return const Text('Sat');
+                          case 7:
+                            return const Text('Sun');
+                          default:
+                            return const Text('');
+                        }
+                      } else {
+                        switch (value.toInt()) {
+                          case 1:
+                            return const Text('Jan');
+                          case 3:
+                            return const Text('Mar');
+                          case 5:
+                            return const Text('Mei');
+                          case 7:
+                            return const Text('Jul');
+                          case 9:
+                            return const Text('Sep');
+                          case 11:
+                            return const Text('Nov');
+                          default:
+                            return const Text('');
+                        }
+                      }
+                    },
+                  ),
+                ),
+                leftTitles: _axisTiles(),
+                rightTitles: _axisTiles(),
+                topTitles: _axisTiles(),
               ),
             ),
-          ),
-        ],
-        titlesData: FlTitlesData(
-          show: true,
-          bottomTitles: AxisTitles(
-            sideTitles: SideTitles(
-              showTitles: true,
-              reservedSize: 30,
-              interval: 1,
-              getTitlesWidget: (value, meta) {
-                if (selectedDate == DateFilter.week) {
-                  switch (value.toInt()) {
-                    case 1:
-                      return const Text('Mon');
-                    case 2:
-                      return const Text('Tue');
-                    case 3:
-                      return const Text('Wed');
-                    case 4:
-                      return const Text('Thu');
-                    case 5:
-                      return const Text('Fri');
-                    case 6:
-                      return const Text('Sat');
-                    case 7:
-                      return const Text('Sun');
-                    default:
-                      return const Text('');
-                  }
-                } else {
-                  switch (value.toInt()) {
-                    case 1:
-                      return const Text('Jan');
-                    case 3:
-                      return const Text('Mar');
-                    case 5:
-                      return const Text('Mei');
-                    case 7:
-                      return const Text('Jul');
-                    case 9:
-                      return const Text('Sep');
-                    case 11:
-                      return const Text('Nov');
-                    default:
-                      return const Text('');
-                  }
-                }
-              },
-            ),
-          ),
-          leftTitles: _axisTiles(),
-          rightTitles: _axisTiles(),
-          topTitles: _axisTiles(),
-        ),
-      ),
+          );
+        }
+        return const Center(child: CircularProgressIndicator());
+      },
     );
   }
 
   AxisTitles _axisTiles() {
     return const AxisTitles(sideTitles: SideTitles(showTitles: false));
   }
+}
+
+List<FlSpot> _generateFlSpots(List<TransactionModel> data, DateFilter filter) {
+  // Inisialisasi spotMap dengan semua nilai 0 agar tetap tampil di grafik
+  Map<int, double> spotMap = {};
+
+  if (filter == DateFilter.week) {
+    for (int i = 1; i <= 7; i++) {
+      spotMap[i] = 0;
+    }
+    for (var transaction in data) {
+      final day = transaction.createdAt.weekday;
+      spotMap[day] = (spotMap[day] ?? 0) + transaction.amount;
+    }
+  } else {
+    for (int i = 1; i <= 12; i++) {
+      spotMap[i] = 0;
+    }
+    for (var transaction in data) {
+      final month = transaction.createdAt.month;
+      spotMap[month] = (spotMap[month] ?? 0) + transaction.amount;
+    }
+  }
+
+  // Konversi ke FlSpot dan urutkan berdasarkan x
+  return spotMap.entries.map((e) => FlSpot(e.key.toDouble(), e.value)).toList()
+    ..sort((a, b) => a.x.compareTo(b.x));
 }

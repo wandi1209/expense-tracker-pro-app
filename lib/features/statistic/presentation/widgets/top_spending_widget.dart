@@ -17,6 +17,9 @@ class _TopSpendingWidgetState extends State<TopSpendingWidget> {
   Widget build(BuildContext context) {
     return Expanded(
       child: BlocBuilder<StatisticBloc, StatisticState>(
+        buildWhen:
+            (previous, current) =>
+                current is StatisticGetTopTransactionsSuccess,
         builder: (context, state) {
           return SingleChildScrollView(
             child: Padding(
