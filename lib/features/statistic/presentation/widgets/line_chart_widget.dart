@@ -67,43 +67,46 @@ class _LineChartWidgetState extends State<LineChartWidget> {
                     reservedSize: 30,
                     interval: 1,
                     getTitlesWidget: (value, meta) {
+                      String text = '';
                       if (widget.selectedDate == DateFilter.week) {
                         switch (value.toInt()) {
                           case 1:
-                            return const Text('Mon');
+                            text = 'Mon';
                           case 2:
-                            return const Text('Tue');
+                            text = 'Tue';
                           case 3:
-                            return const Text('Wed');
+                            text = 'Wed';
                           case 4:
-                            return const Text('Thu');
+                            text = 'Thu';
                           case 5:
-                            return const Text('Fri');
+                            text = 'Fri';
                           case 6:
-                            return const Text('Sat');
+                            text = 'Sat';
                           case 7:
-                            return const Text('Sun');
-                          default:
-                            return const Text('');
+                            text = 'Sun';
                         }
                       } else {
                         switch (value.toInt()) {
                           case 1:
-                            return const Text('Jan');
+                            text = 'Jan';
                           case 3:
-                            return const Text('Mar');
+                            text = 'Mar';
                           case 5:
-                            return const Text('Mei');
+                            text = 'May';
                           case 7:
-                            return const Text('Jul');
+                            text = 'Jun';
                           case 9:
-                            return const Text('Sep');
+                            text = 'Sep';
                           case 11:
-                            return const Text('Nov');
-                          default:
-                            return const Text('');
+                            text = 'Nov';
                         }
                       }
+
+                      return SideTitleWidget(
+                        meta: meta,
+                        space: 12,
+                        child: Text(text),
+                      );
                     },
                   ),
                 ),
