@@ -89,6 +89,7 @@ class _StatisticPageState extends State<StatisticPage> {
                 ),
               ],
             ),
+            const SizedBox(height: 30),
             Container(
               margin: const EdgeInsets.only(right: 40),
               width: double.infinity,
