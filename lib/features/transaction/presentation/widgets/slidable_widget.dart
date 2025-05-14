@@ -61,7 +61,7 @@ class _SlidableWidgetState extends State<SlidableWidget> {
                     context: context,
                     isScrollControlled: true,
                     builder: (BuildContext context) {
-                      return const SheetEditWidget();
+                      return SheetEditWidget(id: data.id);
                     },
                   );
                 },

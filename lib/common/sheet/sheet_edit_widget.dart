@@ -3,11 +3,14 @@ import 'dart:async';
 import 'package:expense_tracker_pro/common/buttons/basic_button.dart';
 import 'package:expense_tracker_pro/common/dialogs/dialog_widget.dart';
 import 'package:expense_tracker_pro/common/inputs/basic_input.dart';
+import 'package:expense_tracker_pro/features/transaction/presentation/bloc/transaction_bloc.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 
 class SheetEditWidget extends StatefulWidget {
-  const SheetEditWidget({super.key});
+  final String id;
+  const SheetEditWidget({super.key, required this.id});
 
   @override
   State<SheetEditWidget> createState() => _SheetEditWidgetState();
@@ -20,76 +23,122 @@ class _SheetEditWidgetState extends State<SheetEditWidget> {
   List<String> types = ['Expense', 'Income'];
 
   @override
+  void initState() {
+    context.read<TransactionBloc>().add(
+      TransactionEventGetDetail(id: widget.id),
+    );
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: EdgeInsets.only(
-        bottom: MediaQuery.of(context).viewInsets.bottom,
-      ),
-      child: SingleChildScrollView(
-        child: Container(
-          width: double.infinity,
-          decoration: BoxDecoration(
-            color: Colors.white,
-            borderRadius: BorderRadius.circular(20),
-          ),
-          child: Padding(
-            padding: const EdgeInsets.all(20),
-            child: Column(
-              children: [
-                const Text(
-                  'Edit Transaction',
-                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
-                ),
-                const SizedBox(height: 20),
-                BasicInput(
-                  title: 'Remarks',
-                  hintText: 'Type here...',
-                  controller: remarks,
-                ),
-                const SizedBox(height: 10),
-                BasicInput(
-                  title: 'Amount',
-                  hintText: '0',
-                  num: true,
-                  controller: amount,
-                ),
-                const SizedBox(height: 10),
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    const Text(
-                      'Transaction Type',
-                      style: TextStyle(fontWeight: FontWeight.w500),
-                    ),
-                    const SizedBox(height: 10),
-                    _dropdownButton(),
-                  ],
-                ),
-                const SizedBox(height: 20),
-                BasicButton(
-                  title: 'Submit',
-                  onPressed: () async {
-                    final dialog = successDialog(
-                      context,
-                      'Edit Transaction Successfuly',
-                    );
+    return BlocListener<TransactionBloc, TransactionState>(
+      listener: (context, state) {
+        if (state is GetDetailTransactionSuccess) {
+          final data = state.transaction;
+          remarks.text = data.remarks;
+          amount.text = data.amount.toString();
+          selectedType =
+              data.transactionType == 'expense' ? 'Expense' : 'Income';
+          setState(() {});
+        }
+      },
+      child: BlocBuilder<TransactionBloc, TransactionState>(
+        builder: (ctx, state) {
+          if (state is TransactionLoading) {
+            return const Center(child: CircularProgressIndicator());
+          } else if (state is EditTransactionSucces) {
+            WidgetsBinding.instance.addPostFrameCallback((_) {
+              final dialog = successDialog(
+                context,
+                'Edit Transaction Successfuly',
+              );
+              dialog.show();
 
-                    dialog.show();
+              Timer(const Duration(seconds: 2), () {
+                dialog.dismiss();
+                if (mounted) context.pop();
+              });
+            });
+          } else if (state is TransactionFailure) {
+            WidgetsBinding.instance.addPostFrameCallback((_) {
+              final dialog = errorDialog(context, state.error);
+              dialog.show();
 
-                    Timer(const Duration(seconds: 2), () {
-                      dialog.dismiss();
-
-                      if (mounted) {
-                        context.pop();
-                      }
-                    });
-                  },
-                ),
-                const SizedBox(height: 60),
-              ],
+              Timer(const Duration(seconds: 2), () {
+                dialog.dismiss();
+                if (mounted) context.pop();
+              });
+            });
+          }
+          return Padding(
+            padding: EdgeInsets.only(
+              bottom: MediaQuery.of(context).viewInsets.bottom,
             ),
-          ),
-        ),
+            child: SingleChildScrollView(
+              child: Container(
+                width: double.infinity,
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(20),
+                ),
+                child: Padding(
+                  padding: const EdgeInsets.all(20),
+                  child: Column(
+                    children: [
+                      const Text(
+                        'Edit Transaction',
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 20,
+                        ),
+                      ),
+                      const SizedBox(height: 20),
+                      BasicInput(
+                        title: 'Remarks',
+                        hintText: 'Type here...',
+                        controller: remarks,
+                      ),
+                      const SizedBox(height: 10),
+                      BasicInput(
+                        title: 'Amount',
+                        hintText: '0',
+                        num: true,
+                        controller: amount,
+                      ),
+                      const SizedBox(height: 10),
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          const Text(
+                            'Transaction Type',
+                            style: TextStyle(fontWeight: FontWeight.w500),
+                          ),
+                          const SizedBox(height: 10),
+                          _dropdownButton(),
+                        ],
+                      ),
+                      const SizedBox(height: 20),
+                      BasicButton(
+                        title: 'Submit',
+                        onPressed: () async {
+                          context.read<TransactionBloc>().add(
+                            TransactionEventEdit(
+                              id: widget.id,
+                              amount: double.tryParse(amount.text) ?? 0,
+                              transactionType: selectedType.toLowerCase(),
+                            ),
+                          );
+                        },
+                      ),
+                      const SizedBox(height: 60),
+                    ],
+                  ),
+                ),
+              ),
+            ),
+          );
+        },
       ),
     );
   }

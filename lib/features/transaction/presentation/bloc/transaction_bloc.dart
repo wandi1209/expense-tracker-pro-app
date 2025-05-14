@@ -99,7 +99,7 @@ class TransactionBloc extends Bloc<TransactionEvent, TransactionState> {
         emit(TransactionLoading());
         final result = await getDetail.execute(event.id);
 
-        emit(GetDetailTransaction(transaction: result));
+        emit(GetDetailTransactionSuccess(transaction: result));
       } catch (e) {
         emit(TransactionFailure(error: e.toString()));
       }
