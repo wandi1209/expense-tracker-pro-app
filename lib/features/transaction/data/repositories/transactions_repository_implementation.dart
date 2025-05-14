@@ -77,4 +77,19 @@ class TransactionsRepositoryImplementation extends TransactionRepository {
       return [];
     }
   }
+
+  @override
+  Future<TransactionModel> getTransactionById(String id) async {
+    try {
+      List<TransactionModel> listTransaction = await getTransactions();
+      for (var e in listTransaction) {
+        if (e.id == id) {
+          return e;
+        }
+      }
+      throw Exception('Transaction with id $id not found');
+    } catch (e) {
+      throw Exception('Failed get transaction with id: $e');
+    }
+  }
 }

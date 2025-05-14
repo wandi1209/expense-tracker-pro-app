@@ -3,6 +3,7 @@ import 'package:expense_tracker_pro/features/transaction/data/models/transaction
 
 abstract class TransactionRepository {
   Future<List<TransactionModel>> getTransactions();
+  Future<TransactionModel> getTransactionById(String id);
   Future<ResponseModel> addIncome(double amount, String remarks);
   Future<ResponseModel> addExpense(double amount, String remarks);
   Future<ResponseModel> editTransaction(
