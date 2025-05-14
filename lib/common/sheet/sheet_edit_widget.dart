@@ -41,35 +41,37 @@ class _SheetEditWidgetState extends State<SheetEditWidget> {
           selectedType =
               data.transactionType == 'expense' ? 'Expense' : 'Income';
           setState(() {});
+        } else if (state is EditTransactionSucces) {
+          WidgetsBinding.instance.addPostFrameCallback((_) {
+            final dialog = successDialog(
+              context,
+              'Edit Transaction Successfuly',
+            );
+            dialog.show();
+
+            Timer(const Duration(seconds: 2), () {
+              dialog.dismiss();
+              if (mounted) {
+                context.push('/transactions');
+              }
+            });
+          });
+        } else if (state is TransactionFailure) {
+          WidgetsBinding.instance.addPostFrameCallback((_) {
+            final dialog = errorDialog(context, state.error);
+            dialog.show();
+
+            Timer(const Duration(seconds: 2), () {
+              dialog.dismiss();
+              if (mounted) context.pop();
+            });
+          });
         }
       },
       child: BlocBuilder<TransactionBloc, TransactionState>(
         builder: (ctx, state) {
           if (state is TransactionLoading) {
             return const Center(child: CircularProgressIndicator());
-          } else if (state is EditTransactionSucces) {
-            WidgetsBinding.instance.addPostFrameCallback((_) {
-              final dialog = successDialog(
-                context,
-                'Edit Transaction Successfuly',
-              );
-              dialog.show();
-
-              Timer(const Duration(seconds: 2), () {
-                dialog.dismiss();
-                if (mounted) context.pop();
-              });
-            });
-          } else if (state is TransactionFailure) {
-            WidgetsBinding.instance.addPostFrameCallback((_) {
-              final dialog = errorDialog(context, state.error);
-              dialog.show();
-
-              Timer(const Duration(seconds: 2), () {
-                dialog.dismiss();
-                if (mounted) context.pop();
-              });
-            });
           }
           return Padding(
             padding: EdgeInsets.only(
