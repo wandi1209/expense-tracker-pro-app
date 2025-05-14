@@ -20,6 +20,14 @@ class GetTransactionSuccess extends TransactionState {
   List<Object?> get props => [transactions];
 }
 
+class GetDetailTransaction extends TransactionState {
+  final TransactionModel transaction;
+
+  GetDetailTransaction({required this.transaction});
+  @override
+  List<Object?> get props => [transaction];
+}
+
 class AddTransactionSuccess extends TransactionState {
   final String message;
 

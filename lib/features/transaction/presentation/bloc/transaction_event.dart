@@ -42,6 +42,14 @@ class TransactionEventEdit extends TransactionEvent {
   List<Object?> get props => [id, amount, transactionType];
 }
 
+class TransactionEventGetDetail extends TransactionEvent {
+  final String id;
+
+  TransactionEventGetDetail({required this.id});
+  @override
+  List<Object?> get props => [id];
+}
+
 class TransactionEventDelete extends TransactionEvent {
   final String id;
 

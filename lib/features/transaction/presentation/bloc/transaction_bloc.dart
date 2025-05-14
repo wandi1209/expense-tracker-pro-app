@@ -5,6 +5,7 @@ import 'package:expense_tracker_pro/features/transaction/domain/usecases/add_exp
 import 'package:expense_tracker_pro/features/transaction/domain/usecases/add_income.dart';
 import 'package:expense_tracker_pro/features/transaction/domain/usecases/delete_transaction.dart';
 import 'package:expense_tracker_pro/features/transaction/domain/usecases/edit_transaction.dart';
+import 'package:expense_tracker_pro/features/transaction/domain/usecases/get_detail.dart';
 import 'package:expense_tracker_pro/features/transaction/domain/usecases/get_transaction.dart';
 
 part 'transaction_event.dart';
@@ -16,6 +17,7 @@ class TransactionBloc extends Bloc<TransactionEvent, TransactionState> {
   final AddIncome addIncome;
   final EditTransaction editTransaction;
   final DeleteTransaction deleteTransaction;
+  final GetDetail getDetail;
 
   TransactionBloc({
     required this.getTransaction,
@@ -23,6 +25,7 @@ class TransactionBloc extends Bloc<TransactionEvent, TransactionState> {
     required this.addIncome,
     required this.editTransaction,
     required this.deleteTransaction,
+    required this.getDetail,
   }) : super(TransactionInitial()) {
     on<TransactionEventAddExpense>((event, emit) async {
       try {
@@ -87,6 +90,16 @@ class TransactionBloc extends Bloc<TransactionEvent, TransactionState> {
         final result = await getTransaction.execute();
 
         emit(GetTransactionSuccess(transactions: result));
+      } catch (e) {
+        emit(TransactionFailure(error: e.toString()));
+      }
+    });
+    on<TransactionEventGetDetail>((event, emit) async {
+      try {
+        emit(TransactionLoading());
+        final result = await getDetail.execute(event.id);
+
+        emit(GetDetailTransaction(transaction: result));
       } catch (e) {
         emit(TransactionFailure(error: e.toString()));
       }
