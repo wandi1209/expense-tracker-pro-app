@@ -26,6 +26,7 @@ import 'package:expense_tracker_pro/features/transaction/domain/usecases/add_exp
 import 'package:expense_tracker_pro/features/transaction/domain/usecases/add_income.dart';
 import 'package:expense_tracker_pro/features/transaction/domain/usecases/delete_transaction.dart';
 import 'package:expense_tracker_pro/features/transaction/domain/usecases/edit_transaction.dart';
+import 'package:expense_tracker_pro/features/transaction/domain/usecases/get_detail.dart';
 import 'package:expense_tracker_pro/features/transaction/domain/usecases/get_transaction.dart';
 import 'package:expense_tracker_pro/features/transaction/presentation/bloc/transaction_bloc.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
@@ -99,6 +100,7 @@ Future<void> init() async {
       addIncome: locator(),
       editTransaction: locator(),
       deleteTransaction: locator(),
+      getDetail: locator(),
     ),
   );
   // USECASE
@@ -116,6 +118,9 @@ Future<void> init() async {
   );
   locator.registerLazySingleton(
     () => DeleteTransaction(transactionRepository: locator()),
+  );
+  locator.registerLazySingleton(
+    () => GetDetail(transactionRepository: locator()),
   );
   // REPOSITORY
   locator.registerLazySingleton<TransactionRepository>(
