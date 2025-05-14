@@ -70,74 +70,82 @@ class _SheetEditWidgetState extends State<SheetEditWidget> {
       },
       child: BlocBuilder<TransactionBloc, TransactionState>(
         builder: (ctx, state) {
-          if (state is TransactionLoading) {
-            return const Center(child: CircularProgressIndicator());
-          }
           return Padding(
             padding: EdgeInsets.only(
               bottom: MediaQuery.of(context).viewInsets.bottom,
             ),
-            child: SingleChildScrollView(
-              child: Container(
-                width: double.infinity,
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.circular(20),
-                ),
-                child: Padding(
-                  padding: const EdgeInsets.all(20),
-                  child: Column(
-                    children: [
-                      const Text(
-                        'Edit Transaction',
-                        style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          fontSize: 20,
-                        ),
-                      ),
-                      const SizedBox(height: 20),
-                      BasicInput(
-                        title: 'Remarks',
-                        hintText: 'Type here...',
-                        controller: remarks,
-                      ),
-                      const SizedBox(height: 10),
-                      BasicInput(
-                        title: 'Amount',
-                        hintText: '0',
-                        num: true,
-                        controller: amount,
-                      ),
-                      const SizedBox(height: 10),
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
+            child: Stack(
+              children: [
+                SingleChildScrollView(
+                  child: Container(
+                    width: double.infinity,
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(20),
+                    ),
+                    child: Padding(
+                      padding: const EdgeInsets.all(20),
+                      child: Column(
                         children: [
                           const Text(
-                            'Transaction Type',
-                            style: TextStyle(fontWeight: FontWeight.w500),
+                            'Edit Transaction',
+                            style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              fontSize: 20,
+                            ),
+                          ),
+                          const SizedBox(height: 20),
+                          BasicInput(
+                            title: 'Remarks',
+                            hintText: 'Type here...',
+                            controller: remarks,
                           ),
                           const SizedBox(height: 10),
-                          _dropdownButton(),
+                          BasicInput(
+                            title: 'Amount',
+                            hintText: '0',
+                            num: true,
+                            controller: amount,
+                          ),
+                          const SizedBox(height: 10),
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              const Text(
+                                'Transaction Type',
+                                style: TextStyle(fontWeight: FontWeight.w500),
+                              ),
+                              const SizedBox(height: 10),
+                              _dropdownButton(),
+                            ],
+                          ),
+                          const SizedBox(height: 20),
+                          BasicButton(
+                            title: 'Submit',
+                            onPressed: () async {
+                              context.read<TransactionBloc>().add(
+                                TransactionEventEdit(
+                                  id: widget.id,
+                                  amount: double.tryParse(amount.text) ?? 0,
+                                  transactionType: selectedType.toLowerCase(),
+                                ),
+                              );
+                            },
+                          ),
+                          const SizedBox(height: 60),
                         ],
                       ),
-                      const SizedBox(height: 20),
-                      BasicButton(
-                        title: 'Submit',
-                        onPressed: () async {
-                          context.read<TransactionBloc>().add(
-                            TransactionEventEdit(
-                              id: widget.id,
-                              amount: double.tryParse(amount.text) ?? 0,
-                              transactionType: selectedType.toLowerCase(),
-                            ),
-                          );
-                        },
-                      ),
-                      const SizedBox(height: 60),
-                    ],
+                    ),
                   ),
                 ),
-              ),
+                if (state is TransactionLoading)
+                  Positioned.fill(
+                    child: Container(
+                      color: Colors.white.withAlpha(200),
+                      child: const Center(child: CircularProgressIndicator()),
+                    ),
+                  ),
+              ],
             ),
           );
         },
