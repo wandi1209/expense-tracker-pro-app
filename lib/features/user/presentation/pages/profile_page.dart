@@ -25,7 +25,7 @@ class _ProfilePageState extends State<ProfilePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       extendBodyBehindAppBar: true,
-      appBar: const BasicAppBar(title: 'Profile'),
+      appBar: const BasicAppBar(title: 'Profile', logout: true),
       body: Stack(
         children: [
           Image.asset(AppImages.dashboardBg),
