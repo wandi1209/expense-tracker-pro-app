@@ -32,6 +32,9 @@ class ForgotPasswordPage extends StatelessWidget {
         },
         child: BlocBuilder<AuthenticationBloc, AuthenticationState>(
           builder: (context, state) {
+            if (state is AuthenticationLoading) {
+              return const Center(child: CircularProgressIndicator());
+            }
             return SingleChildScrollView(
               child: SafeArea(
                 child: Padding(
