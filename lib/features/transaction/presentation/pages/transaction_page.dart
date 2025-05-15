@@ -1,6 +1,6 @@
-import 'package:expense_tracker_pro/common/appbars/basic_app_bar.dart';
-import 'package:expense_tracker_pro/features/transaction/presentation/bloc/transaction_bloc.dart';
-import 'package:expense_tracker_pro/features/transaction/presentation/widgets/slidable_widget.dart';
+import '../../../../common/appbars/basic_app_bar.dart';
+import '../bloc/transaction_bloc.dart';
+import '../widgets/slidable_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 

@@ -1,7 +1,7 @@
-import 'package:expense_tracker_pro/core/utils/enum.dart';
-import 'package:expense_tracker_pro/features/statistic/domain/repositories/statistic_repository.dart';
-import 'package:expense_tracker_pro/features/transaction/data/datasources/remote_datasource.dart';
-import 'package:expense_tracker_pro/features/transaction/data/models/transaction_model.dart';
+import '../../../../core/utils/enum.dart';
+import '../../domain/repositories/statistic_repository.dart';
+import '../../../transaction/data/datasources/remote_datasource.dart';
+import '../../../transaction/data/models/transaction_model.dart';
 
 class StatisticRepositoryImplementation extends StatisticRepository {
   final TransactionRemoteDatasource transactionRemoteDatasource;

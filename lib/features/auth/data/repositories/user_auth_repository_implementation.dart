@@ -1,4 +1,4 @@
-import 'package:expense_tracker_pro/features/auth/data/models/login_req.dart';
+import '../models/login_req.dart';
 import 'package:flutter/material.dart';
 
 import '../datasources/remote_datasource.dart';

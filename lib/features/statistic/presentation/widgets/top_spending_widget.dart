@@ -1,5 +1,5 @@
-import 'package:expense_tracker_pro/common/listviews/transaction_listview.dart';
-import 'package:expense_tracker_pro/features/statistic/presentation/bloc/statistic_bloc.dart';
+import '../../../../common/listviews/transaction_listview.dart';
+import '../bloc/statistic_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 

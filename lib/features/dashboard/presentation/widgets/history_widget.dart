@@ -1,5 +1,5 @@
-import 'package:expense_tracker_pro/common/listviews/transaction_listview.dart';
-import 'package:expense_tracker_pro/features/transaction/data/models/transaction_model.dart';
+import '../../../../common/listviews/transaction_listview.dart';
+import '../../../transaction/data/models/transaction_model.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
@@ -30,9 +30,9 @@ class _HistoryWidgetState extends State<HistoryWidget> {
             ),
           ],
         ),
-        TransactionListview(
-          listData: widget.lisData,
-        ),
+        widget.lisData == []
+            ? const Center(child: Text('No Transactions Available.'))
+            : TransactionListview(listData: widget.lisData),
       ],
     );
   }

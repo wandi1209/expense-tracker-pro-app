@@ -1,9 +1,9 @@
-import 'package:expense_tracker_pro/common/appbars/basic_app_bar.dart';
-import 'package:expense_tracker_pro/core/configs/assets/app_images.dart';
-import 'package:expense_tracker_pro/core/configs/theme/app_colors.dart';
-import 'package:expense_tracker_pro/core/utils/formatter.dart';
-import 'package:expense_tracker_pro/features/dashboard/presentation/bloc/dashboard_bloc.dart';
-import 'package:expense_tracker_pro/features/user/data/models/user_model.dart';
+import '../../../../common/appbars/basic_app_bar.dart';
+import '../../../../core/configs/assets/app_images.dart';
+import '../../../../core/configs/theme/app_colors.dart';
+import '../../../../core/utils/formatter.dart';
+import '../../../dashboard/presentation/bloc/dashboard_bloc.dart';
+import '../../data/models/user_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 

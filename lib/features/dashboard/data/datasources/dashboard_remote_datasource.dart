@@ -1,5 +1,5 @@
 import 'package:dio/dio.dart';
-import 'package:expense_tracker_pro/features/dashboard/data/models/dashboard_model.dart';
+import '../models/dashboard_model.dart';
 
 abstract class DashboardRemoteDatasource {
   Future<DashboardModel> dashboard();

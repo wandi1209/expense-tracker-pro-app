@@ -1,8 +1,8 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
-import 'package:expense_tracker_pro/features/dashboard/data/models/dashboard_model.dart';
-import 'package:expense_tracker_pro/features/dashboard/domain/usecases/dashboard.dart';
-import 'package:expense_tracker_pro/features/dashboard/domain/usecases/get_total_amount.dart';
+import '../../data/models/dashboard_model.dart';
+import '../../domain/usecases/dashboard.dart';
+import '../../domain/usecases/get_total_amount.dart';
 import 'package:flutter/rendering.dart';
 
 part 'dashboard_event.dart';

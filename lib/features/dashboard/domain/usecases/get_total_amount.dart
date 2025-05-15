@@ -1,4 +1,4 @@
-import 'package:expense_tracker_pro/features/dashboard/domain/repositories/dashboard_repository.dart';
+import '../repositories/dashboard_repository.dart';
 
 class GetTotalAmount {
   final DashboardRepository dashboardRepository;

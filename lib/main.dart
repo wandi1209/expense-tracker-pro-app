@@ -1,5 +1,5 @@
 import 'package:bloc/bloc.dart';
-import 'package:expense_tracker_pro/observer.dart';
+import 'observer.dart';
 
 import 'core/routes/app_router.dart';
 import 'service_locator.dart';

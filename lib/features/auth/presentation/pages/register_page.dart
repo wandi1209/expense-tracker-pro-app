@@ -1,4 +1,4 @@
-import 'package:expense_tracker_pro/features/auth/presentation/bloc/authentication_bloc.dart';
+import '../bloc/authentication_bloc.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 

@@ -1,5 +1,5 @@
-import 'package:expense_tracker_pro/core/utils/enum.dart';
-import 'package:expense_tracker_pro/features/transaction/data/models/transaction_model.dart';
+import '../../../../core/utils/enum.dart';
+import '../../../transaction/data/models/transaction_model.dart';
 
 abstract class StatisticRepository {
   Future<List<TransactionModel>> getTransactionByFilter(

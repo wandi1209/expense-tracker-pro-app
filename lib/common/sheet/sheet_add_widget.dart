@@ -1,9 +1,9 @@
 import 'dart:async';
 
-import 'package:expense_tracker_pro/common/buttons/basic_button.dart';
-import 'package:expense_tracker_pro/common/dialogs/dialog_widget.dart';
-import 'package:expense_tracker_pro/common/inputs/basic_input.dart';
-import 'package:expense_tracker_pro/features/transaction/presentation/bloc/transaction_bloc.dart';
+import '../buttons/basic_button.dart';
+import '../dialogs/dialog_widget.dart';
+import '../inputs/basic_input.dart';
+import '../../features/transaction/presentation/bloc/transaction_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';

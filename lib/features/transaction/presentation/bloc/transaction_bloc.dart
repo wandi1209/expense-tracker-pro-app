@@ -1,12 +1,12 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
-import 'package:expense_tracker_pro/features/transaction/data/models/transaction_model.dart';
-import 'package:expense_tracker_pro/features/transaction/domain/usecases/add_expense.dart';
-import 'package:expense_tracker_pro/features/transaction/domain/usecases/add_income.dart';
-import 'package:expense_tracker_pro/features/transaction/domain/usecases/delete_transaction.dart';
-import 'package:expense_tracker_pro/features/transaction/domain/usecases/edit_transaction.dart';
-import 'package:expense_tracker_pro/features/transaction/domain/usecases/get_detail.dart';
-import 'package:expense_tracker_pro/features/transaction/domain/usecases/get_transaction.dart';
+import '../../data/models/transaction_model.dart';
+import '../../domain/usecases/add_expense.dart';
+import '../../domain/usecases/add_income.dart';
+import '../../domain/usecases/delete_transaction.dart';
+import '../../domain/usecases/edit_transaction.dart';
+import '../../domain/usecases/get_detail.dart';
+import '../../domain/usecases/get_transaction.dart';
 
 part 'transaction_event.dart';
 part 'transaction_state.dart';

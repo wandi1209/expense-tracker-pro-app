@@ -1,4 +1,4 @@
-import 'package:expense_tracker_pro/core/services/auth_service.dart';
+import '../../../../core/services/auth_service.dart';
 
 import '../../../../common/buttons/basic_button.dart';
 import '../../../../core/configs/assets/app_images.dart';

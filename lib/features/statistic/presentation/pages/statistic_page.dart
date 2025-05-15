@@ -1,10 +1,10 @@
-import 'package:expense_tracker_pro/common/appbars/basic_app_bar.dart';
-import 'package:expense_tracker_pro/core/utils/enum.dart';
-import 'package:expense_tracker_pro/features/statistic/presentation/bloc/statistic_bloc.dart';
-import 'package:expense_tracker_pro/features/statistic/presentation/widgets/dropdown_widget.dart';
-import 'package:expense_tracker_pro/features/statistic/presentation/widgets/line_chart_widget.dart';
-import 'package:expense_tracker_pro/features/statistic/presentation/widgets/list_chart_view_widget.dart';
-import 'package:expense_tracker_pro/features/statistic/presentation/widgets/top_spending_widget.dart';
+import '../../../../common/appbars/basic_app_bar.dart';
+import '../../../../core/utils/enum.dart';
+import '../bloc/statistic_bloc.dart';
+import '../widgets/dropdown_widget.dart';
+import '../widgets/line_chart_widget.dart';
+import '../widgets/list_chart_view_widget.dart';
+import '../widgets/top_spending_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 

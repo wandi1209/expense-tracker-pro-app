@@ -1,7 +1,7 @@
-import 'package:expense_tracker_pro/features/dashboard/data/datasources/dashboard_remote_datasource.dart';
-import 'package:expense_tracker_pro/features/dashboard/data/models/dashboard_model.dart';
-import 'package:expense_tracker_pro/features/dashboard/domain/repositories/dashboard_repository.dart';
-import 'package:expense_tracker_pro/features/transaction/data/datasources/remote_datasource.dart';
+import '../datasources/dashboard_remote_datasource.dart';
+import '../models/dashboard_model.dart';
+import '../../domain/repositories/dashboard_repository.dart';
+import '../../../transaction/data/datasources/remote_datasource.dart';
 
 class DashboardRepositoryImplementation extends DashboardRepository {
   final TransactionRemoteDatasource transactionRemoteDatasource;

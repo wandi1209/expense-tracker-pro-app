@@ -1,6 +1,6 @@
 import 'dart:core';
 
-import 'package:expense_tracker_pro/core/configs/theme/app_colors.dart';
+import '../../../../core/configs/theme/app_colors.dart';
 import 'package:flutter/material.dart';
 
 class DropdownWidget extends StatefulWidget {

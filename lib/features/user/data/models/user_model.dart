@@ -1,4 +1,4 @@
-import 'package:expense_tracker_pro/features/dashboard/domain/entities/user.dart';
+import '../../../dashboard/domain/entities/user.dart';
 
 class UserModel extends User {
   const UserModel({

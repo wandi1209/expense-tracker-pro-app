@@ -1,5 +1,5 @@
-import 'package:expense_tracker_pro/common/buttons/basic_button.dart';
-import 'package:expense_tracker_pro/common/inputs/basic_input.dart';
+import '../../../../common/buttons/basic_button.dart';
+import '../../../../common/inputs/basic_input.dart';
 import 'package:flutter/material.dart';
 
 class ForgotPasswordPage extends StatelessWidget {

@@ -1,10 +1,10 @@
-import 'package:expense_tracker_pro/features/auth/presentation/bloc/authentication_bloc.dart';
+import '../bloc/authentication_bloc.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../../../common/buttons/basic_button.dart';
 import '../../../../common/inputs/basic_input.dart';
-import 'package:expense_tracker_pro/core/configs/theme/app_colors.dart';
+import '../../../../core/configs/theme/app_colors.dart';
 import 'package:flutter/material.dart';
 
 class LoginPage extends StatefulWidget {

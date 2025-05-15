@@ -1,7 +1,7 @@
-import 'package:expense_tracker_pro/core/configs/theme/app_colors.dart';
-import 'package:expense_tracker_pro/core/utils/enum.dart';
-import 'package:expense_tracker_pro/features/statistic/presentation/bloc/statistic_bloc.dart';
-import 'package:expense_tracker_pro/features/transaction/data/models/transaction_model.dart';
+import '../../../../core/configs/theme/app_colors.dart';
+import '../../../../core/utils/enum.dart';
+import '../bloc/statistic_bloc.dart';
+import '../../../transaction/data/models/transaction_model.dart';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';

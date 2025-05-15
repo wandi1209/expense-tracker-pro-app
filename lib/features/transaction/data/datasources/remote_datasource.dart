@@ -1,6 +1,6 @@
 import 'package:dio/dio.dart';
-import 'package:expense_tracker_pro/core/respons/response_model.dart';
-import 'package:expense_tracker_pro/features/transaction/data/models/transaction_model.dart';
+import '../../../../core/respons/response_model.dart';
+import '../models/transaction_model.dart';
 import 'package:flutter/material.dart';
 
 abstract class TransactionRemoteDatasource {

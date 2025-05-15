@@ -1,5 +1,5 @@
-import 'package:expense_tracker_pro/core/respons/response_model.dart';
-import 'package:expense_tracker_pro/features/transaction/data/models/transaction_model.dart';
+import '../../../../core/respons/response_model.dart';
+import '../../data/models/transaction_model.dart';
 
 abstract class TransactionRepository {
   Future<List<TransactionModel>> getTransactions();

@@ -1,5 +1,5 @@
-import 'package:expense_tracker_pro/features/statistic/domain/repositories/statistic_repository.dart';
-import 'package:expense_tracker_pro/features/transaction/data/models/transaction_model.dart';
+import '../repositories/statistic_repository.dart';
+import '../../../transaction/data/models/transaction_model.dart';
 
 class TopSpending {
   final StatisticRepository statisticRepository;

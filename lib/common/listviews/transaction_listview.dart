@@ -1,5 +1,5 @@
-import 'package:expense_tracker_pro/core/utils/formatter.dart';
-import 'package:expense_tracker_pro/features/transaction/domain/entities/transaction.dart';
+import '../../core/utils/formatter.dart';
+import '../../features/transaction/domain/entities/transaction.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 

@@ -1,4 +1,4 @@
-import 'package:expense_tracker_pro/features/transaction/domain/entities/transaction.dart';
+import '../../domain/entities/transaction.dart';
 
 class TransactionModel extends Transaction {
   const TransactionModel({

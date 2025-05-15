@@ -1,5 +1,5 @@
-import 'package:expense_tracker_pro/core/configs/theme/app_colors.dart';
-import 'package:expense_tracker_pro/core/utils/enum.dart';
+import '../../../../core/configs/theme/app_colors.dart';
+import '../../../../core/utils/enum.dart';
 import 'package:flutter/material.dart';
 
 class ListChartViewWidget extends StatelessWidget {

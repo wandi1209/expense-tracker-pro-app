@@ -1,10 +1,10 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
-import 'package:expense_tracker_pro/core/services/auth_service.dart';
-import 'package:expense_tracker_pro/features/auth/domain/usecases/forgot_password.dart';
-import 'package:expense_tracker_pro/features/auth/domain/usecases/login.dart';
-import 'package:expense_tracker_pro/features/auth/domain/usecases/register.dart';
-import 'package:expense_tracker_pro/features/auth/domain/usecases/reset_password.dart';
+import '../../../../core/services/auth_service.dart';
+import '../../domain/usecases/forgot_password.dart';
+import '../../domain/usecases/login.dart';
+import '../../domain/usecases/register.dart';
+import '../../domain/usecases/reset_password.dart';
 
 part 'authentication_event.dart';
 part 'authentication_state.dart';

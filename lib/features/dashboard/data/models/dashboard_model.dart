@@ -1,5 +1,5 @@
-import 'package:expense_tracker_pro/features/transaction/data/models/transaction_model.dart';
-import 'package:expense_tracker_pro/features/user/data/models/user_model.dart';
+import '../../../transaction/data/models/transaction_model.dart';
+import '../../../user/data/models/user_model.dart';
 
 class DashboardModel {
   final String status;

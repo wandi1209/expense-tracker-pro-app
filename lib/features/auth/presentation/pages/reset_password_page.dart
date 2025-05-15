@@ -1,4 +1,4 @@
-import 'package:expense_tracker_pro/common/buttons/basic_button.dart';
+import '../../../../common/buttons/basic_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:go_router/go_router.dart';
