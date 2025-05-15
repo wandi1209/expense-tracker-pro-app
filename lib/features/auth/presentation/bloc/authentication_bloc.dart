@@ -62,7 +62,11 @@ class AuthenticationBloc
       try {
         emit(AuthenticationLoading());
         final result = await forgotPassword.call(event.email);
-        emit(AuthenticationSuccess(result.status, result.message));
+        if (result.status == 'success') {
+          emit(AuthenticationSuccess(result.status, result.message));
+        } else {
+          emit(AuthenticationFailure(result.message));
+        }
       } catch (e) {
         emit(AuthenticationFailure('Forgot password request failed'));
       }
