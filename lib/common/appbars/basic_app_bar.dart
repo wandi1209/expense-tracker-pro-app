@@ -1,3 +1,4 @@
+import 'package:expense_tracker_pro/common/dialogs/dialog_widget.dart';
 import 'package:expense_tracker_pro/core/services/auth_service.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
@@ -34,10 +35,12 @@ class _BasicAppBarState extends State<BasicAppBar> {
               ? [
                 GestureDetector(
                   onTap: () async {
-                    await authService.clearToken();
-                    if (mounted) {
-                      context.go('/login');
-                    }
+                    warningDialog(context, 'Are you sure?', () async {
+                      await authService.clearToken();
+                      if (mounted) {
+                        context.go('/login');
+                      }
+                    }).show();
                   },
                   child: const Padding(
                     padding: EdgeInsets.only(right: 20),

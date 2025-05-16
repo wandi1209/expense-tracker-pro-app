@@ -53,10 +53,6 @@ class ResetPasswordPage extends StatelessWidget {
                         color: Colors.black,
                       ),
                     ),
-                    Text(
-                      'Enter the verification code we send you on: john@gmail.com|',
-                      style: TextStyle(color: Colors.grey.shade600),
-                    ),
                     const SizedBox(height: 20),
                     const Text(
                       'Reset Code',
