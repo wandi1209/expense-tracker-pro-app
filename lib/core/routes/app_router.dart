@@ -71,8 +71,12 @@ class AppRouter {
         path: '/reset-password',
         name: 'reset-password',
         pageBuilder:
-            (context, state) =>
-                const NoTransitionPage(child: ResetPasswordPage()),
+            (context, state) => NoTransitionPage(
+              child: BlocProvider(
+                create: (context) => locator<AuthenticationBloc>(),
+                child: const ResetPasswordPage(),
+              ),
+            ),
       ),
       GoRoute(
         path: '/new-password',

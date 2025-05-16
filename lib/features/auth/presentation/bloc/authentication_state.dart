@@ -19,7 +19,7 @@ class AuthenticationSuccess extends AuthenticationState {
   AuthenticationSuccess(this.status, this.message);
 
   @override
-  List<Object?> get props => [message];
+  List<Object?> get props => [status, message];
 }
 
 class AuthenticationFailure extends AuthenticationState {
@@ -29,4 +29,13 @@ class AuthenticationFailure extends AuthenticationState {
 
   @override
   List<Object?> get props => [error];
+}
+
+class AuthenticationSavedEmail extends AuthenticationState {
+  final String email;
+
+  AuthenticationSavedEmail(this.email);
+
+  @override
+  List<Object?> get props => [email];
 }

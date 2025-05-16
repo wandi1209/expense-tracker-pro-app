@@ -64,6 +64,7 @@ class AuthenticationBloc
         final result = await forgotPassword.call(event.email);
         if (result.status == 'success') {
           emit(AuthenticationSuccess(result.status, result.message));
+          emit(AuthenticationSavedEmail(event.email));
         } else {
           emit(AuthenticationFailure(result.message));
         }
@@ -80,7 +81,11 @@ class AuthenticationBloc
           event.resetCode,
           event.newPassword,
         );
-        emit(AuthenticationSuccess(result.status, result.message));
+        if (result.status == 'success') {
+          emit(AuthenticationSuccess(result.status, result.message));
+        } else {
+          emit(AuthenticationFailure(result.message));
+        }
       } catch (e) {
         emit(AuthenticationFailure('Reset password failed'));
       }
