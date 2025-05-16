@@ -16,6 +16,7 @@ class AuthenticationBloc
   final ForgotPassword forgotPassword;
   final ResetPassword resetPassword;
   final authService = AuthService();
+  String? _email;
 
   AuthenticationBloc({
     required this.login,
@@ -63,8 +64,8 @@ class AuthenticationBloc
         emit(AuthenticationLoading());
         final result = await forgotPassword.call(event.email);
         if (result.status == 'success') {
+          _email = event.email;
           emit(AuthenticationSuccess(result.status, result.message));
-          emit(AuthenticationSavedEmail(event.email));
         } else {
           emit(AuthenticationFailure(result.message));
         }
@@ -77,7 +78,7 @@ class AuthenticationBloc
       try {
         emit(AuthenticationLoading());
         final result = await resetPassword.call(
-          event.email,
+          _email ?? '',
           event.resetCode,
           event.newPassword,
         );

@@ -32,9 +32,8 @@ class ResetPasswordPage extends StatelessWidget {
           }
         },
         builder: (context, state) {
-          String? _email;
-          if (state is AuthenticationSavedEmail) {
-            _email = state.email;
+          if (state is AuthenticationLoading) {
+            return const Center(child: CircularProgressIndicator());
           }
           return SingleChildScrollView(
             child: SafeArea(
@@ -112,7 +111,6 @@ class ResetPasswordPage extends StatelessWidget {
                       onPressed: () {
                         context.read<AuthenticationBloc>().add(
                           AuthEventResetPassword(
-                            email: _email ?? '',
                             resetCode: int.parse(resetCode.text),
                             newPassword: newPassword.text,
                           ),

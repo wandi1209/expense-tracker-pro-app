@@ -27,7 +27,7 @@ class ForgotPasswordPage extends StatelessWidget {
                 backgroundColor: Colors.green,
               ),
             );
-            context.push('/reset-password');
+            context.go('/reset-password');
           }
         },
         child: BlocBuilder<AuthenticationBloc, AuthenticationState>(

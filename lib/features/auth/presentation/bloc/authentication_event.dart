@@ -36,16 +36,11 @@ class AuthEventForgotPassword extends AuthenticationEvent {
 }
 
 class AuthEventResetPassword extends AuthenticationEvent {
-  final String email;
   final int resetCode;
   final String newPassword;
 
-  AuthEventResetPassword({
-    required this.email,
-    required this.resetCode,
-    required this.newPassword,
-  });
+  AuthEventResetPassword({required this.resetCode, required this.newPassword});
 
   @override
-  List<Object?> get props => [email, resetCode, newPassword];
+  List<Object?> get props => [resetCode, newPassword];
 }
