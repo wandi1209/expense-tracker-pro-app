@@ -32,10 +32,18 @@ class _TransactionPageState extends State<TransactionPage> {
                 );
               }
             }
-            return Center(
-              child: Text(
-                'No Transactions available.',
-                style: TextStyle(color: Colors.grey.shade700),
+            return const Center(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  SizedBox(height: 40),
+                  Icon(Icons.inbox, size: 30, color: Colors.grey),
+                  SizedBox(height: 12),
+                  Text(
+                    'No Transactions Available.',
+                    style: TextStyle(fontSize: 16, color: Colors.grey),
+                  ),
+                ],
               ),
             );
           },
