@@ -16,43 +16,62 @@ class _TopSpendingWidgetState extends State<TopSpendingWidget> {
   @override
   Widget build(BuildContext context) {
     return Expanded(
-      child: BlocBuilder<StatisticBloc, StatisticState>(
-        buildWhen:
-            (previous, current) =>
-                current is StatisticGetTopTransactionsSuccess,
-        builder: (context, state) {
-          return SingleChildScrollView(
-            child: Padding(
-              padding: const EdgeInsets.all(20),
-              child: Column(
+      child: SingleChildScrollView(
+        child: Padding(
+          padding: const EdgeInsets.all(20),
+          child: Column(
+            children: [
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      const Text(
-                        'Top Spending',
-                        style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          fontSize: 20,
-                        ),
-                      ),
-                      GestureDetector(
-                        onTap: () {
-                          widget.changedTop();
-                        },
-                        child: const Icon(Icons.swap_vert),
-                      ),
-                    ],
+                  const Text(
+                    'Top Spending',
+                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
                   ),
-                  if (state is StatisticStateLoading)
-                    const Center(child: CircularProgressIndicator()),
-                  if (state is StatisticGetTopTransactionsSuccess)
-                    TransactionListview(listData: state.topTransactions),
+                  GestureDetector(
+                    onTap: () {
+                      widget.changedTop();
+                    },
+                    child: const Icon(Icons.swap_vert),
+                  ),
                 ],
               ),
-            ),
-          );
-        },
+              BlocBuilder<StatisticBloc, StatisticState>(
+                buildWhen:
+                    (previous, current) =>
+                        current is StatisticGetTopTransactionsSuccess,
+                builder: (context, state) {
+                  if (state is StatisticGetTopTransactionsSuccess) {
+                    if (state.topTransactions.isEmpty) {
+                      return const Center(
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            SizedBox(height: 40),
+                            Icon(Icons.inbox, size: 30, color: Colors.grey),
+                            SizedBox(height: 12),
+                            Text(
+                              'No Transactions Available.',
+                              style: TextStyle(
+                                fontSize: 16,
+                                color: Colors.grey,
+                              ),
+                            ),
+                          ],
+                        ),
+                      );
+                    } else {
+                      return TransactionListview(
+                        listData: state.topTransactions,
+                      );
+                    }
+                  }
+                  return const Center(child: CircularProgressIndicator());
+                },
+              ),
+            ],
+          ),
+        ),
       ),
     );
   }
