@@ -1,3 +1,5 @@
+import 'package:shared_preferences/shared_preferences.dart';
+
 import '../../../../core/configs/assets/app_vectors.dart';
 import '../../../../core/configs/theme/app_colors.dart';
 import 'package:flutter/material.dart';
@@ -15,8 +17,20 @@ class _SplashPageState extends State<SplashPage> {
   @override
   void initState() {
     super.initState();
+    _checkFirst();
+  }
+
+  Future<void> _checkFirst() async {
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    final bool? isFirstTime = prefs.getBool('is_first_time');
+
     Future.delayed(const Duration(seconds: 3), () {
-      context.go('/intro');
+      if (isFirstTime == null) {
+        prefs.setBool('is_first_time', true);
+        context.go('/intro');
+      } else {
+        context.go('/login');
+      }
     });
   }
 
