@@ -1,5 +1,3 @@
-import '../../../../core/services/auth_service.dart';
-
 import '../../../../common/buttons/basic_button.dart';
 import '../../../../core/configs/assets/app_images.dart';
 import '../../../../core/configs/assets/app_vectors.dart';
@@ -9,8 +7,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:go_router/go_router.dart';
 
 class IntroPage extends StatelessWidget {
-  IntroPage({super.key});
-  final _authService = AuthService();
+  const IntroPage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -40,13 +37,8 @@ class IntroPage extends StatelessWidget {
                 ),
                 child: BasicButton(
                   title: "Get Started",
-                  onPressed: () async {
-                    final token = await _authService.getToken();
-                    if (token == null) {
-                      context.go('/login');
-                    } else {
-                      context.go('/dashboard');
-                    }
+                  onPressed: () {
+                    context.go('/register');
                   },
                 ),
               ),
@@ -57,13 +49,8 @@ class IntroPage extends StatelessWidget {
                   children: [
                     const Text("Already Have Account? "),
                     GestureDetector(
-                      onTap: () async {
-                        final token = await _authService.getToken();
-                        if (token == null) {
-                          context.go('/login');
-                        } else {
-                          context.go('/dashboard');
-                        }
+                      onTap: () {
+                        context.go('/login');
                       },
                       child: const Text(
                         "Log In",
