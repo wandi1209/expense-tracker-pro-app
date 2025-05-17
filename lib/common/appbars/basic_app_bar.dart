@@ -35,7 +35,7 @@ class _BasicAppBarState extends State<BasicAppBar> {
               ? [
                 GestureDetector(
                   onTap: () async {
-                    warningDialog(context, 'Are you sure?', () async {
+                    warningDialog(context, 'Are you sure to logout?', () async {
                       await authService.clearToken();
                       if (mounted) {
                         context.go('/login');

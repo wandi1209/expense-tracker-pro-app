@@ -1,3 +1,4 @@
+import 'package:expense_tracker_pro/core/services/auth_service.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../../../core/configs/assets/app_vectors.dart';
@@ -14,6 +15,8 @@ class SplashPage extends StatefulWidget {
 }
 
 class _SplashPageState extends State<SplashPage> {
+  final AuthService authService = AuthService();
+
   @override
   void initState() {
     super.initState();
@@ -24,12 +27,17 @@ class _SplashPageState extends State<SplashPage> {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
     final bool? isFirstTime = prefs.getBool('is_first_time');
 
-    Future.delayed(const Duration(seconds: 3), () {
+    Future.delayed(const Duration(seconds: 3), () async {
       if (isFirstTime == null) {
         prefs.setBool('is_first_time', true);
         context.go('/intro');
       } else {
-        context.go('/login');
+        final token = await authService.getToken();
+        if (token == null) {
+          context.go('/login');
+        } else {
+          context.go('/dashboard');
+        }
       }
     });
   }
